@@ -32,6 +32,10 @@ public class DriveMotors implements PIDOutput{
 		rightMiddle.set(rightSpeed);
 		rightBack.set(rightSpeed);
 	}
+	
+	public static void stop(){
+		drive(0,0);
+	} 
 
 	@Override
 	public void pidWrite(double output) {

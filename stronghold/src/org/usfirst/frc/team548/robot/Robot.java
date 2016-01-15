@@ -28,6 +28,9 @@ public class Robot extends IterativeRobot {
         chooser.addDefault("Default Auto", defaultAuto);
         chooser.addObject("My Auto", customAuto);
         SmartDashboard.putData("Auto choices", chooser);
+        
+        DriveTrain.getInstance();
+        DriveMotors.getInstance();
     }
     
 	/**

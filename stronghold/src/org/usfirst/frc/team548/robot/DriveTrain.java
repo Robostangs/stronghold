@@ -38,6 +38,15 @@ public class DriveTrain implements PIDSource {
 			DriveMotors.drive(power * Constants.DT_DRIVE_STRAIGHT_HIGHER_POWER, power * Constants.DT_DRIVE_STRAIGHT_LOWER_POWER);
 		}
 	}
+	
+	public static void humanDrive(double left, double right){
+		if(left < 0.2 && right < 0.2){
+			DriveMotors.stop();
+		}
+		else{
+			DriveMotors.drive(left, right);
+		}
+	}
 
 	@Override
 	public void setPIDSourceType(PIDSourceType pidSource) {
