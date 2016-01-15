@@ -30,9 +30,12 @@ public class DriveTrain implements PIDSource {
 		encoderRight.reset();
 	}
 	
-	public static void driveStraigt(){
+	public static void driveStraight(double power){
 		if(encoderLeft.getRaw() > encoderRight.getRaw()){
-			drive
+			DriveMotors.drive(power * Constants.DT_DRIVE_STRAIGHT_LOWER_POWER, power * Constants.DT_DRIVE_STRAIGHT_HIGHER_POWER);
+		}
+		else if(encoderLeft.getRaw() < encoderRight.getRaw()){
+			DriveMotors.drive(power * Constants.DT_DRIVE_STRAIGHT_HIGHER_POWER, power * Constants.DT_DRIVE_STRAIGHT_LOWER_POWER);
 		}
 	}
 
