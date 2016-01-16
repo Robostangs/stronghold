@@ -25,9 +25,9 @@ public class DriveMotors implements PIDOutput{
 	}
 	
 	public static void drive(double leftSpeed, double rightSpeed){
-		leftFront.set(leftSpeed);
-		leftMiddle.set(leftSpeed);
-		leftBack.set(leftSpeed);
+		leftFront.set(-leftSpeed);
+		leftMiddle.set(-leftSpeed);
+		leftBack.set(-leftSpeed);
 		rightFront.set(rightSpeed);
 		rightMiddle.set(rightSpeed);
 		rightBack.set(rightSpeed);

@@ -17,8 +17,8 @@ public class DriveTrain implements PIDSource {
 	}
 	
 	private DriveTrain(){
-		encoderLeft = new Encoder(1, 1);
-		encoderRight = new Encoder(1, 1);
+		encoderLeft = new Encoder(Constants.LEFT_ENCODER_POS_1, Constants.LEFT_ENCODER_POS_2);
+		encoderRight = new Encoder(Constants.RIGHT_ENCODER_POS_1, Constants.RIGHT_ENCODER_POS_2);
 	}
 	
 	public static double getEncoderAverage(){
@@ -40,12 +40,13 @@ public class DriveTrain implements PIDSource {
 	}
 	
 	public static void humanDrive(double left, double right){
-		if(left < 0.2 && right < 0.2){
-			DriveMotors.stop();
+		if(Math.abs(left) < 0.2) {
+			left = 0;
 		}
-		else{
-			DriveMotors.drive(left, right);
+		if (Math.abs(right) < 0.2){
+			right = 0;
 		}
+		DriveMotors.drive(left, right);
 	}
 
 	@Override
