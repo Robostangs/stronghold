@@ -1,7 +1,7 @@
 package org.usfirst.frc.team548.robot;
 
 public class Constants {
-	
+		
 		public static final int XBOX_DRIVER_POS = 0;
 		public static final int XBOX_MANIP_POS = 1;
 		

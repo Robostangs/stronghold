@@ -8,6 +8,10 @@ public class DriveTrain implements PIDSource {
 	private static DriveTrain instance;
 	private static Encoder encoderLeft, encoderRight;
 	
+	/**
+	 * Initializes
+	 * @return instance
+	 */
 	public static DriveTrain getInstance(){
 		if(instance == null){
 			instance = new DriveTrain();
@@ -16,20 +20,34 @@ public class DriveTrain implements PIDSource {
 		return instance;
 	}
 	
+	/**
+	 * Initializes the encoders
+	 */
 	private DriveTrain(){
 		encoderLeft = new Encoder(Constants.LEFT_ENCODER_POS_1, Constants.LEFT_ENCODER_POS_2);
 		encoderRight = new Encoder(Constants.RIGHT_ENCODER_POS_1, Constants.RIGHT_ENCODER_POS_2);
 	}
 	
+	/**
+	 * Gets the average of the left and right encoders
+	 * @return 
+	 */
 	public static double getEncoderAverage(){
 		return ((encoderLeft.getRaw() + encoderRight.getRaw()) / 2);
 	}
 	
+	/**
+	 * Resets the encoders
+	 */
 	public static void encoderReset(){
 		encoderLeft.reset();
 		encoderRight.reset();
 	}
 	
+	/**
+	 * Drive straight method
+	 * @param power
+	 */
 	public static void driveStraight(double power){
 		if(encoderLeft.getRaw() > encoderRight.getRaw()){
 			DriveMotors.drive(power * Constants.DT_DRIVE_STRAIGHT_LOWER_POWER, power * Constants.DT_DRIVE_STRAIGHT_HIGHER_POWER);
@@ -39,6 +57,11 @@ public class DriveTrain implements PIDSource {
 		}
 	}
 	
+	/**
+	 * Makes deadzones on the controller
+	 * @param left
+	 * @param right
+	 */
 	public static void humanDrive(double left, double right){
 		if(Math.abs(left) < 0.2) {
 			left = 0;

@@ -7,6 +7,10 @@ public class DriveMotors implements PIDOutput{
 	private static DriveMotors instance;
 	private static CANTalon leftFront, leftMiddle, leftBack, rightFront, rightMiddle, rightBack;
 	
+	/**
+	 * Initializes
+	 * @return
+	 */
 	public static DriveMotors getInstance(){
 		if(instance == null){
 			instance = new DriveMotors();
@@ -15,6 +19,9 @@ public class DriveMotors implements PIDOutput{
 		return instance;
 	}
 	
+	/**
+	 * Initializes the CANTalons
+	 */
 	private DriveMotors(){
 		leftFront = new CANTalon(Constants.DT_TALON_POS_LEFT_FRONT);
 		leftMiddle = new CANTalon(Constants.DT_TALON_POS_LEFT_MID);
@@ -24,6 +31,11 @@ public class DriveMotors implements PIDOutput{
 		rightBack = new CANTalon(Constants.DT_TALON_POS_RIGHT_BACK);
 	}
 	
+	/**
+	 * Sets the speed of the motors
+	 * @param leftSpeed
+	 * @param rightSpeed
+	 */
 	public static void drive(double leftSpeed, double rightSpeed){
 		leftFront.set(-leftSpeed);
 		leftMiddle.set(-leftSpeed);
@@ -33,6 +45,9 @@ public class DriveMotors implements PIDOutput{
 		rightBack.set(rightSpeed);
 	}
 	
+	/**
+	 * Stops the drive motors
+	 */
 	public static void stop(){
 		drive(0,0);
 	} 
