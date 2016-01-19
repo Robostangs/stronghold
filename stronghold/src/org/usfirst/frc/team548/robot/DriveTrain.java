@@ -1,12 +1,14 @@
 package org.usfirst.frc.team548.robot;
 
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PIDSourceType;
 
 public class DriveTrain implements PIDSource {
 	private static DriveTrain instance;
 	private static Encoder encoderLeft, encoderRight;
+	private static PIDController pid;
 	
 	/**
 	 * Initializes
@@ -24,8 +26,12 @@ public class DriveTrain implements PIDSource {
 	 * Initializes the encoders
 	 */
 	private DriveTrain(){
+		DriveMotors.getInstance();
 		encoderLeft = new Encoder(Constants.LEFT_ENCODER_POS_1, Constants.LEFT_ENCODER_POS_2);
 		encoderRight = new Encoder(Constants.RIGHT_ENCODER_POS_1, Constants.RIGHT_ENCODER_POS_2);
+		pid = new PIDController(0, 0, 0, this, DriveMotors.getInstance());
+		pid.setInputRange(-1000000, 1000000);
+		pid.disable();
 	}
 	
 	/**
@@ -71,22 +77,38 @@ public class DriveTrain implements PIDSource {
 		}
 		DriveMotors.drive(left, right);
 	}
-
+	
+	private static PIDSourceType pidtype = PIDSourceType.kDisplacement;
+	
 	@Override
 	public void setPIDSourceType(PIDSourceType pidSource) {
 		// TODO Auto-generated method stub
-		
+		pidtype = pidSource;
 	}
-
+	
+	
 	@Override
 	public PIDSourceType getPIDSourceType() {
 		// TODO Auto-generated method stub
-		return null;
+		return pidtype;
 	}
 
 	@Override
 	public double pidGet() {
 		// TODO Auto-generated method stub
-		return 0;
+		return getEncoderAverage();
 	}
+	
+	public static boolean driveDistance(double setPoint, double pk, double ik, double dk) {
+		pid.setPID(pk, ik, dk);
+		pid.setSetpoint(setPoint);
+		pid.enable();
+		pid.setPercentTolerance(9999999);
+		return pid.onTarget();
+	}
+	
+	public static void disablePID() {
+		pid.disable();
+	}
+	
 }

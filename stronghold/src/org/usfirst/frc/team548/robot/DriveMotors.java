@@ -55,7 +55,7 @@ public class DriveMotors implements PIDOutput{
 	@Override
 	public void pidWrite(double output) {
 		// TODO Auto-generated method stub
-		
+		DriveTrain.driveStraight(output);
 	}
 	
 }
