@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PIDSourceType;
 
 public class DriveTrain implements PIDSource {
-	private static DriveTrain instance;
+	private static DriveTrain instance = null;
 	private static Encoder encoderLeft, encoderRight;
 	private static PIDController pid;
 	
@@ -18,7 +18,6 @@ public class DriveTrain implements PIDSource {
 		if(instance == null){
 			instance = new DriveTrain();
 		}
-		
 		return instance;
 	}
 	

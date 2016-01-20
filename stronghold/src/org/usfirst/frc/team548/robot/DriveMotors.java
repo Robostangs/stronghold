@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.PIDOutput;
 
 public class DriveMotors implements PIDOutput{
-	private static DriveMotors instance;
+	private static DriveMotors instance = null;
 	private static CANTalon leftFront, leftMiddle, leftBack, rightFront, rightMiddle, rightBack;
 	
 	/**
@@ -15,7 +15,6 @@ public class DriveMotors implements PIDOutput{
 		if(instance == null){
 			instance = new DriveMotors();
 		}
-		
 		return instance;
 	}
 	
