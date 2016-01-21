@@ -17,7 +17,7 @@ public class Shooter {
 	}
 	
 	public Shooter() {
-		shootingMotor = new CANTalon(Constants.SHOOTING_MOTOR_POS);
+		shootingMotor = new CANTalon(Constants.SHOOTING_TALON_POS);
 		shooterEncoder = new Encoder(Constants.SHOOTER_ENCODER_POS_1, Constants.SHOOTER_ENCODER_POS_2);
 	}
 	

@@ -15,8 +15,8 @@ public class Ingesting {
 	}
 	
 	public Ingesting() {
-		rollerMotor = new CANTalon(Constants.ROLLER_MOTOR_POS);
-		beltsMotor = new CANTalon(Constants.BELTS_MOTOR_POS);
+		rollerMotor = new CANTalon(Constants.ROLLER_TALON_POS);
+		beltsMotor = new CANTalon(Constants.BELTS_TALON_POS);
 	}
 	
 	public void setRoller(double value) {

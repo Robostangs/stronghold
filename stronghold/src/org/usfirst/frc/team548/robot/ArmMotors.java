@@ -15,7 +15,7 @@ public class ArmMotors {
 	}
 	
 	public ArmMotors() {
-		armMotor = new CANTalon(Constants.ARM_MOTOR_POS);
+		armMotor = new CANTalon(Constants.ARM_TALON_POS);
 	}
 	
 	public void setArm(double value) {
