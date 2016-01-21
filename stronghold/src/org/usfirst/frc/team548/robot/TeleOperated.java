@@ -16,7 +16,7 @@ public class TeleOperated {
 		manip = new XboxController(Constants.XBOX_MANIP_POS);
 	}
 
-	public void run() {
+	public static void run() {
 		
         DriveTrain.humanDrive(driver.getLeftStickYAxis(), driver.getRightStickYAxis());
         
