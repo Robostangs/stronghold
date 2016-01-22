@@ -23,7 +23,6 @@ public class Robot extends IterativeRobot {
         DriveTrain.getInstance();
         DriveMotors.getInstance();
         Arm.getInstance();
-        ArmMotors.getInstance();
         Autonomous.getInstance();
         Ingesting.getInstance();
         Shooter.getInstance();
