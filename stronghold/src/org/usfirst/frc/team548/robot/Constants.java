@@ -16,8 +16,8 @@ public class Constants {
 		
 		public static final int SHOOTING_TALON_POS = 0;
 		
-		public static final int ROLLER_TALON_POS = 0;
-		public static final int BELTS_TALON_POS = 0;
+		public static final int ING_TALON_POS = 0;
+		public static final int ING_SWITCH_POS = 0;
 		
 		public static final double DT_DRIVE_STRAIGHT_LOWER_POWER = 0;
 		public static final double DT_DRIVE_STRAIGHT_HIGHER_POWER = 0;
