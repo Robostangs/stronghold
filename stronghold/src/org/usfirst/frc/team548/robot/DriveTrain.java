@@ -1,13 +1,16 @@
 package org.usfirst.frc.team548.robot;
 
+import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PIDController;
+import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PIDSourceType;
 
-public class DriveTrain implements PIDSource {
+public class DriveTrain implements PIDSource, PIDOutput {
 	private static DriveTrain instance = null;
 	private static Encoder encoderLeft, encoderRight;
+	private static CANTalon leftFront, leftMiddle, leftBack, rightFront, rightMiddle, rightBack;
 	private static PIDController pid;
 	
 	/**
@@ -25,13 +28,34 @@ public class DriveTrain implements PIDSource {
 	 * Initializes the encoders
 	 */
 	private DriveTrain(){
-		DriveMotors.getInstance();
+		leftFront = new CANTalon(Constants.DT_TALON_POS_LEFT_FRONT);
+		leftMiddle = new CANTalon(Constants.DT_TALON_POS_LEFT_MID);
+		leftBack = new CANTalon(Constants.DT_TALON_POS_LEFT_BACK);
+		rightFront = new CANTalon(Constants.DT_TALON_POS_RIGHT_FRONT);
+		rightMiddle = new CANTalon(Constants.DT_TALON_POS_RIGHT_MID);
+		rightBack = new CANTalon(Constants.DT_TALON_POS_RIGHT_BACK);
 		encoderLeft = new Encoder(Constants.LEFT_ENCODER_POS_1, Constants.LEFT_ENCODER_POS_2);
 		encoderRight = new Encoder(Constants.RIGHT_ENCODER_POS_1, Constants.RIGHT_ENCODER_POS_2);
-		pid = new PIDController(0, 0, 0, this, DriveMotors.getInstance());
+		pid = new PIDController(0, 0, 0, this, this);
 		pid.setInputRange(-1000000, 1000000); //IDK YET
 		pid.disable();
 	}
+	
+	public static void drive(double leftSpeed, double rightSpeed){
+		leftFront.set(-leftSpeed);
+		leftMiddle.set(-leftSpeed);
+		leftBack.set(-leftSpeed);
+		rightFront.set(rightSpeed);
+		rightMiddle.set(rightSpeed);
+		rightBack.set(rightSpeed);
+	}
+	
+	/**
+	 * Stops the drive motors
+	 */
+	public static void stop(){
+		drive(0,0);
+	} 
 	
 	/**
 	 * Gets the average of the left and right encoders
@@ -55,10 +79,10 @@ public class DriveTrain implements PIDSource {
 	 */
 	public static void driveStraight(double power){
 		if(encoderLeft.getRaw() > encoderRight.getRaw()){
-			DriveMotors.drive(power * Constants.DT_DRIVE_STRAIGHT_LOWER_POWER, power * Constants.DT_DRIVE_STRAIGHT_HIGHER_POWER);
+			drive(power * Constants.DT_DRIVE_STRAIGHT_LOWER_POWER, power * Constants.DT_DRIVE_STRAIGHT_HIGHER_POWER);
 		}
 		else if(encoderLeft.getRaw() < encoderRight.getRaw()){
-			DriveMotors.drive(power * Constants.DT_DRIVE_STRAIGHT_HIGHER_POWER, power * Constants.DT_DRIVE_STRAIGHT_LOWER_POWER);
+			drive(power * Constants.DT_DRIVE_STRAIGHT_HIGHER_POWER, power * Constants.DT_DRIVE_STRAIGHT_LOWER_POWER);
 		}
 	}
 	
@@ -74,7 +98,7 @@ public class DriveTrain implements PIDSource {
 		if (Math.abs(right) < 0.2){
 			right = 0;
 		}
-		DriveMotors.drive(left, right);
+		drive(left, right);
 	}
 	
 	private static PIDSourceType pidtype = PIDSourceType.kDisplacement;
@@ -118,6 +142,12 @@ public class DriveTrain implements PIDSource {
 	 */
 	public static void disablePID() {
 		pid.disable();
+	}
+
+	@Override
+	public void pidWrite(double output) {
+		// TODO Auto-generated method stub
+		driveStraight(output);
 	}
 	
 }

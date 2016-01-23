@@ -21,7 +21,6 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putData("Auto choices", chooser);
         
         DriveTrain.getInstance();
-        DriveMotors.getInstance();
         Arm.getInstance();
         Autonomous.getInstance();
         Ingesting.getInstance();
@@ -41,15 +40,7 @@ public class Robot extends IterativeRobot {
 
 
     public void autonomousPeriodic() {
-    	switch(autoSelected) {
-    	case customAuto:
-        //Put custom auto code here   
-            break;
-    	case defaultAuto:
-    	default:
-    	//Put default auto code here
-            break;
-    	}
+    	
     }
 
 
