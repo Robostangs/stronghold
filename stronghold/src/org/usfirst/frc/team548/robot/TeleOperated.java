@@ -13,13 +13,13 @@ public class TeleOperated {
 	
 	public TeleOperated() {
 		driver = new XboxController(Constants.XBOX_DRIVER_POS);
-		manip = new XboxController(Constants.XBOX_MANIP_POS);
+		//manip = new XboxController(Constants.XBOX_MANIP_POS);
 	}
 
 	public static void run() {
 		
         DriveTrain.humanDrive(driver.getLeftStickYAxis(), driver.getRightStickYAxis());
-        
+        //DriveTrain.humanDrive(0, 0);
 	}
 	
 }

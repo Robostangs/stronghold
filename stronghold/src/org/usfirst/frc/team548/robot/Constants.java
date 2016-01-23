@@ -5,12 +5,12 @@ public class Constants {
 		public static final int XBOX_DRIVER_POS = 0;
 		public static final int XBOX_MANIP_POS = 1;
 		
-		public static final int DT_TALON_POS_LEFT_FRONT = 0;
-		public static final int DT_TALON_POS_LEFT_MID = 0;
-		public static final int DT_TALON_POS_LEFT_BACK = 0;
-		public static final int DT_TALON_POS_RIGHT_FRONT = 0;
-		public static final int DT_TALON_POS_RIGHT_MID = 0;
-		public static final int DT_TALON_POS_RIGHT_BACK = 0;
+		public static final int DT_TALON_POS_LEFT_FRONT = 1;
+		public static final int DT_TALON_POS_LEFT_MID = 2;
+		public static final int DT_TALON_POS_LEFT_BACK = 3;
+		public static final int DT_TALON_POS_RIGHT_FRONT = 4;
+		public static final int DT_TALON_POS_RIGHT_MID = 5;
+		public static final int DT_TALON_POS_RIGHT_BACK = 6;
 		
 		public static final int ARM_TALON_POS = 0;
 		
@@ -19,6 +19,7 @@ public class Constants {
 		public static final int ING_TALON_POS = 0;
 		public static final int ING_SWITCH_POS = 0;
 		
+		public static final double DT_ENCODER_ERROR_THRESHOLD = 0;
 		public static final double DT_DRIVE_STRAIGHT_LOWER_POWER = 0;
 		public static final double DT_DRIVE_STRAIGHT_HIGHER_POWER = 0;
 		

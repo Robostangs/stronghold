@@ -34,11 +34,11 @@ public class DriveTrain implements PIDSource, PIDOutput {
 		rightFront = new CANTalon(Constants.DT_TALON_POS_RIGHT_FRONT);
 		rightMiddle = new CANTalon(Constants.DT_TALON_POS_RIGHT_MID);
 		rightBack = new CANTalon(Constants.DT_TALON_POS_RIGHT_BACK);
-		encoderLeft = new Encoder(Constants.LEFT_ENCODER_POS_1, Constants.LEFT_ENCODER_POS_2);
-		encoderRight = new Encoder(Constants.RIGHT_ENCODER_POS_1, Constants.RIGHT_ENCODER_POS_2);
-		pid = new PIDController(0, 0, 0, this, this);
-		pid.setInputRange(-1000000, 1000000); //IDK YET
-		pid.disable();
+		//encoderLeft = new Encoder(Constants.LEFT_ENCODER_POS_1, Constants.LEFT_ENCODER_POS_2);
+		//encoderRight = new Encoder(Constants.RIGHT_ENCODER_POS_1, Constants.RIGHT_ENCODER_POS_2);
+		//pid = new PIDController(0, 0, 0, this, this);
+		//pid.setInputRange(-1000000, 1000000); //IDK YET
+		//pid.disable();
 	}
 	
 	public static void drive(double leftSpeed, double rightSpeed){
@@ -78,11 +78,13 @@ public class DriveTrain implements PIDSource, PIDOutput {
 	 * @param power
 	 */
 	public static void driveStraight(double power){
-		if(encoderLeft.getRaw() > encoderRight.getRaw()){
+		if(encoderLeft.getRaw() - encoderRight.getRaw() > Constants.DT_ENCODER_ERROR_THRESHOLD){
 			drive(power * Constants.DT_DRIVE_STRAIGHT_LOWER_POWER, power * Constants.DT_DRIVE_STRAIGHT_HIGHER_POWER);
 		}
-		else if(encoderLeft.getRaw() < encoderRight.getRaw()){
+		else if(encoderLeft.getRaw() - encoderRight.getRaw() < -Constants.DT_ENCODER_ERROR_THRESHOLD){
 			drive(power * Constants.DT_DRIVE_STRAIGHT_HIGHER_POWER, power * Constants.DT_DRIVE_STRAIGHT_LOWER_POWER);
+		} else {
+			drive(power, power);
 		}
 	}
 	
