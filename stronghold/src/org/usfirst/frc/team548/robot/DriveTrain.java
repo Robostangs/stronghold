@@ -100,25 +100,30 @@ public class DriveTrain implements PIDSource, PIDOutput {
 		}
 		drive(left, right);
 	}
-	
+	/*
+	 * 
+	 * 
+	 * 
+	 * PID STUFF vvvvvvvv
+	 * 
+	 * 
+	 * 
+	 */
 	private static PIDSourceType pidtype = PIDSourceType.kDisplacement;
 	
 	@Override
 	public void setPIDSourceType(PIDSourceType pidSource) {//Don't worry about this yet
-		// TODO Auto-generated method stub
 		pidtype = pidSource;
 	}
 	
 	
 	@Override
 	public PIDSourceType getPIDSourceType() { //Dont worry about this yet
-		// TODO Auto-generated method stub
 		return pidtype;
 	}
 
 	@Override
 	public double pidGet() { //Gets the encoder vales for PID
-		// TODO Auto-generated method stub
 		return getEncoderAverage();
 	}
 	/**
@@ -146,7 +151,6 @@ public class DriveTrain implements PIDSource, PIDOutput {
 
 	@Override
 	public void pidWrite(double output) {
-		// TODO Auto-generated method stub
 		driveStraight(output);
 	}
 	

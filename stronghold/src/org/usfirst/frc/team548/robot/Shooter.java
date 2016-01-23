@@ -21,11 +21,19 @@ public class Shooter {
 		shooterEncoder = new Encoder(Constants.SHOOTER_ENCODER_POS_1, Constants.SHOOTER_ENCODER_POS_2);
 	}
 	
-	public void setShooter(double value) {
+	public static void setPower(double value) {
 		shootingMotor.set(value);
 	}
 	
-	public void stopShooting() {
-		setShooter(0);
+	public static void stop() {
+		setPower(0);
+	}
+	
+	public static void setSpeed(double speed) {
+		
+	}
+	
+	public static void disablePID() {
+		
 	}
 }

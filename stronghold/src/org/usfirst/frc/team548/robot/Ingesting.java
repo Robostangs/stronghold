@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj.CANTalon;
 public class Ingesting {
 
 	private static Ingesting instance = null;
-	private static CANTalon rollerMotor, beltsMotor;
+	private static CANTalon rollerMotor;
 	
 	public static Ingesting getInstance(){
 		if(instance == null){
@@ -14,41 +14,25 @@ public class Ingesting {
 		return instance;
 	}
 	
-	public Ingesting() {
+	private Ingesting() {
 		rollerMotor = new CANTalon(Constants.ROLLER_TALON_POS);
-		beltsMotor = new CANTalon(Constants.BELTS_TALON_POS);
 	}
 	
-	public void setRoller(double value) {
+	public static void setRoller(double value) {
 		rollerMotor.set(value);
 	}
 	
-	public void stopRoller() {
+	public static void stopRoller() {
 		setRoller(0);
 	}
 	
-	public void setBelts(double value) {
-		beltsMotor.set(value);
-	}
 	
-	public void stopBelts() {
-		setBelts(0);
-	}
-	
-	public void rollerIn() {
+	public static void rollerIn() {
 		setRoller(Constants.ROLLER_IN_NORMAL_POWER);
 	}
 	
-	public void rollerOut() {
+	public static void rollerOut() {
 		setRoller(Constants.ROLLER_OUT_NORMAL_POWER);
-	}
-	
-	public void beltsIn() {
-		setBelts(Constants.BELTS_IN_NORMAL_POWER);
-	}
-	
-	public void beltsOut() {
-		setBelts(Constants.BELTS_OUT_NORMAL_POWER);
 	}
 	
 }
