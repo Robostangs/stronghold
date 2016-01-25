@@ -2,11 +2,11 @@ package org.usfirst.frc.team548.robot;
 
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PIDSourceType;
+import edu.wpi.first.wpilibj.interfaces.Gyro;
 
 public class DriveTrain implements PIDSource, PIDOutput {
 	private static DriveTrain instance = null;
@@ -158,8 +158,13 @@ public class DriveTrain implements PIDSource, PIDOutput {
 		return pid.onTarget();
 	}
 	
-	public static boolean turnAngle() {
+	public static boolean turnAngle(double setPoint, double pk, double ik, double dk) {
 		//make robot turn using pid based off of gyro values
+		pid.setPID(pk, ik, dk);
+		pid.setSetpoint(setPoint);
+		pid.enable();
+		pid.setPercentTolerance(9999999); //IDK YET
+		return pid.onTarget();
 	}
 	/**
 	 * Disables PID

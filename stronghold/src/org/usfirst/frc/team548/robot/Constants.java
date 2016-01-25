@@ -17,6 +17,7 @@ public class Constants {
 		public static final int ARM_TALON_POS = 0;
 		
 		public static final int SHOOTING_TALON_POS = 0;
+		public static final double SHOOTING_PID_P = 0, SHOOTING_PID_I = 0, SHOOTING_PID_D = 0;
 		
 		public static final int ING_TALON_POS = 0;
 		public static final int ING_SWITCH_POS = 0;
