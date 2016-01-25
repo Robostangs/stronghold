@@ -23,7 +23,7 @@ public class DriveDistanceInTime extends AutoCommandBase{
     @Override
     protected void run() {    
     	//DriveTrain.driveDistance(distance, .26);
-    	System.out.println("Were driving");
+    	System.out.println("We're driving");
     	//this.setDone(DriveTrain.driveDone);
     }
     @Override

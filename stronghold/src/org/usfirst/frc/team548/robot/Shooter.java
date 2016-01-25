@@ -25,6 +25,10 @@ public class Shooter {
 		shootingMotor.set(value);
 	}
 	
+	public static void ingest() {
+		setPower(Constants.SHOOTER_INGEST_SPEED);
+	}
+	
 	public static void stop() {
 		setPower(0);
 	}

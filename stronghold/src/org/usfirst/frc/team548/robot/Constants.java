@@ -12,6 +12,8 @@ public class Constants {
 		public static final int DT_TALON_POS_RIGHT_MID = 5;
 		public static final int DT_TALON_POS_RIGHT_BACK = 6;
 		
+		public static final int GYRO_POS = 0;
+		
 		public static final int ARM_TALON_POS = 0;
 		
 		public static final int SHOOTING_TALON_POS = 0;
@@ -39,4 +41,6 @@ public class Constants {
 		
 		public static final double BELTS_IN_NORMAL_POWER = 0.2;
 		public static final double BELTS_OUT_NORMAL_POWER = -0.2;
+		
+		public static final double SHOOTER_INGEST_SPEED = 0.2;
 }

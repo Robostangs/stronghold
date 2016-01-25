@@ -29,7 +29,6 @@ public class Ingesting {
 		setRoller(0);
 	}
 	
-	
 	public static void rollerIn() {
 		setRoller(Constants.ROLLER_IN_NORMAL_POWER);
 	}

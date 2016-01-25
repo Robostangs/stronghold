@@ -33,8 +33,8 @@ public abstract class AutoMode {
         runCommand(new Wait(seconds));
     }
     
-    protected void driveDistanceInTime(double secounds, int distance) {
-        runCommand(new DriveDistanceInTime(secounds, distance));
+    protected void driveDistanceInTime(double seconds, int distance) {
+        runCommand(new DriveDistanceInTime(seconds, distance));
     }
     
     protected void drivePowerInTime(double seconds, double power) {

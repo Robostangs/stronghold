@@ -1,7 +1,6 @@
 package org.usfirst.frc.team548.robot;
 
 import edu.wpi.first.wpilibj.CANTalon;
-import edu.wpi.first.wpilibj.Encoder;
 
 public class Arm {
 

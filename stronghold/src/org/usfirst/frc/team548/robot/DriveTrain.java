@@ -2,6 +2,7 @@ package org.usfirst.frc.team548.robot;
 
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.PIDSource;
@@ -10,6 +11,7 @@ import edu.wpi.first.wpilibj.PIDSourceType;
 public class DriveTrain implements PIDSource, PIDOutput {
 	private static DriveTrain instance = null;
 	private static Encoder encoderLeft, encoderRight;
+	private static Gyro hyro;
 	private static CANTalon leftFront, leftMiddle, leftBack, rightFront, rightMiddle, rightBack;
 	private static PIDController pid;
 	
@@ -36,6 +38,7 @@ public class DriveTrain implements PIDSource, PIDOutput {
 		rightBack = new CANTalon(Constants.DT_TALON_POS_RIGHT_BACK);
 		//encoderLeft = new Encoder(Constants.LEFT_ENCODER_POS_1, Constants.LEFT_ENCODER_POS_2);
 		//encoderRight = new Encoder(Constants.RIGHT_ENCODER_POS_1, Constants.RIGHT_ENCODER_POS_2);
+		//hyro = new Gyro(Constants.GYRO_POS);
 		//pid = new PIDController(0, 0, 0, this, this);
 		//pid.setInputRange(-1000000, 1000000); //IDK YET
 		//pid.disable();
@@ -72,6 +75,16 @@ public class DriveTrain implements PIDSource, PIDOutput {
 		encoderLeft.reset();
 		encoderRight.reset();
 	}
+	
+	public static void getHyro() {
+		hyro.getAngle();
+	}
+	
+	public static void resetHyro() {
+		hyro.reset();
+	}
+	
+	
 	
 	/**
 	 * Drive straight method
@@ -143,6 +156,10 @@ public class DriveTrain implements PIDSource, PIDOutput {
 		pid.enable();
 		pid.setPercentTolerance(9999999); //IDK YET
 		return pid.onTarget();
+	}
+	
+	public static boolean turnAngle() {
+		//make robot turn using pid based off of gyro values
 	}
 	/**
 	 * Disables PID
