@@ -1,6 +1,7 @@
 package org.usfirst.frc.team548.robot;
 
 import edu.wpi.first.wpilibj.CANTalon;
+import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
 
 public class Arm {
 
@@ -16,6 +17,7 @@ public class Arm {
 	
 	private Arm() {
 		armMotor = new CANTalon(Constants.ARM_TALON_POS);
+		armMotor.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Absolute);
 	}
 	
 	public static void setPower(double value) {
