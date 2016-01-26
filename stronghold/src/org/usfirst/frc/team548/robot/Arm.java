@@ -2,6 +2,7 @@ package org.usfirst.frc.team548.robot;
 
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
+import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
 
 public class Arm {
 
@@ -21,6 +22,7 @@ public class Arm {
 	}
 	
 	public static void setPower(double value) {
+		armMotor.changeControlMode(TalonControlMode.PercentVbus);
 		armMotor.set(value);
 	}
 	
