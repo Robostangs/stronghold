@@ -1,7 +1,7 @@
 package org.usfirst.frc.team548.robot;
 
 public class TeleOperated {
-	private static XboxController driver, manip;
+	private static XboxController driver; //, manip;
 	private static TeleOperated instance = null;
 	
 	public static TeleOperated getInstance(){
@@ -19,7 +19,14 @@ public class TeleOperated {
 	public static void run() {
 		
         DriveTrain.humanDrive(driver.getLeftStickYAxis(), driver.getRightStickYAxis());
-        //DriveTrain.humanDrive(0, 0);
+        
+        if(driver.getAButton()) {
+        	DriveTrain.encoderReset();
+        }
+        
+        if(driver.getBButton()) {
+        	DriveTrain.testEncodersDriving(50000);
+        }
 	}
 	
 }

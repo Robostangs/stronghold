@@ -1,17 +1,21 @@
 package org.usfirst.frc.team548.robot;
 
+import com.kauailabs.navx.frc.AHRS;
+import com.kauailabs.navx.frc.AHRS.SerialDataType;
+
 import edu.wpi.first.wpilibj.CANTalon;
-import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PIDSourceType;
-import edu.wpi.first.wpilibj.interfaces.Gyro;
+import edu.wpi.first.wpilibj.SerialPort;
+import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class DriveTrain implements PIDSource, PIDOutput {
 	private static DriveTrain instance = null;
-	private static Encoder encoderLeft, encoderRight;
-	private static Gyro hyro;
+	private static AHRS hyro;
 	private static CANTalon leftFront, leftMiddle, leftBack, rightFront, rightMiddle, rightBack;
 	private static PIDController pid;
 	
@@ -36,18 +40,28 @@ public class DriveTrain implements PIDSource, PIDOutput {
 		rightFront = new CANTalon(Constants.DT_TALON_POS_RIGHT_FRONT);
 		rightMiddle = new CANTalon(Constants.DT_TALON_POS_RIGHT_MID);
 		rightBack = new CANTalon(Constants.DT_TALON_POS_RIGHT_BACK);
-		//encoderLeft = new Encoder(Constants.LEFT_ENCODER_POS_1, Constants.LEFT_ENCODER_POS_2);
-		//encoderRight = new Encoder(Constants.RIGHT_ENCODER_POS_1, Constants.RIGHT_ENCODER_POS_2);
-		//hyro = new Gyro(Constants.GYRO_POS);
-		//pid = new PIDController(0, 0, 0, this, this);
-		//pid.setInputRange(-1000000, 1000000); //IDK YET
-		//pid.disable();
+		
+		rightBack.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
+		leftFront.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
+		
+		hyro = new AHRS(SerialPort.Port.kMXP);
+		hyro.reset();
+		
+		pid = new PIDController(0.03, 0.01, 0, hyro, this);
+		pid.disable();
+		pid.setInputRange(-180.0f,  180.0f);
+		pid.setOutputRange(-0.5f, 0.5f);
+		pid.setAbsoluteTolerance(2f);
+        pid.setContinuous(true);
+        
+        LiveWindow.addActuator("DriveSystem", "RotateController", pid);
+        LiveWindow.addSensor("Drive", "Gyro", hyro);
 	}
 	
 	public static void drive(double leftSpeed, double rightSpeed){
-		leftFront.set(-leftSpeed);
-		leftMiddle.set(-leftSpeed);
-		leftBack.set(-leftSpeed);
+		leftFront.set(leftSpeed);
+		leftMiddle.set(leftSpeed);
+		leftBack.set(leftSpeed);
 		rightFront.set(rightSpeed);
 		rightMiddle.set(rightSpeed);
 		rightBack.set(rightSpeed);
@@ -61,23 +75,46 @@ public class DriveTrain implements PIDSource, PIDOutput {
 	} 
 	
 	/**
-	 * Gets the average of the left and right encoders
+	 * Gets values of right and left encoders
 	 * @return 
 	 */
-	public static double getEncoderAverage(){
-		return ((encoderLeft.getRaw() + encoderRight.getRaw()) / 2);
+	
+	public static double getLeftEncoder() {
+		return leftFront.getEncPosition();
+	}
+	
+	public static double getRightEncoder() {
+		return -rightBack.getEncPosition();
+	}
+	
+	public static double getEncoderAverage() {
+		return (getRightEncoder() + getLeftEncoder()) / 2;
 	}
 	
 	/**
 	 * Resets the encoders
 	 */
 	public static void encoderReset(){
-		encoderLeft.reset();
-		encoderRight.reset();
+		leftFront.setPosition(0);
+		rightBack.setPosition(0);
 	}
 	
-	public static void getHyro() {
-		hyro.getAngle();
+	public static void testEncodersDriving(int setPoint) {
+		if(getEncoderAverage() > setPoint) {
+			stop();
+		} else if (getEncoderAverage() > setPoint - 1000) {
+			drive(-0.1, 0.1);
+		} else if (getEncoderAverage() > setPoint - 5000) {
+			drive(-0.25, 0.25);
+		} else if (getEncoderAverage() < setPoint) {
+			drive(-0.5, 0.5);
+		}
+	}
+	
+	
+	
+	public static double getHyroAngle() {
+		return hyro.pidGet();
 	}
 	
 	public static void resetHyro() {
@@ -91,10 +128,10 @@ public class DriveTrain implements PIDSource, PIDOutput {
 	 * @param power
 	 */
 	public static void driveStraight(double power){
-		if(encoderLeft.getRaw() - encoderRight.getRaw() > Constants.DT_ENCODER_ERROR_THRESHOLD){
+		if(getLeftEncoder() - getRightEncoder() > Constants.DT_ENCODER_ERROR_THRESHOLD){
 			drive(power * Constants.DT_DRIVE_STRAIGHT_LOWER_POWER, power * Constants.DT_DRIVE_STRAIGHT_HIGHER_POWER);
 		}
-		else if(encoderLeft.getRaw() - encoderRight.getRaw() < -Constants.DT_ENCODER_ERROR_THRESHOLD){
+		else if(getLeftEncoder() - getRightEncoder() < -Constants.DT_ENCODER_ERROR_THRESHOLD){
 			drive(power * Constants.DT_DRIVE_STRAIGHT_HIGHER_POWER, power * Constants.DT_DRIVE_STRAIGHT_LOWER_POWER);
 		} else {
 			drive(power, power);
@@ -124,7 +161,7 @@ public class DriveTrain implements PIDSource, PIDOutput {
 	 * 
 	 * 
 	 */
-	private static PIDSourceType pidtype = PIDSourceType.kDisplacement;
+	private static PIDSourceType pidtype;
 	
 	@Override
 	public void setPIDSourceType(PIDSourceType pidSource) {//Don't worry about this yet
@@ -139,7 +176,7 @@ public class DriveTrain implements PIDSource, PIDOutput {
 
 	@Override
 	public double pidGet() { //Gets the encoder vales for PID
-		return getEncoderAverage();
+		return getHyroAngle();
 	}
 	/**
 	 * Drives a distance and returns true if within a percentage of the target
@@ -159,12 +196,14 @@ public class DriveTrain implements PIDSource, PIDOutput {
 	}
 	
 	public static boolean turnAngle(double setPoint, double pk, double ik, double dk) {
+		
 		//make robot turn using pid based off of gyro values
 		pid.setPID(pk, ik, dk);
-		pid.setSetpoint(setPoint);
 		pid.enable();
-		pid.setPercentTolerance(9999999); //IDK YET
-		return pid.onTarget();
+		pid.setSetpoint(setPoint);
+		pid.setPercentTolerance(25); //IDK YET
+		return true;
+		//return pid.onTarget();
 	}
 	/**
 	 * Disables PID
@@ -175,7 +214,7 @@ public class DriveTrain implements PIDSource, PIDOutput {
 
 	@Override
 	public void pidWrite(double output) {
-		driveStraight(output);
+		drive(-output, -output);
 	}
 	
 }

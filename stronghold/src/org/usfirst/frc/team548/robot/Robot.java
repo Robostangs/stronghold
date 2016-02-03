@@ -37,8 +37,8 @@ public class Robot extends IterativeRobot {;
     	autoSelected = (AutoMode) chooser.getSelected();
 //		autoSelected = SmartDashboard.getStrixng("Auto Selector", defaultAuto);
     	System.out.println("Start Auton");
-		autoSelected.start();
-		
+		//autoSelected.start();
+    	DriveTrain.resetHyro();
     }
 
 
@@ -49,11 +49,14 @@ public class Robot extends IterativeRobot {;
 
     public void teleopPeriodic() {
     	TeleOperated.run();
+    	SmartDashboard.putNumber("Left Encoder", DriveTrain.getLeftEncoder());
+    	SmartDashboard.putNumber("Right Encoder", DriveTrain.getRightEncoder());
+    	
     }
     
 
     public void testPeriodic() {
-    
+    	System.out.println(DriveTrain.getHyroAngle());
     }
     
 }

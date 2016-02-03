@@ -5,12 +5,12 @@ public class Constants {
 		public static final int XBOX_DRIVER_POS = 0;
 		public static final int XBOX_MANIP_POS = 1;
 		
-		public static final int DT_TALON_POS_LEFT_FRONT = 1;
+		public static final int DT_TALON_POS_LEFT_FRONT = 1; //left encoder location
 		public static final int DT_TALON_POS_LEFT_MID = 2;
 		public static final int DT_TALON_POS_LEFT_BACK = 3;
-		public static final int DT_TALON_POS_RIGHT_FRONT = 4;
-		public static final int DT_TALON_POS_RIGHT_MID = 5;
-		public static final int DT_TALON_POS_RIGHT_BACK = 6;
+		public static final int DT_TALON_POS_RIGHT_FRONT = 10;
+		public static final int DT_TALON_POS_RIGHT_MID = 11;
+		public static final int DT_TALON_POS_RIGHT_BACK = 12; //right encoder location
 		
 		public static final int GYRO_POS = 0;
 		
