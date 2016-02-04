@@ -49,10 +49,10 @@ public class DriveTrain implements PIDSource, PIDOutput {
 		
 		pid = new PIDController(0.03, 0.01, 0, hyro, this);
 		pid.disable();
-		pid.setInputRange(-180.0f,  180.0f);
-		pid.setOutputRange(-0.5f, 0.5f);
-		pid.setAbsoluteTolerance(2f);
-        pid.setContinuous(true);
+//		pid.setInputRange(-180.0f,  180.0f);
+//		pid.setOutputRange(-0.5f, 0.5f);
+//		pid.setAbsoluteTolerance(2f);
+//        pid.setContinuous(true);
         
         LiveWindow.addActuator("DriveSystem", "RotateController", pid);
         LiveWindow.addSensor("Drive", "Gyro", hyro);
@@ -99,16 +99,22 @@ public class DriveTrain implements PIDSource, PIDOutput {
 		rightBack.setPosition(0);
 	}
 	
-	public static void testEncodersDriving(int setPoint) {
+	public static boolean testEncodersDriving(int setPoint) {
+		boolean done = false;
 		if(getEncoderAverage() > setPoint) {
 			stop();
+			done = true;
 		} else if (getEncoderAverage() > setPoint - 1000) {
 			drive(-0.1, 0.1);
+			done = false;
 		} else if (getEncoderAverage() > setPoint - 5000) {
 			drive(-0.25, 0.25);
+			done = false;
 		} else if (getEncoderAverage() < setPoint) {
 			drive(-0.5, 0.5);
+			done = false;
 		}
+		return done;
 	}
 	
 	
@@ -161,7 +167,10 @@ public class DriveTrain implements PIDSource, PIDOutput {
 	 * 
 	 * 
 	 */
-	private static PIDSourceType pidtype;
+	private static PIDSourceType pidtype = PIDSourceType.kDisplacement;
+	
+	private static boolean gyroPID = true, pidInit = false;
+	
 	
 	@Override
 	public void setPIDSourceType(PIDSourceType pidSource) {//Don't worry about this yet
@@ -187,22 +196,21 @@ public class DriveTrain implements PIDSource, PIDOutput {
 	 * @param dk
 	 * @return is the setpoint in tolerance
 	 */
-	public static boolean driveDistance(double setPoint, double pk, double ik, double dk) {
-		pid.setPID(pk, ik, dk);
-		pid.setSetpoint(setPoint);
-		pid.enable();
-		pid.setPercentTolerance(9999999); //IDK YET
-		return pid.onTarget();
-	}
+//	public static boolean driveDistance(double setPoint, double pk, double ik, double dk) {
+//		pid.setPID(pk, ik, dk);
+//		pid.setSetpoint(setPoint);
+//		pid.enable();
+//		pid.setPercentTolerance(9999999); //IDK YET
+//		return pid.onTarget();
+//	}
 	
-	public static boolean turnAngle(double setPoint, double pk, double ik, double dk) {
+	public static void turnAngle(double setPoint, double pk, double ik, double dk) {
 		
 		//make robot turn using pid based off of gyro values
-		pid.setPID(pk, ik, dk);
 		pid.enable();
+		
 		pid.setSetpoint(setPoint);
-		pid.setPercentTolerance(25); //IDK YET
-		return true;
+		//pid.setPercentTolerance(25); //IDK YET
 		//return pid.onTarget();
 	}
 	/**
@@ -211,10 +219,29 @@ public class DriveTrain implements PIDSource, PIDOutput {
 	public static void disablePID() {
 		pid.disable();
 	}
+	
+	public static void setPIDtoGyro() {
+		gyroPID = true;
+		pid = new PIDController(Constants.DT_PID_GYRO_KP, Constants.DT_PID_GYRO_KI, Constants.DT_PID_GYRO_KD, hyro, DriveTrain.getInstance());
+		pid.setInputRange(-180.0f,  180.0f);
+		pid.setOutputRange(-0.5f, 0.5f);
+		pid.setAbsoluteTolerance(2f);
+        pid.setContinuous(true);
+	}
+	
+	public static void setPIDtoDrive() {
+		gyroPID = false;
+		pid = new PIDController(Constants.DT_PID_DRIVE_KP, Constants.DT_PID_DRIVE_KI, Constants.DT_PID_DRIVE_KD, DriveTrain.getInstance(), DriveTrain.getInstance());
+		
+	}
 
 	@Override
 	public void pidWrite(double output) {
-		drive(-output, -output);
+		if(gyroPID) {
+			drive(-output, -output);	
+		} else {
+			driveStraight(output);
+		}
 	}
 	
 }

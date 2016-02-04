@@ -17,15 +17,22 @@ public class TeleOperated {
 	}
 
 	public static void run() {
-		
-        DriveTrain.humanDrive(driver.getLeftStickYAxis(), driver.getRightStickYAxis());
         
         if(driver.getAButton()) {
         	DriveTrain.encoderReset();
         }
         
         if(driver.getBButton()) {
-        	DriveTrain.testEncodersDriving(50000);
+        	boolean done = false;
+        	if(DriveTrain.testEncodersDriving(30000)) {
+        		done = true;
+        	}
+        	if(done) {
+        		DriveTrain.turnAngle(90, 0.03, 0.01, 0);
+        	}
+        } else {
+        	DriveTrain.disablePID();
+            DriveTrain.humanDrive(driver.getLeftStickYAxis(), driver.getRightStickYAxis());
         }
 	}
 	
