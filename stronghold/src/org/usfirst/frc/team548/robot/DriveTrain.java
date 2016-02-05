@@ -97,27 +97,7 @@ public class DriveTrain implements PIDSource, PIDOutput {
 	public static void encoderReset(){
 		leftFront.setPosition(0);
 		rightBack.setPosition(0);
-	}
-	
-	public static boolean testEncodersDriving(int setPoint) {
-		boolean done = false;
-		if(getEncoderAverage() > setPoint) {
-			stop();
-			done = true;
-		} else if (getEncoderAverage() > setPoint - 1000) {
-			drive(-0.1, 0.1);
-			done = false;
-		} else if (getEncoderAverage() > setPoint - 5000) {
-			drive(-0.25, 0.25);
-			done = false;
-		} else if (getEncoderAverage() < setPoint) {
-			drive(-0.5, 0.5);
-			done = false;
-		}
-		return done;
-	}
-	
-	
+	}	
 	
 	public static double getHyroAngle() {
 		return hyro.pidGet();

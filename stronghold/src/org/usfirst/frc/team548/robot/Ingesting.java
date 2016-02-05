@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 public class Ingesting {
 
 	private static Ingesting instance = null;
-	private static CANTalon rollerMotor;
+	private static CANTalon ingestingMotor;
 	private static DigitalInput ballSwitch;
 	
 	public static Ingesting getInstance(){
@@ -17,28 +17,43 @@ public class Ingesting {
 	}
 	
 	private Ingesting() {
-		rollerMotor = new CANTalon(Constants.ING_TALON_POS);
-		ballSwitch = new DigitalInput(Constants.ING_SWITCH_POS);
+		ingestingMotor = new CANTalon(Constants.INGESTING_TALON_POS);
+		ballSwitch = new DigitalInput(Constants.INGESTING_SWITCH_POS);
 	}
 	
-	public static void setRoller(double value) {
-		rollerMotor.set(value);
+	//Set rollers and injector wheels to speed
+	public static void setIngesting(double value) {
+		ingestingMotor.set(value);
 	}
 	
-	public static void stopRoller() {
-		setRoller(0);
+	public static void stopIngesting() {
+		setIngesting(0);
 	}
 	
-	public static void rollerIn() {
-		setRoller(Constants.ROLLER_IN_NORMAL_POWER);
+	//ingest ball with ingesting and shooter wheel
+	public static void ingest() {
+		setIngesting(Constants.INGESTING_IN_NORMAL_POWER);
+		Shooter.shooterIngest();
 	}
 	
-	public static void rollerOut() {
-		setRoller(Constants.ROLLER_OUT_NORMAL_POWER);
+	//exgest ball with ingesting and shooter wheel
+	public static void exgest() {
+		setIngesting(Constants.INGESTING_OUT_NORMAL_POWER);
+		Shooter.shooterExgest();
 	}
 	
+	//use limit switch to determine if we're holding a ball
 	public static boolean hasBall() {
 		return ballSwitch.get();
+	}
+	
+	//run ingesting inwards constantly at slow speed to hold ball
+	public static void holdBall() {
+		setIngesting(Constants.INGESTING_HOLDING_BALL_POWER);
+	}
+	
+	public static void inject() {
+		setIngesting(Constants.INJECTING_POWER);
 	}
 	
 }

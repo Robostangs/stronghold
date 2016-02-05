@@ -1,13 +1,15 @@
 package org.usfirst.frc.team548.robot;
 
 import edu.wpi.first.wpilibj.CANTalon;
+import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
 import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
 
 public class Arm {
 
 	private static Arm instance = null;
-	private static CANTalon armMotor;
+	private static CANTalon leftArmMotor, rightArmMotor;
+	private static PIDController pid;
 	
 	public static Arm getInstance() {
 		if(instance == null){
@@ -17,13 +19,18 @@ public class Arm {
 	}
 	
 	private Arm() {
-		armMotor = new CANTalon(Constants.ARM_TALON_POS);
-		armMotor.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Absolute);
+		leftArmMotor = new CANTalon(Constants.RIGHT_ARM_TALON_POS);
+		rightArmMotor = new CANTalon(Constants.LEFT_ARM_TALON_POS);
+		leftArmMotor.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Absolute);
+
+		pid = new PIDController(0, 0, 0, leftArmMotor, this);
+		pid.disable();
 	}
 	
 	public static void setPower(double value) {
-		armMotor.changeControlMode(TalonControlMode.PercentVbus);
-		armMotor.set(value);
+		leftArmMotor.changeControlMode(TalonControlMode.PercentVbus);
+		leftArmMotor.set(value);
+		rightArmMotor.set(-value);
 	}
 	
 	public static void stopArm() {
@@ -31,6 +38,32 @@ public class Arm {
 	}
 	
 	public static double getEncoder() {
-		return armMotor.getEncPosition();
+		return leftArmMotor.getEncPosition();
 	}
+	
+	public static void setArmPos(int setpoint) {
+		leftArmMotor.set(setpoint);
+		leftArmMotor.changeControlMode(ControlMode.Position);
+		leftArmMotor.setPID(0, 0, 0);
+	}
+	
+	public static void setSpeed(double value) {
+		if(value > 0) {
+			if(getEncoder() < Constants.ARM_MAX_POS) {
+				setPower(value * Constants.ARM_POWER_COEFFICIENT);
+			} else {
+				setPower(0);
+			}
+		} else if (value < 0) {
+			if(getEncoder() > Constants.ARM_MIN_POS) {
+				setPower(value * Constants.ARM_POWER_COEFFICIENT);
+			} else {
+				setPower(0);
+			}
+		} else {
+			setPower(0);
+		}
+	}
+	
+	
 }

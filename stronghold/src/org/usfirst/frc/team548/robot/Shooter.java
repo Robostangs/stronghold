@@ -26,8 +26,12 @@ public class Shooter {
 		shootingMotor.set(value);
 	}
 	
-	public static void ingest() {
+	public static void shooterIngest() {
 		setPower(Constants.SHOOTER_INGEST_SPEED);
+	}
+	
+	public static void shooterExgest() {
+		setPower(Constants.SHOOTER_EXGEST_SPEED);
 	}
 	
 	public static void stop() {
@@ -40,6 +44,11 @@ public class Shooter {
 		shootingMotor.set(speed);
 		shootingMotor.setPID(Constants.SHOOTING_PID_P, Constants.SHOOTING_PID_I, Constants.SHOOTING_PID_D);
 		
+	}
+	
+	public static void setShooterSpeedNoPID(double speed) {
+		disablePID();
+		shootingMotor.set(speed);
 	}
 	
 	public static void disablePID() {
