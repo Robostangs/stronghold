@@ -54,7 +54,10 @@ public class Robot extends IterativeRobot {;
     	
     }
     
-
+    public void testInit() {
+    	DriveTrain.resetPIDInit();
+    	DriveTrain.setPIDtoGyro();
+    }
     public void testPeriodic() {
     	System.out.println(DriveTrain.getHyroAngle());
     }

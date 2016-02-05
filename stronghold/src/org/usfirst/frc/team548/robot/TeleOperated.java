@@ -20,16 +20,14 @@ public class TeleOperated {
         
         if(driver.getAButton()) {
         	DriveTrain.encoderReset();
+        	DriveTrain.resetHyro();
+        	DriveTrain.resetPIDInit();
         }
         
         if(driver.getBButton()) {
-        	boolean done = false;
-        	if(DriveTrain.testEncodersDriving(30000)) {
-        		done = true;
-        	}
-        	if(done) {
-        		DriveTrain.turnAngle(90, 0.03, 0.01, 0);
-        	}
+
+        		DriveTrain.turnAngle(90);
+        	
         } else {
         	DriveTrain.disablePID();
             DriveTrain.humanDrive(driver.getLeftStickYAxis(), driver.getRightStickYAxis());

@@ -47,7 +47,7 @@ public class DriveTrain implements PIDSource, PIDOutput {
 		hyro = new AHRS(SerialPort.Port.kMXP);
 		hyro.reset();
 		
-		pid = new PIDController(0.03, 0.01, 0, hyro, this);
+		pid = new PIDController(0, 0, 0, hyro, this);
 		pid.disable();
 //		pid.setInputRange(-180.0f,  180.0f);
 //		pid.setOutputRange(-0.5f, 0.5f);
@@ -185,7 +185,7 @@ public class DriveTrain implements PIDSource, PIDOutput {
 
 	@Override
 	public double pidGet() { //Gets the encoder vales for PID
-		return getHyroAngle();
+		return getEncoderAverage();
 	}
 	/**
 	 * Drives a distance and returns true if within a percentage of the target
@@ -204,8 +204,12 @@ public class DriveTrain implements PIDSource, PIDOutput {
 //		return pid.onTarget();
 //	}
 	
-	public static void turnAngle(double setPoint, double pk, double ik, double dk) {
-		
+	public static void resetPIDInit() {
+		pidInit = false;
+	}
+	
+	public static void turnAngle(double setPoint) {
+		setPIDtoGyro();
 		//make robot turn using pid based off of gyro values
 		pid.enable();
 		
@@ -221,18 +225,21 @@ public class DriveTrain implements PIDSource, PIDOutput {
 	}
 	
 	public static void setPIDtoGyro() {
+		if(!pidInit) {
 		gyroPID = true;
 		pid = new PIDController(Constants.DT_PID_GYRO_KP, Constants.DT_PID_GYRO_KI, Constants.DT_PID_GYRO_KD, hyro, DriveTrain.getInstance());
 		pid.setInputRange(-180.0f,  180.0f);
 		pid.setOutputRange(-0.5f, 0.5f);
 		pid.setAbsoluteTolerance(2f);
         pid.setContinuous(true);
+		}
+        pidInit = true;
 	}
 	
 	public static void setPIDtoDrive() {
 		gyroPID = false;
 		pid = new PIDController(Constants.DT_PID_DRIVE_KP, Constants.DT_PID_DRIVE_KI, Constants.DT_PID_DRIVE_KD, DriveTrain.getInstance(), DriveTrain.getInstance());
-		
+		pidInit = true;
 	}
 
 	@Override
