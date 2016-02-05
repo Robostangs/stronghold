@@ -125,6 +125,7 @@ public class DriveTrain implements PIDSource, PIDOutput {
 	
 	public static void resetHyro() {
 		hyro.reset();
+		System.out.println("RESET GYRO");
 	}
 	
 	

@@ -32,6 +32,7 @@ public abstract class AutoCommandBase {
     
     public void execute() {
     	System.out.println("Starting command "+this.getCommandName());
+    	this.init();
         timer.start();
         while(!done && !hasTimedOut() && (!ds.isDisabled() && !ds.isOperatorControl())) {
             this.run();
