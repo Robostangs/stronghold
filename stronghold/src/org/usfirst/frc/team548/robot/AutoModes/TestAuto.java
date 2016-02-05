@@ -5,6 +5,8 @@
  */
 package org.usfirst.frc.team548.robot.AutoModes;
 
+import org.usfirst.frc.team548.robot.DriveTrain;
+
 /**
  *
  * @author Alex
@@ -17,10 +19,11 @@ public class TestAuto extends AutoMode {
 
     @Override
     protected void run() {
+        turnToAngleInTime(5, 90);
+
         waitTime(2.5);
-        drivePowerInTime(2, 1);
-        waitTime(2.5);
-        drivePowerInTime(3, .5);
+        turnToAngleInTime(5, 90);
+        turnToAngleInTime(5, 180);
     }
     
 }

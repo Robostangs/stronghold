@@ -36,7 +36,7 @@ public abstract class AutoCommandBase {
         while(!done && !hasTimedOut() && (!ds.isDisabled() && !ds.isOperatorControl())) {
             this.run();
             try {
-                Thread.sleep(10);
+                Thread.sleep(5);
             } catch (InterruptedException ex) {
                 Logger.getLogger(AutoCommandBase.class.getName()).log(Level.SEVERE, null, ex);
             }

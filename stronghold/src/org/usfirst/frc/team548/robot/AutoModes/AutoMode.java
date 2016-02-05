@@ -33,12 +33,12 @@ public abstract class AutoMode {
         runCommand(new Wait(seconds));
     }
     
-    protected void driveDistanceInTime(double seconds, int distance) {
-        runCommand(new DriveDistanceInTime(seconds, distance));
+    protected void turnToAngleInTime(double seconds, double angle) {
+        runCommand(new TurnToAngleInTime(seconds, angle));
     }
     
     protected void drivePowerInTime(double seconds, double power) {
-    	runCommand(new DrivePower(seconds, power));
+    	runCommand(new DrivePowerInTime(seconds, power));
     }
     
     private static void runCommand(AutoCommandBase command) {

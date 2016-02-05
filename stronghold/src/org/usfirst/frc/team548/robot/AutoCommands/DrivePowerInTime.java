@@ -2,10 +2,10 @@ package org.usfirst.frc.team548.robot.AutoCommands;
 
 import org.usfirst.frc.team548.robot.DriveTrain;
 
-public class DrivePower extends AutoCommandBase {
+public class DrivePowerInTime extends AutoCommandBase {
 	
 	double power;
-	public DrivePower(double timeOut, double power) {
+	public DrivePowerInTime(double timeOut, double power) {
 		super(timeOut);
 		this.power = power;
 		// TODO Auto-generated constructor stub

@@ -46,6 +46,6 @@ public class Constants {
 		public static final double SHOOTER_INGEST_SPEED = 0.2;
 		
 		//PID constants
-		public static final double DT_PID_GYRO_KP = 0.05, DT_PID_GYRO_KI = 0, DT_PID_GYRO_KD = 0;
+		public static final double DT_PID_GYRO_KP = 0.03, DT_PID_GYRO_KI = 0, DT_PID_GYRO_KD = 0;
 		public static final double DT_PID_DRIVE_KP = 0, DT_PID_DRIVE_KI = 0, DT_PID_DRIVE_KD = 0;
 }
