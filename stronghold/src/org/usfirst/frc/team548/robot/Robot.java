@@ -2,9 +2,11 @@
 package org.usfirst.frc.team548.robot;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.PowerDistributionPanel;
 //import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import org.usfirst.frc.team548.robot.AutoModes.*;
 
 
@@ -20,10 +22,10 @@ public class Robot extends IterativeRobot {;
         SmartDashboard.putData("Auto choices", chooser);
         
         DriveTrain.getInstance();
-        //Arm.getInstance();
+        Arm.getInstance();
         Autonomous.getInstance();
-        //Ingesting.getInstance();
-        //Shooter.getInstance();
+        Ingesting.getInstance();
+        Shooter.getInstance();
         TeleOperated.getInstance();
     }
     
@@ -47,8 +49,9 @@ public class Robot extends IterativeRobot {;
 
     public void teleopPeriodic() {
     	TeleOperated.run();
-    	SmartDashboard.putNumber("Left Encoder", DriveTrain.getLeftEncoder());
-    	SmartDashboard.putNumber("Right Encoder", DriveTrain.getRightEncoder());
+    	//SmartDashboard.putNumber("Left Encoder", DriveTrain.getLeftEncoder());
+    	//SmartDashboard.putNumber("Right Encoder", DriveTrain.getRightEncoder());
+    	
     	
     }
     

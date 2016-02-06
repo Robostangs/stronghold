@@ -20,13 +20,13 @@ public class Arm {
 	private Arm() {
 		leftArmMotor = new CANTalon(Constants.RIGHT_ARM_TALON_POS);
 		rightArmMotor = new CANTalon(Constants.LEFT_ARM_TALON_POS);
-		leftArmMotor.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Absolute);
+		//leftArmMotor.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Absolute);
 	}
 	
 	public static void setPower(double value) {
-		leftArmMotor.changeControlMode(TalonControlMode.PercentVbus);
-		leftArmMotor.set(value);
-		rightArmMotor.set(-value);
+		//leftArmMotor.changeControlMode(TalonControlMode.PercentVbus);
+		leftArmMotor.set(-value);
+		rightArmMotor.set(value);
 	}
 	
 	public static void stopArm() {
@@ -45,17 +45,17 @@ public class Arm {
 	
 	public static void setSpeed(double value) {
 		if(value > 0) {
-			if(getEncoder() < Constants.ARM_MAX_POS) {
+//			if(getEncoder() < Constants.ARM_MAX_POS) {
 				setPower(value * Constants.ARM_POWER_COEFFICIENT);
-			} else {
-				setPower(0);
-			}
+//			} else {
+//				setPower(0);
+//			}
 		} else if (value < 0) {
-			if(getEncoder() > Constants.ARM_MIN_POS) {
+//			if(getEncoder() > Constants.ARM_MIN_POS) {
 				setPower(value * Constants.ARM_POWER_COEFFICIENT);
-			} else {
-				setPower(0);
-			}
+//			} else {
+//				setPower(0);
+//			}
 		} else {
 			setPower(0);
 		}

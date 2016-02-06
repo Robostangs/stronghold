@@ -22,7 +22,7 @@ public class Shooter {
 	}
 	
 	public static void setPower(double value) {
-		shootingMotor.changeControlMode(TalonControlMode.PercentVbus);
+		//shootingMotor.changeControlMode(TalonControlMode.PercentVbus);
 		shootingMotor.set(value);
 	}
 	

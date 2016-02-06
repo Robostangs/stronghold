@@ -81,7 +81,7 @@ public class XboxController extends Joystick{
 	}
 	
 	public boolean getRightTriggerButton() {
-		if(getRawAxis(3) > 0.5) {
+		if(getRightTriggerAxis() > 0.5) {
 			return true;
 		} else {
 			return false;
@@ -89,7 +89,7 @@ public class XboxController extends Joystick{
 	}
 	
 	public boolean getLeftTriggerButton() {
-		if(getRawAxis(2) > 0.5) {
+		if(getLeftTriggerAxis() > 0.5) {
 			return true;
 		} else {
 			

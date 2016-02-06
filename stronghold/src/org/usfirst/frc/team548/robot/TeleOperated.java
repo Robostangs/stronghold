@@ -40,8 +40,8 @@ public class TeleOperated {
           //*****NEED TO IMPLEMENT ARM PID POSITIONS ASAP*******
             
           //Use right joystick to manually move arm
-          if(Math.abs(manip.getRightStickYAxis()) > 0.1) {
-        	  Arm.setSpeed(manip.getRightStickYAxis());
+          if(Math.abs(manip.getLeftStickYAxis()) > 0.15) {
+        	  Arm.setSpeed(manip.getLeftStickYAxis());
           } else {
         	  Arm.stopArm();
           }
@@ -54,21 +54,25 @@ public class TeleOperated {
            * left trigger = exgest
            * neither = run ingesting inward slowly to hold ball
            */
-          if(manip.getAButton()) {
-        	  //replace with PID asap (but after arm PID)
-        	  Shooter.setShooterSpeedNoPID(Constants.SHOOTER_SPEED_NO_PID);
-        	  if(manip.getLeftBumper()) {
-        		  Ingesting.inject();
-        	  }
-          } else {
-	          if(manip.getRightTriggerButton()) {
-	        	  Ingesting.ingest();
-	          } else if(manip.getLeftTriggerButton()) {
+//          if(manip.getAButton()) {
+//        	  //replace with PID asap (but after arm PID)
+//        	  Shooter.setShooterSpeedNoPID(Constants.SHOOTER_SPEED_NO_PID);
+////        	  if(manip.getRightBumper()) {
+////        		  Ingesting.inject();
+//        	  }
+//          } else {
+        	  
+          Shooter.setShooterSpeedNoPID(manip.getRightTriggerAxis());
+          
+	          if(manip.getLeftBumper()) {
 	        	  Ingesting.exgest();
+	          } else if(manip.getRightBumper()) {
+	        	  Ingesting.ingest();
 	          } else {
 	        	  Ingesting.holdBall();
+	        	  //Shooter.stop();
 	          }
-          }
+          //}
 	}
 	
 }

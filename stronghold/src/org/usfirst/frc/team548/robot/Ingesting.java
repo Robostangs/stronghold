@@ -7,7 +7,7 @@ public class Ingesting {
 
 	private static Ingesting instance = null;
 	private static CANTalon ingestingMotor;
-	private static DigitalInput ballSwitch;
+	//private static DigitalInput ballSwitch;
 	
 	public static Ingesting getInstance(){
 		if(instance == null){
@@ -18,7 +18,7 @@ public class Ingesting {
 	
 	private Ingesting() {
 		ingestingMotor = new CANTalon(Constants.INGESTING_TALON_POS);
-		ballSwitch = new DigitalInput(Constants.INGESTING_SWITCH_POS);
+		//ballSwitch = new DigitalInput(Constants.INGESTING_SWITCH_POS);
 	}
 	
 	//Set rollers and injector wheels to speed
@@ -43,9 +43,9 @@ public class Ingesting {
 	}
 	
 	//use limit switch to determine if we're holding a ball
-	public static boolean hasBall() {
-		return ballSwitch.get();
-	}
+//	public static boolean hasBall() {
+//		return ballSwitch.get();
+//	}
 	
 	//run ingesting inwards constantly at slow speed to hold ball
 	public static void holdBall() {
