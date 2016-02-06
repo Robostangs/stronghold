@@ -1,11 +1,13 @@
 package org.usfirst.frc.team548.robot;
 
 import edu.wpi.first.wpilibj.CANTalon;
+import edu.wpi.first.wpilibj.DigitalInput;
 
 public class Ingesting {
 
 	private static Ingesting instance = null;
-	private static CANTalon rollerMotor, beltsMotor;
+	private static CANTalon ingestingMotor;
+	private static DigitalInput ballSwitch;
 	
 	public static Ingesting getInstance(){
 		if(instance == null){
@@ -14,41 +16,44 @@ public class Ingesting {
 		return instance;
 	}
 	
-	public Ingesting() {
-		rollerMotor = new CANTalon(Constants.ROLLER_TALON_POS);
-		beltsMotor = new CANTalon(Constants.BELTS_TALON_POS);
+	private Ingesting() {
+		ingestingMotor = new CANTalon(Constants.INGESTING_TALON_POS);
+		ballSwitch = new DigitalInput(Constants.INGESTING_SWITCH_POS);
 	}
 	
-	public void setRoller(double value) {
-		rollerMotor.set(value);
+	//Set rollers and injector wheels to speed
+	public static void setIngesting(double value) {
+		ingestingMotor.set(value);
 	}
 	
-	public void stopRoller() {
-		setRoller(0);
+	public static void stopIngesting() {
+		setIngesting(0);
 	}
 	
-	public void setBelts(double value) {
-		beltsMotor.set(value);
+	//ingest ball with ingesting and shooter wheel
+	public static void ingest() {
+		setIngesting(Constants.INGESTING_IN_NORMAL_POWER);
+		Shooter.shooterIngest();
 	}
 	
-	public void stopBelts() {
-		setBelts(0);
+	//exgest ball with ingesting and shooter wheel
+	public static void exgest() {
+		setIngesting(Constants.INGESTING_OUT_NORMAL_POWER);
+		Shooter.shooterExgest();
 	}
 	
-	public void rollerIn() {
-		setRoller(Constants.ROLLER_IN_NORMAL_POWER);
+	//use limit switch to determine if we're holding a ball
+	public static boolean hasBall() {
+		return ballSwitch.get();
 	}
 	
-	public void rollerOut() {
-		setRoller(Constants.ROLLER_OUT_NORMAL_POWER);
+	//run ingesting inwards constantly at slow speed to hold ball
+	public static void holdBall() {
+		setIngesting(Constants.INGESTING_HOLDING_BALL_POWER);
 	}
 	
-	public void beltsIn() {
-		setBelts(Constants.BELTS_IN_NORMAL_POWER);
-	}
-	
-	public void beltsOut() {
-		setBelts(Constants.BELTS_OUT_NORMAL_POWER);
+	public static void inject() {
+		setIngesting(Constants.INJECTING_POWER);
 	}
 	
 }

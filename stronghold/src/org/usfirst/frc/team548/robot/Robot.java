@@ -5,27 +5,25 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 //import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.usfirst.frc.team548.robot.AutoModes.*;
 
 
-public class Robot extends IterativeRobot {
-    final String defaultAuto = "Default";
-    final String customAuto = "My Auto";
-    String autoSelected;
+public class Robot extends IterativeRobot {;
+    TestAuto testAuto = new TestAuto("1");
+    AutoMode autoSelected;
     SendableChooser chooser;
 	
 
     public void robotInit() {
         chooser = new SendableChooser();
-        chooser.addDefault("Default Auto", defaultAuto);
-        chooser.addObject("My Auto", customAuto);
+        chooser.addDefault("Auton 1", testAuto);
         SmartDashboard.putData("Auto choices", chooser);
         
         DriveTrain.getInstance();
-        DriveMotors.getInstance();
-        Arm.getInstance();
+        //Arm.getInstance();
         Autonomous.getInstance();
-        Ingesting.getInstance();
-        Shooter.getInstance();
+        //Ingesting.getInstance();
+        //Shooter.getInstance();
         TeleOperated.getInstance();
     }
     
@@ -34,32 +32,32 @@ public class Robot extends IterativeRobot {
 	 * If using the SendableChooser make sure to add them to the chooser code above as well.
 	 */
     public void autonomousInit() {
-    	autoSelected = (String) chooser.getSelected();
-//		autoSelected = SmartDashboard.getString("Auto Selector", defaultAuto);
-		System.out.println("Auto selected: " + autoSelected);
+    	autoSelected = (AutoMode) chooser.getSelected();
+//		autoSelected = SmartDashboard.getStrixng("Auto Selector", defaultAuto);
+    	System.out.println("Start Auton");
+		autoSelected.start();
+    	DriveTrain.resetHyro();
     }
 
 
     public void autonomousPeriodic() {
-    	switch(autoSelected) {
-    	case customAuto:
-        //Put custom auto code here   
-            break;
-    	case defaultAuto:
-    	default:
-    	//Put default auto code here
-            break;
-    	}
+    	
     }
 
 
     public void teleopPeriodic() {
     	TeleOperated.run();
+    	SmartDashboard.putNumber("Left Encoder", DriveTrain.getLeftEncoder());
+    	SmartDashboard.putNumber("Right Encoder", DriveTrain.getRightEncoder());
+    	
     }
     
-
+    public void testInit() {
+    	DriveTrain.resetPIDInit();
+    	DriveTrain.setPIDtoGyro();
+    }
     public void testPeriodic() {
-    
+    	System.out.println(DriveTrain.getHyroAngle());
     }
     
 }
