@@ -9,7 +9,6 @@ public class Arm {
 
 	private static Arm instance = null;
 	private static CANTalon leftArmMotor, rightArmMotor;
-	private static PIDController pid;
 	
 	public static Arm getInstance() {
 		if(instance == null){
@@ -22,9 +21,6 @@ public class Arm {
 		leftArmMotor = new CANTalon(Constants.RIGHT_ARM_TALON_POS);
 		rightArmMotor = new CANTalon(Constants.LEFT_ARM_TALON_POS);
 		leftArmMotor.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Absolute);
-
-		pid = new PIDController(0, 0, 0, leftArmMotor, this);
-		pid.disable();
 	}
 	
 	public static void setPower(double value) {
@@ -43,7 +39,7 @@ public class Arm {
 	
 	public static void setArmPos(int setpoint) {
 		leftArmMotor.set(setpoint);
-		leftArmMotor.changeControlMode(ControlMode.Position);
+		leftArmMotor.changeControlMode(TalonControlMode.Position);
 		leftArmMotor.setPID(0, 0, 0);
 	}
 	
