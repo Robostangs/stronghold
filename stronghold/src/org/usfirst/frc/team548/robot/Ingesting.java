@@ -33,13 +33,13 @@ public class Ingesting {
 	//ingest ball with ingesting and shooter wheel
 	public static void ingest() {
 		setIngesting(Constants.INGESTING_IN_NORMAL_POWER);
-		Shooter.shooterIngest();
+		
 	}
 	
 	//exgest ball with ingesting and shooter wheel
 	public static void exgest() {
 		setIngesting(Constants.INGESTING_OUT_NORMAL_POWER);
-		Shooter.shooterExgest();
+		
 	}
 	
 	//use limit switch to determine if we're holding a ball

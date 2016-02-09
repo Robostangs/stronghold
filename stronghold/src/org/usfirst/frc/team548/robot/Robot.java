@@ -14,7 +14,7 @@ public class Robot extends IterativeRobot {;
     TestAuto testAuto = new TestAuto("1");
     AutoMode autoSelected;
     SendableChooser chooser;
-	
+	PowerDistributionPanel pdp;
 
     public void robotInit() {
         chooser = new SendableChooser();
@@ -23,10 +23,10 @@ public class Robot extends IterativeRobot {;
         
         DriveTrain.getInstance();
         Arm.getInstance();
-        Autonomous.getInstance();
         Ingesting.getInstance();
         Shooter.getInstance();
         TeleOperated.getInstance();
+        pdp = new PowerDistributionPanel();
     }
     
 	/**
@@ -38,6 +38,7 @@ public class Robot extends IterativeRobot {;
 //		autoSelected = SmartDashboard.getStrixng("Auto Selector", defaultAuto);
     	System.out.println("Start Auton");
 		autoSelected.start();
+		
     	DriveTrain.resetHyro();
     }
 
@@ -51,6 +52,22 @@ public class Robot extends IterativeRobot {;
     	TeleOperated.run();
     	//SmartDashboard.putNumber("Left Encoder", DriveTrain.getLeftEncoder());
     	//SmartDashboard.putNumber("Right Encoder", DriveTrain.getRightEncoder());
+    	SmartDashboard.putNumber("Current 0", pdp.getCurrent(0));
+    	SmartDashboard.putNumber("Current 1", pdp.getCurrent(1));
+    	SmartDashboard.putNumber("Current 2", pdp.getCurrent(2));
+    	SmartDashboard.putNumber("Current 3", pdp.getCurrent(3));
+    	SmartDashboard.putNumber("Current 4", pdp.getCurrent(4));
+    	SmartDashboard.putNumber("Current 5", pdp.getCurrent(5));
+    	SmartDashboard.putNumber("Current 6", pdp.getCurrent(6));
+    	SmartDashboard.putNumber("Current 7", pdp.getCurrent(7));
+    	SmartDashboard.putNumber("Current 8", pdp.getCurrent(8));
+    	SmartDashboard.putNumber("Current 9", pdp.getCurrent(9));
+    	SmartDashboard.putNumber("Current 10", pdp.getCurrent(10));
+    	SmartDashboard.putNumber("Current 11", pdp.getCurrent(11));
+    	SmartDashboard.putNumber("Current 12", pdp.getCurrent(12));
+    	SmartDashboard.putNumber("Current 13", pdp.getCurrent(13));
+    	SmartDashboard.putNumber("Current 14", pdp.getCurrent(14));
+    	SmartDashboard.putNumber("Current 15", pdp.getCurrent(15));
     	
     	
     }

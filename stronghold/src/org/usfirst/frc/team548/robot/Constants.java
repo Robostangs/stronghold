@@ -31,13 +31,13 @@ public class Constants {
 		public static final int SHOOTING_TALON_POS = 5;
 		public static final double SHOOTING_PID_P = 0, SHOOTING_PID_I = 0, SHOOTING_PID_D = 0;
 		public static final double SHOOTER_INGEST_SPEED = -0.6;
-		public static final double SHOOTER_EXGEST_SPEED = 0.2;
+		public static final double SHOOTER_EXGEST_SPEED = 0.5;
 		public static final double SHOOTER_SPEED_NO_PID = 1;
 		
 	//Ingesting
 		public static final int INGESTING_TALON_POS = 8;
 		public static final int INGESTING_SWITCH_POS = 0;
-		public static final double INGESTING_IN_NORMAL_POWER = 0.5;
+		public static final double INGESTING_IN_NORMAL_POWER = 1;
 		public static final double INGESTING_OUT_NORMAL_POWER = -0.5;
 		public static final double INGESTING_HOLDING_BALL_POWER = 0.05;
 		public static final double INJECTING_POWER = -0.2;

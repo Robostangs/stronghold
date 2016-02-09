@@ -25,11 +25,11 @@ public class XboxController extends Joystick{
 	}
 	
 	public double getRightTriggerAxis() {
-		return getRawAxis(2);
+		return getRawAxis(3);
 	}
 	
 	public double getLeftTriggerAxis() {
-		return getRawAxis(3);
+		return getRawAxis(2);
 	}
 	
 	public double getRightStickXAxis() {

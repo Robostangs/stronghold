@@ -66,8 +66,10 @@ public class TeleOperated {
           
 	          if(manip.getLeftBumper()) {
 	        	  Ingesting.exgest();
+	        	  Shooter.shooterExgest();
 	          } else if(manip.getRightBumper()) {
 	        	  Ingesting.ingest();
+	        	  Shooter.shooterIngest();
 	          } else {
 	        	  Ingesting.holdBall();
 	        	  //Shooter.stop();
