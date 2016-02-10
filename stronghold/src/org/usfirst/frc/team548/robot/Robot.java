@@ -68,7 +68,8 @@ public class Robot extends IterativeRobot {;
     	SmartDashboard.putNumber("Current 13", pdp.getCurrent(13));
     	SmartDashboard.putNumber("Current 14", pdp.getCurrent(14));
     	SmartDashboard.putNumber("Current 15", pdp.getCurrent(15));
-    	
+    	SmartDashboard.putNumber("ENCODER", Arm.getEncoder());
+    	SmartDashboard.putNumber("Left Stick Y", TeleOperated.getStick());
     	
     }
     

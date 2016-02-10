@@ -41,10 +41,11 @@ public class TeleOperated {
             
           //Use right joystick to manually move arm
           if(Math.abs(manip.getLeftStickYAxis()) > 0.15) {
-        	  Arm.setSpeed(manip.getLeftStickYAxis());
+        	  
           } else {
-        	  Arm.stopArm();
+        	 // Arm.stopArm();
           }
+          
           
           /*
            * A button = run shooter wheels
@@ -62,8 +63,8 @@ public class TeleOperated {
 //        	  }
 //          } else {
         	  
-          Shooter.setShooterSpeedNoPID(-manip.getRightTriggerAxis());
           
+          Shooter.setShooterSpeedNoPID(-manip.getRightTriggerAxis());
 	          if(manip.getLeftBumper()) {
 	        	  Ingesting.exgest();
 	        	  Shooter.shooterExgest();
@@ -76,7 +77,21 @@ public class TeleOperated {
 	        	  Ingesting.holdBall();
 	        	  //Shooter.stop();
 	          }
+	          
+	          if(manip.getYButton()) {
+	        	  Arm.setArmPos(850);
+	          } else {
+	        	  Arm.setSpeed(manip.getLeftStickYAxis());
+	          }
+	          
+	          if(manip.getBButton()) {
+	        	  Arm.setSpeed(-0.5);
+	          }
           //}
+	}
+	
+	public static double getStick() {
+		return manip.getLeftStickYAxis();
 	}
 	
 }

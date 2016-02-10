@@ -18,15 +18,17 @@ public class Arm {
 	}
 	
 	private Arm() {
-		leftArmMotor = new CANTalon(Constants.RIGHT_ARM_TALON_POS);
-		rightArmMotor = new CANTalon(Constants.LEFT_ARM_TALON_POS);
-		//leftArmMotor.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Absolute);
+		leftArmMotor = new CANTalon(Constants.LEFT_ARM_TALON_POS);
+		rightArmMotor = new CANTalon(Constants.RIGHT_ARM_TALON_POS);
+		leftArmMotor.setFeedbackDevice(FeedbackDevice.AnalogEncoder);
 	}
 	
 	public static void setPower(double value) {
-		//leftArmMotor.changeControlMode(TalonControlMode.PercentVbus);
-		leftArmMotor.set(-value);
-		rightArmMotor.set(value);
+		leftArmMotor.changeControlMode(TalonControlMode.PercentVbus);
+		rightArmMotor.changeControlMode(TalonControlMode.PercentVbus);
+		leftArmMotor.set(value);
+		rightArmMotor.set(-value);
+		System.out.println(value);
 	}
 	
 	public static void stopArm() {
@@ -34,28 +36,38 @@ public class Arm {
 	}
 	
 	public static double getEncoder() {
-		return leftArmMotor.getEncPosition();
+		return leftArmMotor.getAnalogInRaw();
 	}
 	
 	public static void setArmPos(int setpoint) {
-		leftArmMotor.set(setpoint);
+		rightArmMotor.reverseOutput(true);
 		leftArmMotor.changeControlMode(TalonControlMode.Position);
-		leftArmMotor.setPID(0, 0, 0);
+		rightArmMotor.changeControlMode(TalonControlMode.Follower);
+		rightArmMotor.set(leftArmMotor.getDeviceID());
+		leftArmMotor.set(setpoint);
+		
+		//leftArmMotor.setPID(3, 0, 0);
+		
+		
 	}
 	
 	public static void setSpeed(double value) {
-		if(value > 0) {
-//			if(getEncoder() < Constants.ARM_MAX_POS) {
+		if(value < 0) {
+			if(getEncoder() < Constants.ARM_MAX_POS) {
+				setPower(0);
+			} else if(getEncoder() < Constants.ARM_MAX_THRESHOLD){
+				setPower(value * Constants.ARM_LOW_POWER);
+			} else {
 				setPower(value * Constants.ARM_POWER_COEFFICIENT);
-//			} else {
-//				setPower(0);
-//			}
-		} else if (value < 0) {
-//			if(getEncoder() > Constants.ARM_MIN_POS) {
+			}
+		} else if (value > 0) {
+			if(getEncoder() > Constants.ARM_MIN_POS) {
+				setPower(0);
+			} else if(getEncoder() > Constants.ARM_MIN_THRESHOLD){
+				setPower(value * Constants.ARM_LOW_POWER);
+			} else {
 				setPower(value * Constants.ARM_POWER_COEFFICIENT);
-//			} else {
-//				setPower(0);
-//			}
+			}
 		} else {
 			setPower(0);
 		}

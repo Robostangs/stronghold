@@ -24,10 +24,16 @@ public class Constants {
 		public static final int LEFT_ARM_TALON_POS = 4;
 		public static final int RIGHT_ARM_TALON_POS = 9;
 		public static final double ARM_POWER_COEFFICIENT = 0.75;
-		public static final int ARM_MAX_POS = 0;
-		public static final int ARM_MIN_POS = 0;
+		public static final double ARM_LOW_POWER = 0.05;
+		public static final int ARM_MAX_POS = 660;
+		public static final int ARM_MAX_THRESHOLD = 700;
+		public static final int ARM_MIN_POS = 910;
+		public static final int ARM_MIN_THRESHOLD = 900;
+		public static final int ARM_LOW_POS = 910;
+		public static final int ARM_INGEST_POS = 905;
+		public static final int ARM_DEFENSE_POS = 830;
 		
-		//Lowest position: 933
+		//Lowest position: 917
 		//Highest position: 635 (be careful to stop early to prevent falling over)
 		
 	//Shooter
