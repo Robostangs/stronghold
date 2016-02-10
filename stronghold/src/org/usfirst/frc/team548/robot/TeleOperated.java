@@ -62,7 +62,7 @@ public class TeleOperated {
 //        	  }
 //          } else {
         	  
-          Shooter.setShooterSpeedNoPID(manip.getRightTriggerAxis());
+          Shooter.setShooterSpeedNoPID(-manip.getRightTriggerAxis());
           
 	          if(manip.getLeftBumper()) {
 	        	  Ingesting.exgest();
@@ -70,6 +70,8 @@ public class TeleOperated {
 	          } else if(manip.getRightBumper()) {
 	        	  Ingesting.ingest();
 	        	  Shooter.shooterIngest();
+	          } else if (manip.getAButton()){
+	        	  Ingesting.inject();
 	          } else {
 	        	  Ingesting.holdBall();
 	        	  //Shooter.stop();
