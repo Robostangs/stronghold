@@ -65,10 +65,10 @@ public class TeleOperated {
         	  
           
           Shooter.setShooterSpeedNoPID(-manip.getRightTriggerAxis());
-	          if(manip.getLeftBumper()) {
+	          if(manip.getRightBumper()) {
 	        	  Ingesting.exgest();
 	        	  Shooter.shooterExgest();
-	          } else if(manip.getRightBumper()) {
+	          } else if(manip.getLeftBumper()) {
 	        	  Ingesting.ingest();
 	        	  Shooter.shooterIngest();
 	          } else if (manip.getAButton()){
@@ -79,7 +79,7 @@ public class TeleOperated {
 	          }
 	          
 	          if(manip.getYButton()) {
-	        	  Arm.setArmPos(850);
+	        	  Arm.setArmPos(500);
 	          } else {
 	        	  Arm.setSpeed(manip.getLeftStickYAxis());
 	          }
@@ -89,6 +89,7 @@ public class TeleOperated {
 	          }
           //}
 	}
+	
 	
 	public static double getStick() {
 		return manip.getLeftStickYAxis();

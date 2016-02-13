@@ -20,7 +20,7 @@ public class Arm {
 	private Arm() {
 		leftArmMotor = new CANTalon(Constants.LEFT_ARM_TALON_POS);
 		rightArmMotor = new CANTalon(Constants.RIGHT_ARM_TALON_POS);
-		leftArmMotor.setFeedbackDevice(FeedbackDevice.AnalogEncoder);
+		leftArmMotor.setFeedbackDevice(FeedbackDevice.AnalogPot);
 	}
 	
 	public static void setPower(double value) {
@@ -53,21 +53,21 @@ public class Arm {
 	
 	public static void setSpeed(double value) {
 		if(value < 0) {
-			if(getEncoder() < Constants.ARM_MAX_POS) {
-				setPower(0);
-			} else if(getEncoder() < Constants.ARM_MAX_THRESHOLD){
-				setPower(value * Constants.ARM_LOW_POWER);
-			} else {
+//			if(getEncoder() < Constants.ARM_MAX_POS) {
+//				setPower(0);
+//			} else if(getEncoder() < Constants.ARM_MAX_THRESHOLD){
+//				setPower(value * Constants.ARM_LOW_POWER);
+//			} else {
 				setPower(value * Constants.ARM_POWER_COEFFICIENT);
-			}
+//			}
 		} else if (value > 0) {
-			if(getEncoder() > Constants.ARM_MIN_POS) {
-				setPower(0);
-			} else if(getEncoder() > Constants.ARM_MIN_THRESHOLD){
-				setPower(value * Constants.ARM_LOW_POWER);
-			} else {
+//			if(getEncoder() > Constants.ARM_MIN_POS) {
+//				setPower(0);
+//			} else if(getEncoder() > Constants.ARM_MIN_THRESHOLD){
+//				setPower(value * Constants.ARM_LOW_POWER);
+//			} else {
 				setPower(value * Constants.ARM_POWER_COEFFICIENT);
-			}
+//			}
 		} else {
 			setPower(0);
 		}
