@@ -34,18 +34,7 @@ public class TeleOperated {
 //        }
             
             
-      //Manip controls?!
-            
-            
-          //*****NEED TO IMPLEMENT ARM PID POSITIONS ASAP*******
-            
-          //Use right joystick to manually move arm
-          if(Math.abs(manip.getLeftStickYAxis()) > 0.15) {
-        	  
-          } else {
-        	 // Arm.stopArm();
-          }
-          
+      //Manip controls?!         
           
           /*
            * A button = run shooter wheels
@@ -64,30 +53,45 @@ public class TeleOperated {
 //          } else {
         	  
           
-          Shooter.setShooterSpeedNoPID(-manip.getRightTriggerAxis());
+           Shooter.setShooterSpeedNoPID(-manip.getRightTriggerAxis());
+          
 	          if(manip.getRightBumper()) {
 	        	  Ingesting.exgest();
 	        	  Shooter.shooterExgest();
 	          } else if(manip.getLeftBumper()) {
 	        	  Ingesting.ingest();
 	        	  Shooter.shooterIngest();
-	          } else if (manip.getAButton()){
+	          } else if (manip.getBackButton()){
 	        	  Ingesting.inject();
 	          } else {
 	        	  Ingesting.holdBall();
-	        	  //Shooter.stop();
 	          }
 	          
-	          if(manip.getYButton()) {
-	        	  Arm.setArmPos(500);
+	          
+	          if(manip.getAButton()) {
+	        	  if(Arm.isArmHigh()) {
+	        		  Arm.setArmDownToLow();
+	        	  } else {
+	        		  Arm.setArmUpToLow();
+	        	  }
+	          } else if(manip.getXButton()) {
+	        	  if(Arm.isArmHigh()) {
+	        		  Arm.setArmDownToIng();
+	        	  } else {
+	        		  Arm.setArmUpToIng();
+	        	  }
+	          } else if(manip.getBButton()) {
+	        	  if(Arm.isArmHigh()) {
+	        		  Arm.setArmDownToDef();
+	        	  } else {
+	        		  Arm.setArmUpToDef();
+	        	  }
+	          } else if(manip.getYButton()) {
+	        	  Arm.setArmShoot();
 	          } else {
+	        	  Arm.resetSnap();
 	        	  Arm.setSpeed(manip.getLeftStickYAxis());
 	          }
-	          
-	          if(manip.getBButton()) {
-	        	  Arm.setSpeed(-0.5);
-	          }
-          //}
 	}
 	
 	

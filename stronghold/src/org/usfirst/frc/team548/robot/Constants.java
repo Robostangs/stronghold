@@ -25,13 +25,36 @@ public class Constants {
 		public static final int RIGHT_ARM_TALON_POS = 9;
 		public static final double ARM_POWER_COEFFICIENT = 0.75;
 		public static final double ARM_LOW_POWER = 0.05;
-		public static final int ARM_MAX_POS = 660;
-		public static final int ARM_MAX_THRESHOLD = 700;
-		public static final int ARM_MIN_POS = 910;
-		public static final int ARM_MIN_THRESHOLD = 900;
-		public static final int ARM_LOW_POS = 910;
-		public static final int ARM_INGEST_POS = 905;
-		public static final int ARM_DEFENSE_POS = 830;
+		public static final double ARM_MAX_POS = 660;
+		public static final double ARM_MAX_THRESHOLD = 700;
+		public static final double ARM_MIN_POS = 910;
+		public static final double ARM_MIN_THRESHOLD = 900;
+		public static final double ARM_LOW_POS = .780;
+		public static final double ARM_ING_POS = .757;
+		public static final double ARM_DEF_POS =.700;
+		public static final double ARM_SHOOT_POS = .480;
+		public static final double ARM_UP_TO_LOW_P = 4;
+		public static final double ARM_UP_TO_LOW_I = 0.02;
+		public static final double ARM_UP_TO_LOW_D = 0;
+		public static final double ARM_DOWN_TO_LOW_P = 0.75;
+		public static final double ARM_DOWN_TO_LOW_I = 0.002;
+		public static final double ARM_DOWN_TO_LOW_D = 0;
+ 		public static final double ARM_UP_TO_ING_P = 3;
+		public static final double ARM_UP_TO_ING_I = 0;
+		public static final double ARM_UP_TO_ING_D = 20;
+ 		public static final double ARM_DOWN_TO_ING_P = 2.3;
+		public static final double ARM_DOWN_TO_ING_I = 0.001;
+		public static final double ARM_DOWN_TO_ING_D = 10;
+		public static final double ARM_UP_TO_DEF_P = 3.5;
+		public static final double ARM_UP_TO_DEF_I = 0;
+		public static final double ARM_UP_TO_DEF_D = 0;
+		public static final double ARM_DOWN_TO_DEF_P = 3;
+		public static final double ARM_DOWN_TO_DEF_I = 0;
+		public static final double ARM_DOWN_TO_DEF_D = 20;
+		public static final double ARM_SHOOT_P = 1.7;
+		public static final double ARM_SHOOT_I = 0;
+		public static final double ARM_SHOOT_D = 1;
+	
 		
 		//Lowest position: 917
 		//Highest position: 635 (be careful to stop early to prevent falling over)

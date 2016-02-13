@@ -49,12 +49,12 @@ public class DriveTrain implements PIDSource, PIDOutput {
 		
 		pid = new PIDController(0, 0, 0, hyro, this);
 		pid.disable();
-//		pid.setInputRange(-180.0f,  180.0f);
-//		pid.setOutputRange(-0.5f, 0.5f);
-//		pid.setAbsoluteTolerance(2f);
-//        pid.setContinuous(true);
+		pid.setInputRange(-180.0f,  180.0f);
+		pid.setOutputRange(-0.5f, 0.5f);
+		pid.setAbsoluteTolerance(2f);
+        pid.setContinuous(true);
         
-        LiveWindow.addActuator("DriveSystem", "RotateController", pid);
+        
         LiveWindow.addSensor("Drive", "Gyro", hyro);
 	}
 	
