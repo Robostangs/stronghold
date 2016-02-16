@@ -41,6 +41,14 @@ public abstract class AutoMode {
     	runCommand(new DrivePowerInTime(seconds, power));
     }
     
+    protected void driveStraightWithHyro(double seconds, double power) {
+    	runCommand(new DriveStraightWithGyroInTime(seconds, power));
+    }
+    
+    protected void setArmToPosInTime(double seconds, int pos) {
+    	runCommand(new RaiseArmInTime(seconds, pos));
+    }
+    
     private static void runCommand(AutoCommandBase command) {
         command.execute();
     }
