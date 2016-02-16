@@ -18,7 +18,6 @@ public class DriveTrain implements PIDSource, PIDOutput {
 	private static AHRS hyro;
 	private static CANTalon leftFront, leftMiddle, leftBack, rightFront, rightMiddle, rightBack;
 	private static PIDController pid;
-	
 	/**
 	 * Initializes
 	 * @return instance
@@ -100,12 +99,12 @@ public class DriveTrain implements PIDSource, PIDOutput {
 	}	
 	
 	public static double getHyroAngle() {
+		
 		return hyro.pidGet();
 	}
 	
 	public static void resetHyro() {
 		hyro.reset();
-		System.out.println("RESET GYRO");
 	}
 	
 	
@@ -119,6 +118,20 @@ public class DriveTrain implements PIDSource, PIDOutput {
 			drive(power * Constants.DT_DRIVE_STRAIGHT_LOWER_POWER, power * Constants.DT_DRIVE_STRAIGHT_HIGHER_POWER);
 		}
 		else if(getLeftEncoder() - getRightEncoder() < -Constants.DT_ENCODER_ERROR_THRESHOLD){
+			drive(power * Constants.DT_DRIVE_STRAIGHT_HIGHER_POWER, power * Constants.DT_DRIVE_STRAIGHT_LOWER_POWER);
+		} else {
+			drive(power, power);
+		}
+	}
+	/**
+	 * CALL GYRO RESET BEFORE USING
+	 * @param power
+	 */
+	public static void driveStraightHyro(double power) {
+		if(getHyroAngle() > Constants.DT_HYRO_ERROR_THRESHOLD){
+			drive(power * Constants.DT_DRIVE_STRAIGHT_LOWER_POWER, power * Constants.DT_DRIVE_STRAIGHT_HIGHER_POWER);
+		}
+		else if(getHyroAngle() > -Constants.DT_HYRO_ERROR_THRESHOLD){
 			drive(power * Constants.DT_DRIVE_STRAIGHT_HIGHER_POWER, power * Constants.DT_DRIVE_STRAIGHT_LOWER_POWER);
 		} else {
 			drive(power, power);

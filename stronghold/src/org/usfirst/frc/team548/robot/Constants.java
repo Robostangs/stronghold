@@ -14,8 +14,9 @@ public class Constants {
 		public static final int DT_TALON_POS_RIGHT_MID = 11;
 		public static final int DT_TALON_POS_RIGHT_BACK = 12; //right encoder location		
 		public static final double DT_ENCODER_ERROR_THRESHOLD = 0;
-		public static final double DT_DRIVE_STRAIGHT_LOWER_POWER = 0;
-		public static final double DT_DRIVE_STRAIGHT_HIGHER_POWER = 0;
+		public static final double DT_HYRO_ERROR_THRESHOLD = 7;
+		public static final double DT_DRIVE_STRAIGHT_LOWER_POWER = .75;
+		public static final double DT_DRIVE_STRAIGHT_HIGHER_POWER = 1.25;
 		
 	//Gyro
 		public static final int GYRO_POS = 0;
@@ -77,4 +78,5 @@ public class Constants {
 	//PID constants
 		public static final double DT_PID_GYRO_KP = 0.03, DT_PID_GYRO_KI = 0, DT_PID_GYRO_KD = 0;
 		public static final double DT_PID_DRIVE_KP = 0, DT_PID_DRIVE_KI = 0, DT_PID_DRIVE_KD = 0;
+		
 }

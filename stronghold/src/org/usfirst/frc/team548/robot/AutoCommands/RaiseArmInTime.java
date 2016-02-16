@@ -1,35 +1,43 @@
 package org.usfirst.frc.team548.robot.AutoCommands;
 
-import org.usfirst.frc.team548.robot.DriveTrain;
+import org.usfirst.frc.team548.robot.Arm;
 
-public class DrivePowerInTime extends AutoCommandBase {
-	
-	double power;
-	public DrivePowerInTime(double timeOut, double power) {
+public class RaiseArmInTime extends AutoCommandBase {
+	private int position;
+	public RaiseArmInTime(double timeOut, int pos) {
 		super(timeOut);
-		this.power = power;
+		position = pos;
 		// TODO Auto-generated constructor stub
 	}
+
 	@Override
 	public void init() {
 		// TODO Auto-generated method stub
 		
 	}
+
 	@Override
 	protected void run() {
 		// TODO Auto-generated method stub
-		DriveTrain.drive(power, power);
-		
+		if(position == 0) {
+			Arm.setArmDownToLow();
+		} else if(position == 1) {
+			Arm.setArmShoot();
+		} else if (position == 2) {
+			Arm.setArmUpToDef();
+		}
 	}
+
 	@Override
 	public void end() {
 		// TODO Auto-generated method stub
-		DriveTrain.stop();
+		
 	}
+
 	@Override
 	protected String getCommandName() {
 		// TODO Auto-generated method stub
-		return "DrivePower in Time";
+		return "SetArmToPos";
 	}
 
 }
