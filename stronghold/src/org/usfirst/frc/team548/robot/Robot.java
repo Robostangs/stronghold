@@ -12,14 +12,15 @@ import org.usfirst.frc.team548.robot.AutoModes.*;
 
 
 public class Robot extends IterativeRobot {;
-    TestAuto testAuto = new TestAuto("1");
     AutoMode autoSelected;
     SendableChooser chooser;
 	PowerDistributionPanel pdp;
 
     public void robotInit() {
         chooser = new SendableChooser();
-        chooser.addDefault("Auton 1", testAuto);
+        chooser.addDefault("Shoot Auton", new FirstAuto());
+        chooser.addObject("Cross Low Bar", new CrossLowBar());
+        chooser.addObject("Cross Low Bar Then Return", new CrossLowBarThenReturn());
         SmartDashboard.putData("Auto choices", chooser);
         
         DriveTrain.getInstance();
@@ -36,8 +37,7 @@ public class Robot extends IterativeRobot {;
 	 */
     public void autonomousInit() {
     	autoSelected = (AutoMode) chooser.getSelected();
-//		autoSelected = SmartDashboard.getStrixng("Auto Selector", defaultAuto);
-    	System.out.println("Start Auton");
+    	System.out.println("Starting Auton");
 		autoSelected.start();
 		
     	DriveTrain.resetHyro();

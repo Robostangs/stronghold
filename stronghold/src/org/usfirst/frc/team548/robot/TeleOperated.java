@@ -30,9 +30,18 @@ public class TeleOperated {
 //        	
 //        } else {
 //        	DriveTrain.disablePID();
-            DriveTrain.humanDrive(driver.getLeftStickYAxis(), driver.getRightStickYAxis());
+            
 //        }
             
+            if(driver.getAButton()) {
+            	DriveTrain.resetHyro();
+            } else if(driver.getBButton()) {
+            	DriveTrain.driveStraightHyro(.5);
+            } else {
+            	DriveTrain.humanDrive(driver.getLeftStickYAxis(), driver.getRightStickYAxis());
+            }
+            
+            System.out.println("L: "+ DriveTrain.getLeftRate()+" R: "+DriveTrain.getRightRate());
             
       //Manip controls?!         
           

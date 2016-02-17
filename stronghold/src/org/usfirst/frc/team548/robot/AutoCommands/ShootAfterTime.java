@@ -1,43 +1,42 @@
 package org.usfirst.frc.team548.robot.AutoCommands;
 
-import org.usfirst.frc.team548.robot.Arm;
+import org.usfirst.frc.team548.robot.Ingesting;
+import org.usfirst.frc.team548.robot.Shooter;
 
-public class RaiseArmInTime extends AutoCommandBase {
-	private int position;
-	public RaiseArmInTime(double timeOut, int pos) {
+public class ShootAfterTime extends AutoCommandBase {
+	
+	private double rampTime, power;
+	public ShootAfterTime(double timeOut, double shootAfter, double power) {
 		super(timeOut);
-		position = pos;
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public void init() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	protected void run() {
 		// TODO Auto-generated method stub
-		if(position == 0) {
-			Arm.setArmDownToLow();
-		} else if(position == 2) {
-			Arm.setArmShoot();
-		} else if (position == 1) {
-			Arm.setArmUpToDef();
+		Shooter.setShooterSpeedNoPID(power);
+		if(timer.get() >= rampTime) {
+			Ingesting.inject();
 		}
 	}
 
 	@Override
 	public void end() {
 		// TODO Auto-generated method stub
-		
+		Shooter.stop();
+		Ingesting.stopIngesting();
 	}
 
 	@Override
 	protected String getCommandName() {
 		// TODO Auto-generated method stub
-		return "SetArmToPos";
+		return "Shoot After Time";
 	}
 
 }

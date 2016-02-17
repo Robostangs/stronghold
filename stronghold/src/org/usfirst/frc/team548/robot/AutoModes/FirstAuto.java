@@ -10,7 +10,11 @@ public class FirstAuto extends AutoMode {
 	@Override
 	protected void run() {
 		// TODO Auto-generated method stub
-
+		setArmToPosInTime(5, 0);
+		driveStraightWithHyro(5, 0.5);
+		turnToAngleInTime(10, 45);
+		setArmToPosInTime(5, 2);
+		shootAfterRamp(7, 5, .75);
 	}
 
 }

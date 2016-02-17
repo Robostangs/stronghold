@@ -1,5 +1,6 @@
 package org.usfirst.frc.team548.robot.AutoCommands;
 
+import org.usfirst.frc.team548.robot.Arm;
 import org.usfirst.frc.team548.robot.DriveTrain;
 
 public class DriveStraightWithGyroInTime extends AutoCommandBase {
@@ -21,6 +22,7 @@ public class DriveStraightWithGyroInTime extends AutoCommandBase {
 	protected void run() {
 		// TODO Auto-generated method stub
 		DriveTrain.driveStraightHyro(power);
+		Arm.setPower(.6);
 	}
 
 	@Override

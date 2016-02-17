@@ -82,6 +82,14 @@ public class DriveTrain implements PIDSource, PIDOutput {
 		return leftFront.getEncPosition();
 	}
 	
+	public static double getLeftRate() {
+		return leftFront.getEncVelocity();
+	}
+	
+	public static double getRightRate() {
+		return rightFront.getEncVelocity();
+	}
+	
 	public static double getRightEncoder() {
 		return -rightBack.getEncPosition();
 	}
@@ -129,12 +137,12 @@ public class DriveTrain implements PIDSource, PIDOutput {
 	 */
 	public static void driveStraightHyro(double power) {
 		if(getHyroAngle() > Constants.DT_HYRO_ERROR_THRESHOLD){
-			drive(power * Constants.DT_DRIVE_STRAIGHT_LOWER_POWER, power * Constants.DT_DRIVE_STRAIGHT_HIGHER_POWER);
+			drive(-power * Constants.DT_DRIVE_STRAIGHT_LOWER_POWER, power * Constants.DT_DRIVE_STRAIGHT_HIGHER_POWER);
 		}
 		else if(getHyroAngle() > -Constants.DT_HYRO_ERROR_THRESHOLD){
-			drive(power * Constants.DT_DRIVE_STRAIGHT_HIGHER_POWER, power * Constants.DT_DRIVE_STRAIGHT_LOWER_POWER);
+			drive(-power * Constants.DT_DRIVE_STRAIGHT_HIGHER_POWER, power * Constants.DT_DRIVE_STRAIGHT_LOWER_POWER);
 		} else {
-			drive(power, power);
+			drive(-power, power);
 		}
 	}
 	

@@ -22,6 +22,7 @@ public class Constants {
 		public static final int GYRO_POS = 0;
 		
 	//Arm
+		public static final double ARM_ENOCDER_OFFSET = -.08;
 		public static final int LEFT_ARM_TALON_POS = 4;
 		public static final int RIGHT_ARM_TALON_POS = 9;
 		public static final double ARM_POWER_COEFFICIENT = 0.75;
@@ -30,10 +31,10 @@ public class Constants {
 		public static final double ARM_MAX_THRESHOLD = 700;
 		public static final double ARM_MIN_POS = 910;
 		public static final double ARM_MIN_THRESHOLD = 900;
-		public static final double ARM_LOW_POS = .780;
-		public static final double ARM_ING_POS = .757;
-		public static final double ARM_DEF_POS =.700;
-		public static final double ARM_SHOOT_POS = .480;
+		public static final double ARM_LOW_POS = .780+ARM_ENOCDER_OFFSET;
+		public static final double ARM_ING_POS = .757+ARM_ENOCDER_OFFSET;
+		public static final double ARM_DEF_POS =.700+ARM_ENOCDER_OFFSET;
+		public static final double ARM_SHOOT_POS = .480+ARM_ENOCDER_OFFSET;
 		public static final double ARM_UP_TO_LOW_P = 4;
 		public static final double ARM_UP_TO_LOW_I = 0.02;
 		public static final double ARM_UP_TO_LOW_D = 0;

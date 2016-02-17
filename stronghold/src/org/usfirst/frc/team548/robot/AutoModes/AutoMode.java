@@ -49,6 +49,10 @@ public abstract class AutoMode {
     	runCommand(new RaiseArmInTime(seconds, pos));
     }
     
+    protected void shootAfterRamp(double seconds, double rampSeconds, double power) {
+    	runCommand(new ShootAfterTime(seconds, rampSeconds, power));
+    }
+    
     private static void runCommand(AutoCommandBase command) {
         command.execute();
     }
