@@ -10,6 +10,6 @@ public class CrossLowBarThenReturn extends AutoMode {
 	protected void run() {
 		// TODO Auto-generated method stub
 		driveStraightWithHyro(4, .5);
-		driveStraightWithHyro(4, -.5);
+		driveStraightWithHyro(3, -.5);
 	}
 }

@@ -5,6 +5,7 @@
  */
 package org.usfirst.frc.team548.robot.AutoModes;
 
+import org.usfirst.frc.team548.robot.Constants;
 import org.usfirst.frc.team548.robot.AutoCommands.*;
 
 
@@ -45,7 +46,7 @@ public abstract class AutoMode {
     	runCommand(new DriveStraightWithGyroInTime(seconds, power));
     }
     
-    protected void setArmToPosInTime(double seconds, int pos) {
+    protected void setArmToPosInTime(double seconds, Constants.ARM_POS pos) {
     	runCommand(new RaiseArmInTime(seconds, pos));
     }
     

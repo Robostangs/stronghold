@@ -61,9 +61,9 @@ public class DriveTrain implements PIDSource, PIDOutput {
 		leftFront.set(leftSpeed);
 		leftMiddle.set(leftSpeed);
 		leftBack.set(leftSpeed);
-		rightFront.set(rightSpeed);
-		rightMiddle.set(rightSpeed);
-		rightBack.set(rightSpeed);
+		rightFront.set(-rightSpeed);
+		rightMiddle.set(-rightSpeed);
+		rightBack.set(-rightSpeed);
 	}
 	
 	/**
@@ -142,7 +142,7 @@ public class DriveTrain implements PIDSource, PIDOutput {
 		else if(getHyroAngle() > -Constants.DT_HYRO_ERROR_THRESHOLD){
 			drive(-power * Constants.DT_DRIVE_STRAIGHT_HIGHER_POWER, power * Constants.DT_DRIVE_STRAIGHT_LOWER_POWER);
 		} else {
-			drive(-power, power);
+			drive(power, power);
 		}
 	}
 	
@@ -247,9 +247,9 @@ public class DriveTrain implements PIDSource, PIDOutput {
 	@Override
 	public void pidWrite(double output) {
 		if(gyroPID) {
-			drive(-output, -output);	
+			drive(-output, output);	
 		} else {
-			driveStraight(output);
+			driveStraightHyro(output);
 		}
 	}
 	

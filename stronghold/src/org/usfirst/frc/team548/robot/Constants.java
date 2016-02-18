@@ -31,10 +31,10 @@ public class Constants {
 		public static final double ARM_MAX_THRESHOLD = 700;
 		public static final double ARM_MIN_POS = 910;
 		public static final double ARM_MIN_THRESHOLD = 900;
-		public static final double ARM_LOW_POS = .780+ARM_ENOCDER_OFFSET;
-		public static final double ARM_ING_POS = .757+ARM_ENOCDER_OFFSET;
-		public static final double ARM_DEF_POS =.700+ARM_ENOCDER_OFFSET;
-		public static final double ARM_SHOOT_POS = .480+ARM_ENOCDER_OFFSET;
+		public static final double ARM_LOW_POS = 0.780 + ARM_ENOCDER_OFFSET;
+		public static final double ARM_ING_POS = 0.757 + ARM_ENOCDER_OFFSET;
+		public static final double ARM_DEF_POS = 0.700 + ARM_ENOCDER_OFFSET;
+		public static final double ARM_SHOOT_POS = 0.480 + ARM_ENOCDER_OFFSET;
 		public static final double ARM_UP_TO_LOW_P = 4;
 		public static final double ARM_UP_TO_LOW_I = 0.02;
 		public static final double ARM_UP_TO_LOW_D = 0;
@@ -56,6 +56,19 @@ public class Constants {
 		public static final double ARM_SHOOT_P = 1.7;
 		public static final double ARM_SHOOT_I = 0;
 		public static final double ARM_SHOOT_D = 1;
+		
+		public static enum ARM_POS {
+			LOW (ARM_LOW_POS),
+			ING (ARM_ING_POS),
+			DEF (ARM_DEF_POS),
+			SHOOT (ARM_SHOOT_POS);
+			private final double setpoint;
+			ARM_POS(double value) {
+				this.setpoint = value;
+			}
+			
+			public double getSetpoint() { return setpoint; }
+		}
 	
 		
 		//Lowest position: 917

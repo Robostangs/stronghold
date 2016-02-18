@@ -37,7 +37,7 @@ public class XboxController extends Joystick{
 	}
 	
 	public double getRightStickYAxis() {
-		return -getRawAxis(5);
+		return getRawAxis(5);
 	}
 
 	public boolean getAButton() {
