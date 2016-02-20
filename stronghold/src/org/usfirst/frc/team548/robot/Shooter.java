@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
 public class Shooter {
 
 	private static Shooter instance = null;
-	private static CANTalon shootingMotor;
+	private static CANTalon shootingMotor, shootingMotor2;
 	
 	public static Shooter getInstance(){
 		if(instance == null){
@@ -19,11 +19,13 @@ public class Shooter {
 	
 	public Shooter() {
 		shootingMotor = new CANTalon(Constants.SHOOTING_TALON_POS);
+		//shootingMotor2 = new CANTalon(10);
 	}
 	
 	public static void setPower(double value) {
 		//shootingMotor.changeControlMode(TalonControlMode.PercentVbus);
 		shootingMotor.set(value);
+		//shootingMotor2.set(-value);
 	}
 	
 	public static void shooterIngest() {
@@ -48,7 +50,7 @@ public class Shooter {
 	
 	public static void setShooterSpeedNoPID(double speed) {
 		disablePID();
-		shootingMotor.set(speed);
+		setPower(speed);
 	}
 	
 	public static void disablePID() {

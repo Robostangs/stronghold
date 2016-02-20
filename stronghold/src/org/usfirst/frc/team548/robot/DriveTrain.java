@@ -40,8 +40,8 @@ public class DriveTrain implements PIDSource, PIDOutput {
 		rightMiddle = new CANTalon(Constants.DT_TALON_POS_RIGHT_MID);
 		rightBack = new CANTalon(Constants.DT_TALON_POS_RIGHT_BACK);
 		
-		//rightBack.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
-		//leftFront.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
+		rightBack.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
+		leftFront.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
 		
 		hyro = new AHRS(SerialPort.Port.kMXP);
 		hyro.reset();
@@ -58,12 +58,12 @@ public class DriveTrain implements PIDSource, PIDOutput {
 	}
 	
 	public static void drive(double leftSpeed, double rightSpeed){
-		leftFront.set(leftSpeed);
-		leftMiddle.set(leftSpeed);
-		leftBack.set(leftSpeed);
-		rightFront.set(-rightSpeed);
-		rightMiddle.set(-rightSpeed);
-		rightBack.set(-rightSpeed);
+		leftFront.set(-leftSpeed);
+		leftMiddle.set(-leftSpeed);
+		leftBack.set(-leftSpeed);
+		rightFront.set(rightSpeed);
+		rightMiddle.set(rightSpeed);
+		rightBack.set(rightSpeed);
 	}
 	
 	/**
@@ -87,7 +87,7 @@ public class DriveTrain implements PIDSource, PIDOutput {
 	}
 	
 	public static double getRightRate() {
-		return rightFront.getEncVelocity();
+		return rightBack.getEncVelocity();
 	}
 	
 	public static double getRightEncoder() {
@@ -137,10 +137,10 @@ public class DriveTrain implements PIDSource, PIDOutput {
 	 */
 	public static void driveStraightHyro(double power) {
 		if(getHyroAngle() > Constants.DT_HYRO_ERROR_THRESHOLD){
-			drive(-power * Constants.DT_DRIVE_STRAIGHT_LOWER_POWER, power * Constants.DT_DRIVE_STRAIGHT_HIGHER_POWER);
+			drive(power * Constants.DT_DRIVE_STRAIGHT_LOWER_POWER, power * Constants.DT_DRIVE_STRAIGHT_HIGHER_POWER);
 		}
 		else if(getHyroAngle() > -Constants.DT_HYRO_ERROR_THRESHOLD){
-			drive(-power * Constants.DT_DRIVE_STRAIGHT_HIGHER_POWER, power * Constants.DT_DRIVE_STRAIGHT_LOWER_POWER);
+			drive(power * Constants.DT_DRIVE_STRAIGHT_HIGHER_POWER, power * Constants.DT_DRIVE_STRAIGHT_LOWER_POWER);
 		} else {
 			drive(power, power);
 		}
@@ -160,6 +160,38 @@ public class DriveTrain implements PIDSource, PIDOutput {
 		}
 		drive(left, right);
 	}
+	
+	public static void driveForza(double wheel, double power, boolean turnQuick) {
+        if(Math.abs(power) > .1) {
+            double leftPower = 0;
+            double rightPower = 0;
+            if (turnQuick)
+            {
+                leftPower = (wheel*(power));
+                rightPower = -wheel * ( power);
+
+            }
+            else if (wheel > 0) //right
+            {
+                leftPower = power ;
+                rightPower = power * (1-wheel);
+            }
+            else if (wheel < 0)// left
+            {
+                leftPower = power * (1 - -wheel);
+                rightPower = power;
+            }
+            else
+            {
+                leftPower = power;
+                rightPower = power;
+            }
+            drive(leftPower, rightPower);
+        } else {
+             drive(0, 0);
+        }
+	}
+        
 	/*
 	 * 
 	 * 

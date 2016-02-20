@@ -1,14 +1,17 @@
 package org.usfirst.frc.team548.robot.AutoCommands;
 
 import org.usfirst.frc.team548.robot.Arm;
+import org.usfirst.frc.team548.robot.Constants;
 import org.usfirst.frc.team548.robot.DriveTrain;
 
-public class DriveStraightWithGyroInTime extends AutoCommandBase {
+public class DriveStraightWithGyroInTimeWithArmPos extends AutoCommandBase {
 	
 	private double power;
-	public DriveStraightWithGyroInTime(double timeOut, double power) {
+	private Constants.ARM_POS position;
+	public DriveStraightWithGyroInTimeWithArmPos(double timeOut, double power, Constants.ARM_POS pos) {
 		super(timeOut);
 		this.power = power;
+		this.position = pos;
 		// TODO Auto-generated constructor stub
 	}
 
@@ -22,7 +25,13 @@ public class DriveStraightWithGyroInTime extends AutoCommandBase {
 	protected void run() {
 		// TODO Auto-generated method stub
 		DriveTrain.driveStraightHyro(power);
-		Arm.setPower(.6);
+		if(position == Constants.ARM_POS.LOW) {
+			Arm.setArmDownToLow();
+		} else if(position == Constants.ARM_POS.SHOOT) {
+			Arm.setArmShoot();
+		} else if (position == Constants.ARM_POS.DEF) {
+			Arm.setArmUpToDef();
+		}
 	}
 
 	@Override
@@ -34,7 +43,7 @@ public class DriveStraightWithGyroInTime extends AutoCommandBase {
 	@Override
 	protected String getCommandName() {
 		// TODO Auto-generated method stub
-		return "Drive Straight With Hyro In Time";
+		return "Drive Straight With Hyro In Time Wiht Arm Pos";
 	}
 
 }

@@ -21,7 +21,7 @@ public class XboxController extends Joystick{
 	}
 	
 	public double getLeftStickYAxis() {
-		return getRawAxis(1);
+		return -getRawAxis(1);
 	}
 	
 	public double getRightTriggerAxis() {
@@ -37,7 +37,7 @@ public class XboxController extends Joystick{
 	}
 	
 	public double getRightStickYAxis() {
-		return getRawAxis(5);
+		return -getRawAxis(5);
 	}
 
 	public boolean getAButton() {
@@ -120,4 +120,5 @@ public class XboxController extends Joystick{
 	public double getBothTriggerAxis() {
 		return (getRightTriggerAxis()-getLeftTriggerAxis());
 	}
+	
 }

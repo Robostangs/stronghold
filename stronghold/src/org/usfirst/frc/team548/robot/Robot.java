@@ -18,7 +18,7 @@ public class Robot extends IterativeRobot {;
 
     public void robotInit() {
         chooser = new SendableChooser();
-        chooser.addDefault("Shoot Auton", new FirstAuto());
+        chooser.addDefault("Shoot Auton", new HighGoal());
         chooser.addObject("Cross Low Bar", new CrossLowBar());
         chooser.addObject("Cross Low Bar Then Return", new CrossLowBarThenReturn());
         SmartDashboard.putData("Auto choices", chooser);
@@ -70,7 +70,7 @@ public class Robot extends IterativeRobot {;
     	SmartDashboard.putNumber("Current 14", pdp.getCurrent(14));
     	SmartDashboard.putNumber("Current 15", pdp.getCurrent(15));
     	SmartDashboard.putNumber("ENCODER", Arm.getEncoder());
-    	SmartDashboard.putNumber("Left Stick Y", TeleOperated.getStick());
+
     	
     }
     

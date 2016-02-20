@@ -42,8 +42,8 @@ public abstract class AutoMode {
     	runCommand(new DrivePowerInTime(seconds, power));
     }
     
-    protected void driveStraightWithHyro(double seconds, double power) {
-    	runCommand(new DriveStraightWithGyroInTime(seconds, power));
+    protected void driveStraightWithHyroWithArmPos(double seconds, double power, Constants.ARM_POS pos) {
+    	runCommand(new DriveStraightWithGyroInTimeWithArmPos(seconds, power, pos));
     }
     
     protected void setArmToPosInTime(double seconds, Constants.ARM_POS pos) {

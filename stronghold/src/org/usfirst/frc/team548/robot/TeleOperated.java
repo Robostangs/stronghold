@@ -15,7 +15,7 @@ public class TeleOperated {
 		driver = new XboxController(Constants.XBOX_DRIVER_POS);
 		manip = new XboxController(Constants.XBOX_MANIP_POS);
 	}
-
+	static boolean newDrive = false;
 	public static void run() {
         
 //        if(driver.getAButton()) {
@@ -38,8 +38,15 @@ public class TeleOperated {
             } else if(driver.getBButton()) {
             	DriveTrain.driveStraightHyro(.5);
             } else {
-            	DriveTrain.humanDrive(driver.getLeftStickYAxis(), driver.getRightStickYAxis());
+            	if(newDrive) {
+            		DriveTrain.driveForza(driver.getLeftStickXAxis(), driver.getBothTriggerAxis(), driver.getXButton());
+                } else {
+                	DriveTrain.humanDrive(driver.getLeftStickYAxis(), driver.getRightStickYAxis());	
+                }
             }
+            
+            if(driver.getStartButton()) newDrive = true;
+            if(driver.getBackButton()) newDrive = false;
             
             System.out.println("L: "+ DriveTrain.getLeftRate()+" R: "+DriveTrain.getRightRate());
             
@@ -101,11 +108,6 @@ public class TeleOperated {
 	        	  Arm.resetSnap();
 	        	  Arm.setSpeed(manip.getLeftStickYAxis());
 	          }
-	}
-	
-	
-	public static double getStick() {
-		return manip.getLeftStickYAxis();
 	}
 	
 }

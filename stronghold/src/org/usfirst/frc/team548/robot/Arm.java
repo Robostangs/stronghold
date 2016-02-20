@@ -36,13 +36,11 @@ public class Arm implements PIDOutput {
 	
 	public static void setPower(double value) {
 		
-		leftArmMotor.set(value);
-		rightArmMotor.set(-value);
+		leftArmMotor.set(-value);
+		rightArmMotor.set(value);
 	}
 	
-	public static void stopArm() {
-		setPower(0);
-	}
+	public static void stopArm() { }
 	
 	public static double getEncoder() {
 		return encoder.get();
