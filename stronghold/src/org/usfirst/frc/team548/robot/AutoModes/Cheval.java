@@ -10,10 +10,11 @@ public class Cheval extends AutoMode {
 
 	@Override
 	protected void run() {
+		
 		// TODO Auto-generated method stub
-		driveStraightWithHyroWithArmPos(2, 0.5, Constants.ARM_POS.DEF);
-		setArmToPosInTime(2, Constants.ARM_POS.LOW);
-		driveStraightWithHyroWithArmPos(5, 0.8, Constants.ARM_POS.LOW);
+		driveStraightWithHyroWithArmPos(1, 0.5, Constants.ARM_POS.DEF);
+		setArmToPosInTime(1.5, Constants.ARM_POS.LOW);
+		driveStraightWithHyroWithArmPos(1.5, 0.8, Constants.ARM_POS.LOW);
 	}
 
 }

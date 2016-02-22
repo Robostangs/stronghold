@@ -21,11 +21,11 @@ public class RaiseArmInTime extends AutoCommandBase {
 	protected void run() {
 		// TODO Auto-generated method stub
 		if(position == Constants.ARM_POS.LOW) {
-			Arm.setArmDownToLow();
+			Arm.setArmToLow();
 		} else if(position == Constants.ARM_POS.SHOOT) {
 			Arm.setArmShoot();
 		} else if (position == Constants.ARM_POS.DEF) {
-			Arm.setArmUpToDef();
+			Arm.setArmToDef();
 		}
 	}
 

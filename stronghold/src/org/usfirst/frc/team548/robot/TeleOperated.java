@@ -85,11 +85,9 @@ public class TeleOperated {
 	          
 	          
 	          if(manip.getAButton()) {
-	        	  if(Arm.isArmHigh()) {
-	        		  Arm.setArmDownToLow();
-	        	  } else {
-	        		  Arm.setArmUpToLow();
-	        	  }
+	        	  
+	        		  Arm.setArmToLow();
+	        	  
 	          } else if(manip.getXButton()) {
 	        	  if(Arm.isArmHigh()) {
 	        		  Arm.setArmDownToIng();
@@ -97,16 +95,16 @@ public class TeleOperated {
 	        		  Arm.setArmUpToIng();
 	        	  }
 	          } else if(manip.getBButton()) {
-	        	  if(Arm.isArmHigh()) {
-	        		  Arm.setArmDownToDef();
-	        	  } else {
-	        		  Arm.setArmUpToDef();
-	        	  }
+	        	  
+	        		  Arm.setArmToDef();
+	        	  
+	        		  
+	        	  
 	          } else if(manip.getYButton()) {
 	        	  Arm.setArmShoot();
 	          } else {
 	        	  Arm.resetSnap();
-	        	  Arm.setSpeed(manip.getLeftStickYAxis());
+	        	  Arm.setSpeed(manip.getRightStickYAxis());
 	          }
 	}
 	

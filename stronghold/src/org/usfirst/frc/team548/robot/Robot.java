@@ -21,6 +21,7 @@ public class Robot extends IterativeRobot {;
         chooser.addDefault("Shoot Auton", new HighGoal());
         chooser.addObject("Cross Low Bar", new CrossLowBar());
         chooser.addObject("Cross Low Bar Then Return", new CrossLowBarThenReturn());
+        chooser.addObject("Cheval", new Cheval());
         SmartDashboard.putData("Auto choices", chooser);
         
         DriveTrain.getInstance();

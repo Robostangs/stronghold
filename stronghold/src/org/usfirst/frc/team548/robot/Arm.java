@@ -28,7 +28,7 @@ public class Arm implements PIDOutput {
 		rightArmMotor = new CANTalon(Constants.RIGHT_ARM_TALON_POS);
 		leftArmMotor.changeControlMode(TalonControlMode.PercentVbus);
 		rightArmMotor.changeControlMode(TalonControlMode.PercentVbus);
-		encoder = new AnalogPotentiometer(0);
+		encoder = new AnalogPotentiometer(1);
 		pid = new PIDController(0,0,0, encoder, this);
 		LiveWindow.addActuator("Arm", "RotateController", pid);
 		LiveWindow.addSensor("Arm", "Pot", encoder);
@@ -52,13 +52,11 @@ public class Arm implements PIDOutput {
 		pid.setSetpoint(setpoint);		
 	}
 	
-	public static void setArmUpToLow() {
-		setArmPos(Constants.ARM_LOW_POS, Constants.ARM_UP_TO_LOW_P, Constants.ARM_UP_TO_LOW_I, Constants.ARM_UP_TO_LOW_D);
+	public static void setArmToLow() {
+		setArmPos(Constants.ARM_LOW_POS, Constants.ARM_TO_LOW_P, Constants.ARM_TO_LOW_I, Constants.ARM_TO_LOW_D);
 	}
 	
-	public static void setArmDownToLow() {
-		setArmPos(Constants.ARM_LOW_POS, Constants.ARM_DOWN_TO_LOW_P, Constants.ARM_DOWN_TO_LOW_I, Constants.ARM_DOWN_TO_LOW_D);
-	}
+	
 	
 	public static void setArmUpToIng() {
 		setArmPos(Constants.ARM_ING_POS, Constants.ARM_UP_TO_ING_P, Constants.ARM_UP_TO_ING_I, Constants.ARM_UP_TO_ING_D);
@@ -68,13 +66,11 @@ public class Arm implements PIDOutput {
 		setArmPos(Constants.ARM_ING_POS, Constants.ARM_DOWN_TO_ING_P, Constants.ARM_DOWN_TO_ING_I, Constants.ARM_DOWN_TO_ING_D);
 	}
 	
-	public static void setArmUpToDef() {
-		setArmPos(Constants.ARM_DEF_POS, Constants.ARM_UP_TO_DEF_P, Constants.ARM_UP_TO_DEF_I, Constants.ARM_UP_TO_DEF_D);
+	public static void setArmToDef() {
+		setArmPos(Constants.ARM_DEF_POS, Constants.ARM_TO_DEF_P, Constants.ARM_TO_DEF_I, Constants.ARM_TO_DEF_D);
 	}
 	
-	public static void setArmDownToDef() {
-		setArmPos(Constants.ARM_DEF_POS, Constants.ARM_DOWN_TO_DEF_P, Constants.ARM_DOWN_TO_DEF_I, Constants.ARM_DOWN_TO_DEF_D);
-	}
+	
 	
 	public static void setArmShoot() {
 		setArmPos(Constants.ARM_SHOOT_POS, Constants.ARM_SHOOT_P, Constants.ARM_SHOOT_I, Constants.ARM_SHOOT_D);
@@ -130,7 +126,7 @@ public class Arm implements PIDOutput {
 	@Override
 	public void pidWrite(double output) {
 		// TODO Auto-generated method stub
-		setPower(output);
+		setPower(-output);
 	}
 	
 	

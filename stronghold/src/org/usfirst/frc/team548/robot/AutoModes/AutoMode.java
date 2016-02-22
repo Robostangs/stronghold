@@ -19,13 +19,13 @@ public abstract class AutoMode {
     
     public AutoMode(String autoName) {
         this.autoName = autoName;
-        System.out.println("AUTO: "+this.autoName+" has been initialized!");
+        System.out.println("AUTO: " + this.autoName + " has been initialized!");
     }
     
     public void start() {
-        System.out.println("AUTO: "+this.autoName+" has started!");
+        System.out.println("AUTO: " + this.autoName + " has started!");
         this.run();
-        System.out.println("AUTO: "+this.autoName+" has ended!");
+        System.out.println("AUTO: " + this.autoName + " has ended!");
     }
     
     protected abstract void run();
