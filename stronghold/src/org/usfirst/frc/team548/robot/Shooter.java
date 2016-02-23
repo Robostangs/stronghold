@@ -72,9 +72,7 @@ public class Shooter implements PIDOutput{
 		pid.disable();
 	}
 
-	@Override
 	public void pidWrite(double output) {
-		// TODO Auto-generated method stub
 		setPower(output);
 	}
 }

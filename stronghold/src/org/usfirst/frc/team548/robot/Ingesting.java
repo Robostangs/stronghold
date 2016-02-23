@@ -21,7 +21,6 @@ public class Ingesting {
 		//ballSwitch = new DigitalInput(Constants.INGESTING_SWITCH_POS);
 	}
 	
-	//Set rollers and injector wheels to speed
 	public static void setIngesting(double value) {
 		ingestingMotor.set(value);
 	}
@@ -30,24 +29,20 @@ public class Ingesting {
 		setIngesting(0);
 	}
 	
-	//ingest ball with ingesting and shooter wheel
 	public static void ingest() {
 		setIngesting(Constants.INGESTING_IN_NORMAL_POWER);
 		
 	}
-	
-	//exgest ball with ingesting and shooter wheel
+
 	public static void exgest() {
 		setIngesting(Constants.INGESTING_OUT_NORMAL_POWER);
 		
 	}
 	
-	//use limit switch to determine if we're holding a ball
 //	public static boolean hasBall() {
 //		return ballSwitch.get();
 //	}
 	
-	//run ingesting inwards constantly at slow speed to hold ball
 	public static void holdBall() {
 		setIngesting(Constants.INGESTING_HOLDING_BALL_POWER);
 	}

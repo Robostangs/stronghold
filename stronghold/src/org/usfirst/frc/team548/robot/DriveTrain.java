@@ -92,17 +92,6 @@ public class DriveTrain implements PIDSource, PIDOutput {
 	public static void resetHyro() {
 		hyro.reset();
 	}
-	
-//	public static void driveStraight(double power){
-//		if(getLeftEncoder() - getRightEncoder() > Constants.DT_ENCODER_ERROR_THRESHOLD){
-//			drive(power * Constants.DT_DRIVE_STRAIGHT_LOWER_POWER, power * Constants.DT_DRIVE_STRAIGHT_HIGHER_POWER);
-//		}
-//		else if(getLeftEncoder() - getRightEncoder() < -Constants.DT_ENCODER_ERROR_THRESHOLD){
-//			drive(power * Constants.DT_DRIVE_STRAIGHT_HIGHER_POWER, power * Constants.DT_DRIVE_STRAIGHT_LOWER_POWER);
-//		} else {
-//			drive(power, power);
-//		}
-//	}
 
 	public static void driveStraightHyro(double power) {
 		if(getHyroAngle() > Constants.DT_HYRO_ERROR_THRESHOLD){
@@ -114,12 +103,7 @@ public class DriveTrain implements PIDSource, PIDOutput {
 			drive(power, power);
 		}
 	}
-	
-	/**
-	 * Makes deadzones on the controller
-	 * @param left
-	 * @param right
-	 */
+
 	public static void humanDrive(double left, double right){
 		if(Math.abs(left) < 0.2) {
 			left = 0;
@@ -161,33 +145,19 @@ public class DriveTrain implements PIDSource, PIDOutput {
         }
 	}
         
-	/*
-	 * 
-	 * 
-	 * 
-	 * PID STUFF vvvvvvvv
-	 * 
-	 * 
-	 * 
-	 */
 	private static PIDSourceType pidtype = PIDSourceType.kDisplacement;
 	
 	private static boolean gyroPID = true, pidInit = false;
-	
-	
-	@Override
-	public void setPIDSourceType(PIDSourceType pidSource) {//Don't worry about this yet
+
+	public void setPIDSourceType(PIDSourceType pidSource) {
 		pidtype = pidSource;
 	}
-	
-	
-	@Override
-	public PIDSourceType getPIDSourceType() { //Dont worry about this yet
+
+	public PIDSourceType getPIDSourceType() {
 		return pidtype;
 	}
 
-	@Override
-	public double pidGet() { //Gets the encoder vales for PID
+	public double pidGet() {
 		return getEncoderAverage();
 	}
 	/**
@@ -213,28 +183,22 @@ public class DriveTrain implements PIDSource, PIDOutput {
 	
 	public static void turnAngle(double setPoint) {
 		setPIDtoGyro();
-		//make robot turn using pid based off of gyro values
 		pid.enable();
-		
 		pid.setSetpoint(setPoint);
-		//pid.setPercentTolerance(25); //IDK YET
-		//return pid.onTarget();
 	}
-	/**
-	 * Disables PID
-	 */
+
 	public static void disablePID() {
 		pid.disable();
 	}
 	
 	public static void setPIDtoGyro() {
 		if(!pidInit) {
-		gyroPID = true;
-		pid = new PIDController(Constants.DT_PID_GYRO_KP, Constants.DT_PID_GYRO_KI, Constants.DT_PID_GYRO_KD, hyro, DriveTrain.getInstance());
-		pid.setInputRange(-180.0f,  180.0f);
-		pid.setOutputRange(-0.5f, 0.5f);
-		pid.setAbsoluteTolerance(2f);
-        pid.setContinuous(true);
+			gyroPID = true;
+			pid = new PIDController(Constants.DT_PID_GYRO_KP, Constants.DT_PID_GYRO_KI, Constants.DT_PID_GYRO_KD, hyro, DriveTrain.getInstance());
+			pid.setInputRange(-180.0f,  180.0f);
+			pid.setOutputRange(-0.5f, 0.5f);
+			pid.setAbsoluteTolerance(2f);
+	        pid.setContinuous(true);
 		}
         pidInit = true;
 	}
@@ -245,7 +209,6 @@ public class DriveTrain implements PIDSource, PIDOutput {
 		pidInit = true;
 	}
 
-	@Override
 	public void pidWrite(double output) {
 		if(gyroPID) {
 			drive(-output, output);	
