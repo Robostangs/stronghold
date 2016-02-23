@@ -1,8 +1,6 @@
 package org.usfirst.frc.team548.robot;
 
 import com.kauailabs.navx.frc.AHRS;
-import com.kauailabs.navx.frc.AHRS.SerialDataType;
-
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
@@ -11,27 +9,20 @@ import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class DriveTrain implements PIDSource, PIDOutput {
 	private static DriveTrain instance = null;
 	private static AHRS hyro;
 	private static CANTalon leftFront, leftMiddle, leftBack, rightFront, rightMiddle, rightBack;
 	private static PIDController pid;
-	/**
-	 * Initializes
-	 * @return instance
-	 */
+
 	public static DriveTrain getInstance(){
 		if(instance == null){
 			instance = new DriveTrain();
 		}
 		return instance;
 	}
-	
-	/**
-	 * Initializes the encoders
-	 */
+
 	private DriveTrain(){
 		leftFront = new CANTalon(Constants.DT_TALON_POS_LEFT_FRONT);
 		leftMiddle = new CANTalon(Constants.DT_TALON_POS_LEFT_MID);
@@ -52,8 +43,7 @@ public class DriveTrain implements PIDSource, PIDOutput {
 		pid.setOutputRange(-0.5f, 0.5f);
 		pid.setAbsoluteTolerance(2f);
         pid.setContinuous(true);
-        
-        
+          
         LiveWindow.addSensor("Drive", "Gyro", hyro);
 	}
 	
@@ -65,18 +55,10 @@ public class DriveTrain implements PIDSource, PIDOutput {
 		rightMiddle.set(rightSpeed);
 		rightBack.set(rightSpeed);
 	}
-	
-	/**
-	 * Stops the drive motors
-	 */
+
 	public static void stop(){
-		drive(0,0);
+		drive(0, 0);
 	} 
-	
-	/**
-	 * Gets values of right and left encoders
-	 * @return 
-	 */
 	
 	public static double getLeftEncoder() {
 		return leftFront.getEncPosition();
@@ -97,17 +79,13 @@ public class DriveTrain implements PIDSource, PIDOutput {
 	public static double getEncoderAverage() {
 		return (getRightEncoder() + getLeftEncoder()) / 2;
 	}
-	
-	/**
-	 * Resets the encoders
-	 */
+
 	public static void encoderReset(){
 		leftFront.setPosition(0);
 		rightBack.setPosition(0);
 	}	
 	
 	public static double getHyroAngle() {
-		
 		return hyro.pidGet();
 	}
 	
@@ -115,12 +93,6 @@ public class DriveTrain implements PIDSource, PIDOutput {
 		hyro.reset();
 	}
 	
-	
-	
-	/**
-	 * Drive straight method
-	 * @param power
-	 */
 //	public static void driveStraight(double power){
 //		if(getLeftEncoder() - getRightEncoder() > Constants.DT_ENCODER_ERROR_THRESHOLD){
 //			drive(power * Constants.DT_DRIVE_STRAIGHT_LOWER_POWER, power * Constants.DT_DRIVE_STRAIGHT_HIGHER_POWER);
@@ -131,10 +103,7 @@ public class DriveTrain implements PIDSource, PIDOutput {
 //			drive(power, power);
 //		}
 //	}
-	/**
-	 * CALL GYRO RESET BEFORE USING
-	 * @param power
-	 */
+
 	public static void driveStraightHyro(double power) {
 		if(getHyroAngle() > Constants.DT_HYRO_ERROR_THRESHOLD){
 			drive(power * Constants.DT_DRIVE_STRAIGHT_LOWER_POWER_LEFT, power * Constants.DT_DRIVE_STRAIGHT_HIGHER_POWER_RIGHT);

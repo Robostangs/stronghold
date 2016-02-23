@@ -1,10 +1,8 @@
 package org.usfirst.frc.team548.robot;
 
-import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.PIDController;
-import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
 import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.PIDOutput;
@@ -15,7 +13,10 @@ public class Arm implements PIDOutput {
 	private static CANTalon leftArmMotor, rightArmMotor;
 	private static PIDController pid;
 	private static AnalogPotentiometer encoder;
-	private static boolean armIsHigh = false;
+	private static double shootingAdjustment = 0;
+	private static boolean adjustInit = false;
+//	private static boolean armIsHigh = false;
+	
 	public static Arm getInstance() {
 		if(instance == null){
 			instance = new Arm();
@@ -40,96 +41,103 @@ public class Arm implements PIDOutput {
 		rightArmMotor.set(value);
 	}
 	
-	public static void stopArm() { }
+	public static void stopArm() {
+		setPower(0);
+	}
 	
 	public static double getEncoder() {
 		return encoder.get();
 	}
 	
-	public static void setArmPos(double setpoint, double pk, double ik, double dk) {
+	public static void setArmPID(double setpoint, double pk, double ik, double dk) {
 		pid.enable();
 		pid.setPID(pk, ik, dk);
 		pid.setSetpoint(setpoint);		
 	}
 	
-	public static void setArmToLow() {
-		setArmPos(Constants.ARM_LOW_POS, Constants.ARM_TO_LOW_P, Constants.ARM_TO_LOW_I, Constants.ARM_TO_LOW_D);
+	public static void adjustArmPID(double setpoint, double pk, double ik, double dk) {
+		pid.enable();
+		pid.setPID(pk, ik, dk);
+		pid.setSetpoint(setpoint + getAdjustment());
+		System.out.println(setpoint);
 	}
 	
-	
-	
-	public static void setArmUpToIng() {
-		setArmPos(Constants.ARM_ING_POS, Constants.ARM_UP_TO_ING_P, Constants.ARM_UP_TO_ING_I, Constants.ARM_UP_TO_ING_D);
+	public static void setArmPos(Constants.ARM_POS pos) {
+		if(pos == Constants.ARM_POS.LOW) {
+			setArmPID(Constants.ARM_LOW_POS, Constants.ARM_LOW_P, Constants.ARM_LOW_I, Constants.ARM_LOW_D);
+		} else if (pos == Constants.ARM_POS.DEF) {
+			setArmPID(Constants.ARM_DEF_POS, Constants.ARM_DEF_P, Constants.ARM_DEF_I, Constants.ARM_DEF_D);
+		}  else if (pos == Constants.ARM_POS.ING) {
+			setArmPID(Constants.ARM_ING_POS, Constants.ARM_ING_P, Constants.ARM_ING_I, Constants.ARM_ING_D);
+		} else if (pos == Constants.ARM_POS.SHOOT) {
+			if(shootingAdjustment == 0) {
+				setArmPID(Constants.ARM_SHOOT_POS, Constants.ARM_SHOOT_P, Constants.ARM_SHOOT_I, Constants.ARM_SHOOT_D);
+			} else {
+				adjustArmPID(Constants.ARM_SHOOT_POS, Constants.ARM_SHOOT_ADJUST_P, Constants.ARM_SHOOT_ADJUST_I, Constants.ARM_SHOOT_ADJUST_D);
+			}
+		}  
 	}
 	
-	public static void setArmDownToIng() {
-		setArmPos(Constants.ARM_ING_POS, Constants.ARM_DOWN_TO_ING_P, Constants.ARM_DOWN_TO_ING_I, Constants.ARM_DOWN_TO_ING_D);
-	}
-	
-	public static void setArmToDef() {
-		setArmPos(Constants.ARM_DEF_POS, Constants.ARM_TO_DEF_P, Constants.ARM_TO_DEF_I, Constants.ARM_TO_DEF_D);
-	}
-	
-	
-	
-	public static void setArmShoot() {
-		setArmPos(Constants.ARM_SHOOT_POS, Constants.ARM_SHOOT_P, Constants.ARM_SHOOT_I, Constants.ARM_SHOOT_D);
-	}
-	
-	public static double snap = 0;
-	
-	public static boolean initSnap = false;
-	
-	public static double takeSnap() {
-		if(!initSnap) {
-			snap = getEncoder();
-			initSnap = true;
-		}
-		return snap;
-	}
-	
-	public static void resetSnap() {
-		initSnap = false;
-	}
-	
-	public static boolean isArmHigh() {
-		if(takeSnap() < 0.650) {
-			 return true;
-		} else {
-			return false;
+	public static void changeAdjustment(double change) {
+		if(!adjustInit) {
+			if(shootingAdjustment + change <= 0 && change < 0) {
+				adjustInit = true;
+			} else {
+				shootingAdjustment += change;
+				adjustInit = true;
+			}
 		}
 	}
+	
+	public static double getAdjustment() {
+		return shootingAdjustment;
+	}
+	
+	public static void resetAdjustmentInit() {
+		adjustInit = false;
+	}
+	
+	public static void resetAdjustment() {
+		shootingAdjustment = 0;
+		adjustInit = false;
+	}
+	
+//	public static double snap = 0;
+//	
+//	public static boolean initSnap = false;
+//	
+//	public static double takeSnap() {
+//		if(!initSnap) {
+//			snap = getEncoder();
+//			initSnap = true;
+//		}
+//		return snap;
+//	}
+//	
+//	public static void resetSnap() {
+//		initSnap = false;
+//	}
+//	
+//	public static boolean isArmHigh() {
+//		if(takeSnap() < 0.650) {
+//			 return true;
+//		} else {
+//			return false;
+//		}
+//	}
 	
 	public static void setSpeed(double value) {
 		pid.disable();
 		if(value < 0) {
-//			if(getEncoder() < Constants.ARM_MAX_POS) {
-//				setPower(0);
-//			} else if(getEncoder() < Constants.ARM_MAX_THRESHOLD){
-//				setPower(value * Constants.ARM_LOW_POWER);
-//			} else {
 				setPower(value * Constants.ARM_POWER_COEFFICIENT);
-//			}
 		} else if (value > 0) {
-//			if(getEncoder() > Constants.ARM_MIN_POS) {
-//				setPower(0);
-//			} else if(getEncoder() > Constants.ARM_MIN_THRESHOLD){
-//				setPower(value * Constants.ARM_LOW_POWER);
-//			} else {
 				setPower(value * Constants.ARM_POWER_COEFFICIENT);
-//			}
 		} else {
 			setPower(0);
 		}
 	}
 
-	@Override
 	public void pidWrite(double output) {
-		// TODO Auto-generated method stub
 		setPower(-output);
 	}
-	
-	
-	
-	
 }

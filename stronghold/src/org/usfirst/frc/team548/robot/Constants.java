@@ -28,30 +28,27 @@ public class Constants {
 		public static final int LEFT_ARM_TALON_POS = 4;
 		public static final int RIGHT_ARM_TALON_POS = 7;
 		public static final double ARM_POWER_COEFFICIENT = 0.75;
-		public static final double ARM_LOW_POWER = 0.05;
-		public static final double ARM_MAX_POS = 660;
-		public static final double ARM_MAX_THRESHOLD = 700;
-		public static final double ARM_MIN_POS = 910;
-		public static final double ARM_MIN_THRESHOLD = 900;
-		public static final double ARM_LOW_POS = .968; //change this one
+		public static final double ARM_LOW_POS = .972; //change this one
 		public static final double ARM_ING_POS = ARM_LOW_POS - 0.027; //don't change
 		public static final double ARM_DEF_POS = ARM_LOW_POS - .147; //don't change
-		public static final double ARM_SHOOT_POS = ARM_LOW_POS - .421; //don't change
-		public static final double ARM_TO_LOW_P = 2;
-		public static final double ARM_TO_LOW_I = 0.002;
-		public static final double ARM_TO_LOW_D = 10;
- 		public static final double ARM_UP_TO_ING_P = 3;
-		public static final double ARM_UP_TO_ING_I = 0;
-		public static final double ARM_UP_TO_ING_D = 20;
- 		public static final double ARM_DOWN_TO_ING_P = 2.3;
-		public static final double ARM_DOWN_TO_ING_I = 0.001;
-		public static final double ARM_DOWN_TO_ING_D = 10;
-		public static final double ARM_TO_DEF_P = 8;
-		public static final double ARM_TO_DEF_I = 0.02;
-		public static final double ARM_TO_DEF_D = 30;
-		public static final double ARM_SHOOT_P = 1.7;
+		public static final double ARM_SHOOT_POS = ARM_LOW_POS - .407; //don't change
+		public static final double ARM_LOW_P = 2;
+		public static final double ARM_LOW_I = 0.002;
+		public static final double ARM_LOW_D = 10;
+ 		public static final double ARM_ING_P = 3;
+		public static final double ARM_ING_I = 0;
+		public static final double ARM_ING_D = 20;
+		public static final double ARM_DEF_P = 8;
+		public static final double ARM_DEF_I = 0.02;
+		public static final double ARM_DEF_D = 30;
+		public static final double ARM_SHOOT_P = 1;
 		public static final double ARM_SHOOT_I = 0;
 		public static final double ARM_SHOOT_D = 1;
+		public static final double ARM_SHOOT_ADJUST_P = 12;
+		public static final double ARM_SHOOT_ADJUST_I = 0;
+		public static final double ARM_SHOOT_ADJUST_D = 30;
+		public static final double POSITIVE_ARM_ADJUSTMENT = 0.005;
+		public static final double NEGATIVE_ARM_ADJUSTMENT = -0.005;
 		
 		public static enum ARM_POS {
 			LOW (ARM_LOW_POS),
@@ -74,12 +71,14 @@ public class Constants {
 		public static final int SHOOTING_TALON_POS_1 = 5;
 		public static final int SHOOTING_TALON_POS_2 = 9;
 		public static final double SHOOTING_PID_P = 0, SHOOTING_PID_I = 0, SHOOTING_PID_D = 0;
-		public static final double SHOOTER_INGEST_SPEED = 0.6;
-		public static final double SHOOTER_EXGEST_SPEED = -0.5;
+		public static final double SHOOTER_INGEST_SPEED = -0.6;
+		public static final double SHOOTER_EXGEST_SPEED = 0.5;
 		public static final double SHOOTER_SPEED_NO_PID = -1;
-		public static final double SHOOTER_P = 0;
-		public static final double SHOOTER_I = 0;
+		public static final double SHOOTER_P = 0.0000001;
+		public static final double SHOOTER_I = 0.000000000005;
 		public static final double SHOOTER_D = 0;
+		public static final int SHOOTER_ENC_POS_1 = 0;
+		public static final int SHOOTER_ENC_POS_2 = 1;
 		
 	//Ingesting
 		public static final int INGESTING_TALON_POS = 8;
@@ -88,6 +87,12 @@ public class Constants {
 		public static final double INGESTING_OUT_NORMAL_POWER = -0.5;
 		public static final double INGESTING_HOLDING_BALL_POWER = 0.05;
 		public static final double INJECTING_POWER = -0.6;
+		
+	//Scaling
+		public static final int SCALING_TALON_POS = 0;
+		public static final int SCALING_SWITCH_POS = 0;
+		public static final double SCALING_SPEED = 0.5;
+		public static final double DESCALING_SPEED = -0.5;
 		
 	//PID constants
 		public static final double DT_PID_GYRO_KP = 0.03, DT_PID_GYRO_KI = 0, DT_PID_GYRO_KD = 0;

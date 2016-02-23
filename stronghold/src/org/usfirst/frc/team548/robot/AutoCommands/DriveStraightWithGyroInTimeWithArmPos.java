@@ -25,13 +25,9 @@ public class DriveStraightWithGyroInTimeWithArmPos extends AutoCommandBase {
 	protected void run() {
 		// TODO Auto-generated method stub
 		DriveTrain.driveStraightHyro(power);
-		if(position == Constants.ARM_POS.LOW) {
-			Arm.setArmToLow();
-		} else if(position == Constants.ARM_POS.SHOOT) {
-			Arm.setArmShoot();
-		} else if (position == Constants.ARM_POS.DEF) {
-			Arm.setArmToDef();
-		}
+		
+			Arm.setArmPos(position);
+		
 	}
 
 	@Override
