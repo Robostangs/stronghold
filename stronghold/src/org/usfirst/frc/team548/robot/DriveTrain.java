@@ -31,8 +31,8 @@ public class DriveTrain implements PIDSource, PIDOutput {
 		rightMiddle = new CANTalon(Constants.DT_TALON_POS_RIGHT_MID);
 		rightBack = new CANTalon(Constants.DT_TALON_POS_RIGHT_BACK);
 		
-		rightBack.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
-		leftFront.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
+//		rightBack.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
+//		leftFront.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
 		
 		hyro = new AHRS(SerialPort.Port.kMXP);
 		hyro.reset();
@@ -101,6 +101,16 @@ public class DriveTrain implements PIDSource, PIDOutput {
 			drive(power * Constants.DT_DRIVE_STRAIGHT_HIGHER_POWER_LEFT, power * Constants.DT_DRIVE_STRAIGHT_LOWER_POWER_RIGHT);
 		} else {
 			drive(power, power);
+		}
+	}
+	
+	public static void driveDistanceNoPID(int distance, double power, int threshold) {
+		if(getEncoderAverage() < (distance - threshold)) {
+			driveStraightHyro(power);
+		} else if(getEncoderAverage() < distance) {
+			driveStraightHyro(power * Constants.DRIVE_DISTANCE_LOW_POWER);
+		} else {
+			stop();
 		}
 	}
 
@@ -211,7 +221,7 @@ public class DriveTrain implements PIDSource, PIDOutput {
 
 	public void pidWrite(double output) {
 		if(gyroPID) {
-			drive(-output, output);	
+			drive(output, -output);	
 		} else {
 			driveStraightHyro(output);
 		}

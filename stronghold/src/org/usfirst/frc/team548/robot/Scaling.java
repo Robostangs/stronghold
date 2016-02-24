@@ -7,11 +7,11 @@ public class Scaling {
 	
 	private static CANTalon scalingMotor;
 	private static Scaling instance = null;
-	private static DigitalInput scalingSwitch;
+//	private static DigitalInput scalingSwitch;
 	
 	public Scaling() {
 		scalingMotor = new CANTalon(Constants.SCALING_TALON_POS);
-		scalingSwitch = new DigitalInput(Constants.SCALING_SWITCH_POS);
+//		scalingSwitch = new DigitalInput(Constants.SCALING_SWITCH_POS);
 	}
 	
 	public static Scaling getInstance() {
@@ -21,26 +21,26 @@ public class Scaling {
 		return instance;
 	}
 	
-	public static boolean getSwitch() {
-		return scalingSwitch.get();
-	}
+//	public static boolean getSwitch() {
+//		return scalingSwitch.get();
+//	}
 	
 	public static void setSpeed(double value) {
-		if(!getSwitch()) {
+		//if(!getSwitch()) {
 			scalingMotor.set(value);
-		}
+		//}
 	}
 	
 	public static void stopScaling() {
 		setSpeed(0);
 	}
 	
-	public static void scale() {
-		setSpeed(Constants.SCALING_SPEED);
+	public static void scale(double speed) {
+		setSpeed(speed);
 	}
 	
-	public static void descale() {
-		setSpeed(Constants.DESCALING_SPEED);
+	public static void descale(double speed) {
+		setSpeed(-speed);
 	}
 	
 	

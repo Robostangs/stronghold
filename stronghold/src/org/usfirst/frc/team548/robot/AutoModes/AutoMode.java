@@ -34,8 +34,8 @@ public abstract class AutoMode {
         runCommand(new Wait(seconds));
     }
     
-    protected void turnToAngleInTime(double seconds, double angle) {
-        runCommand(new TurnToAngleInTime(seconds, angle));
+    protected void turnToAngleInTime(double seconds, double angle, boolean reset) {
+        runCommand(new TurnToAngleInTime(seconds, angle, reset));
     }
     
     protected void drivePowerInTime(double seconds, double power) {
@@ -52,6 +52,10 @@ public abstract class AutoMode {
     
     protected void shootAfterRamp(double seconds, double rampSeconds, double power) {
     	runCommand(new ShootAfterTime(seconds, rampSeconds, power));
+    }
+    
+    protected void driveDistanceWithArmPos(double seconds, double power, int threshold, int distance, Constants.ARM_POS pos) {
+    	runCommand(new DriveDistanceWithArmPos(seconds, power, threshold, distance, pos));
     }
     
     private static void runCommand(AutoCommandBase command) {

@@ -7,16 +7,20 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class TurnToAngleInTime extends AutoCommandBase {
 	
 	double angle = 0;
-	public TurnToAngleInTime(double timeOut, double angle) {
+	boolean reset;
+	public TurnToAngleInTime(double timeOut, double angle, boolean r) {
 		super(timeOut);
 		// TODO Auto-generated constructor stub
 		this.angle = angle;
+		this.reset = r;
 	}
 
 	@Override
 	public void init() {
 		// TODO Auto-generated method stub
+		if(reset) {
 		DriveTrain.resetHyro();
+		}
 		DriveTrain.resetPIDInit();
 		
 		

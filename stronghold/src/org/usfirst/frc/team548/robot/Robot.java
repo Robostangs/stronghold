@@ -18,7 +18,7 @@ public class Robot extends IterativeRobot {;
 
     public void robotInit() {
         chooser = new SendableChooser();
-        chooser.addDefault("Shoot Auton", new HighGoal());
+        chooser.addDefault("High Goal", new HighGoal());
         chooser.addObject("Cross Low Bar", new CrossLowBar());
         chooser.addObject("Cross Low Bar Then Return", new CrossLowBarThenReturn());
         chooser.addObject("Cheval", new Cheval());
@@ -29,7 +29,7 @@ public class Robot extends IterativeRobot {;
         Ingesting.getInstance();
         Shooter.getInstance();
         TeleOperated.getInstance();
-        //Scaling.getInstance();
+        Scaling.getInstance();
         pdp = new PowerDistributionPanel();
     }
     
@@ -47,13 +47,12 @@ public class Robot extends IterativeRobot {;
 
 
     public void autonomousPeriodic() {
-    	
+
     }
 
 
     public void teleopPeriodic() {
     	TeleOperated.run();
-
 //    	SmartDashboard.putNumber("Current 0", pdp.getCurrent(0));
 //    	SmartDashboard.putNumber("Current 1", pdp.getCurrent(1));
 //    	SmartDashboard.putNumber("Current 2", pdp.getCurrent(2));
@@ -73,10 +72,15 @@ public class Robot extends IterativeRobot {;
     	
     	SmartDashboard.putNumber("ENCODER", Arm.getEncoder());
     	
+    	SmartDashboard.putNumber("Gyro", DriveTrain.getHyroAngle());
+    	
     	SmartDashboard.putNumber("Shooter Velocity", Shooter.getShooterEncoderVelocity()/1000);
     	
     	SmartDashboard.putNumber("Adjustment", Arm.getAdjustment());
-
+    	
+    	SmartDashboard.putNumber("Left", DriveTrain.getLeftEncoder());
+    	SmartDashboard.putNumber("Right", DriveTrain.getRightEncoder());
+    	
     	
     }
     

@@ -1,5 +1,7 @@
 package org.usfirst.frc.team548.robot.AutoCommands;
 
+import org.usfirst.frc.team548.robot.Arm;
+import org.usfirst.frc.team548.robot.Constants;
 import org.usfirst.frc.team548.robot.Ingesting;
 import org.usfirst.frc.team548.robot.Shooter;
 
@@ -8,6 +10,8 @@ public class ShootAfterTime extends AutoCommandBase {
 	private double rampTime, power;
 	public ShootAfterTime(double timeOut, double shootAfter, double power) {
 		super(timeOut);
+		this.power = power;
+		this.rampTime = shootAfter;
 		// TODO Auto-generated constructor stub
 	}
 
@@ -24,6 +28,8 @@ public class ShootAfterTime extends AutoCommandBase {
 		if(timer.get() >= rampTime) {
 			Ingesting.inject();
 		}
+		Arm.resetAdjustment();
+		Arm.setArmPos(Constants.ARM_POS.AUTO_SHOOT);
 	}
 
 	@Override

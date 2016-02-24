@@ -36,7 +36,6 @@ public class Arm implements PIDOutput {
 	}
 	
 	public static void setPower(double value) {
-		
 		leftArmMotor.set(-value);
 		rightArmMotor.set(value);
 	}
@@ -52,7 +51,7 @@ public class Arm implements PIDOutput {
 	public static void setArmPID(double setpoint, double pk, double ik, double dk) {
 		pid.enable();
 		pid.setPID(pk, ik, dk);
-		pid.setSetpoint(setpoint);		
+		pid.setSetpoint(setpoint);
 	}
 	
 	public static void adjustArmPID(double setpoint, double pk, double ik, double dk) {
@@ -75,7 +74,9 @@ public class Arm implements PIDOutput {
 			} else {
 				adjustArmPID(Constants.ARM_SHOOT_POS, Constants.ARM_SHOOT_ADJUST_P, Constants.ARM_SHOOT_ADJUST_I, Constants.ARM_SHOOT_ADJUST_D);
 			}
-		}  
+		} else if (pos == Constants.ARM_POS.AUTO_SHOOT) {
+			setArmPID(Constants.ARM_AUTO_SHOOT_POS, Constants.ARM_AUTO_SHOOT_P, Constants.ARM_AUTO_SHOOT_I, Constants.ARM_AUTO_SHOOT_D);
+		}
 	}
 	
 	public static void changeAdjustment(double change) {

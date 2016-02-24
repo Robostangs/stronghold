@@ -19,11 +19,7 @@ public class TestAuto extends AutoMode {
 
     @Override
     protected void run() {
-        turnToAngleInTime(5, 90);
 
-        waitTime(2.5);
-        turnToAngleInTime(5, 90);
-        turnToAngleInTime(5, 180);
     }
     
 }
