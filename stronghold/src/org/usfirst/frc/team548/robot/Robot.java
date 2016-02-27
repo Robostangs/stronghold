@@ -29,7 +29,7 @@ public class Robot extends IterativeRobot {;
         Ingesting.getInstance();
         Shooter.getInstance();
         TeleOperated.getInstance();
-//      Scaling.getInstance();
+        Scaling.getInstance();
         pdp = new PowerDistributionPanel();
     }
     

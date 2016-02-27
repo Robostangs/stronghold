@@ -31,8 +31,8 @@ public class DriveTrain implements PIDSource, PIDOutput {
 		rightMiddle = new CANTalon(Constants.DT_TALON_POS_RIGHT_MID);
 		rightBack = new CANTalon(Constants.DT_TALON_POS_RIGHT_BACK);
 		
-//		rightBack.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
-//		leftFront.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
+		rightBack.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
+		leftFront.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
 		
 		hyro = new AHRS(SerialPort.Port.kMXP);
 		hyro.reset();

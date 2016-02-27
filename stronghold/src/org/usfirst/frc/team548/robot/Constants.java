@@ -7,12 +7,12 @@ public class Constants {
 		public static final int XBOX_MANIP_POS = 1;
 		
 	//Drivetrain motors
-		public static final int DT_TALON_POS_LEFT_FRONT = 1;//8 //left encoder location
-		public static final int DT_TALON_POS_LEFT_MID = 2;//7
-		public static final int DT_TALON_POS_LEFT_BACK = 3;//6
-		public static final int DT_TALON_POS_RIGHT_FRONT = 10;//0
-		public static final int DT_TALON_POS_RIGHT_MID = 11;//1
-		public static final int DT_TALON_POS_RIGHT_BACK = 12; //2 //right encoder location		
+		public static final int DT_TALON_POS_LEFT_FRONT = 8;//left encoder location
+		public static final int DT_TALON_POS_LEFT_MID = 7;
+		public static final int DT_TALON_POS_LEFT_BACK = 6;
+		public static final int DT_TALON_POS_RIGHT_FRONT = 0;
+		public static final int DT_TALON_POS_RIGHT_MID = 1;
+		public static final int DT_TALON_POS_RIGHT_BACK = 2;//right encoder location		
 		public static final double DT_ENCODER_ERROR_THRESHOLD = 0;
 		public static final double DT_HYRO_ERROR_THRESHOLD = 1;
 		public static final double DT_DRIVE_STRAIGHT_LOWER_POWER_RIGHT = .85;
@@ -27,21 +27,21 @@ public class Constants {
 	//Arm
 		public static final double ARM_ENOCDER_OFFSET = -.08;
 		public static final int LEFT_ARM_TALON_POS = 4;
-		public static final int RIGHT_ARM_TALON_POS = 7;//10
+		public static final int RIGHT_ARM_TALON_POS = 10;
 		public static final double ARM_POWER_COEFFICIENT = -0.75;
-		public static final double ARM_LOW_POS = 1.005; //change this one
-		public static final double ARM_ING_POS = ARM_LOW_POS - 0.050; //don't change
-		public static final double ARM_DEF_POS = ARM_LOW_POS - .147; //don't change
-		public static final double ARM_SHOOT_POS = ARM_LOW_POS - .407;//don't change
-		public static final double ARM_AUTO_SHOOT_POS = ARM_LOW_POS - .402;//don't change
-		public static final double ARM_LOW_P = 2;
+		public static final double ARM_LOW_POS = .193; //change this one
+		public static final double ARM_ING_POS = ARM_LOW_POS - 0.022; //don't change
+		public static final double ARM_DEF_POS = ARM_LOW_POS - .140; //don't change
+		public static final double ARM_SHOOT_POS = ARM_LOW_POS - .425;//don't change
+		public static final double ARM_AUTO_SHOOT_POS = ARM_LOW_POS - .425;//don't change
+		public static final double ARM_LOW_P = 1.75;
 		public static final double ARM_LOW_I = 0.002;
-		public static final double ARM_LOW_D = 10;
+		public static final double ARM_LOW_D = 5;
  		public static final double ARM_ING_P = 8;
-		public static final double ARM_ING_I = 0.02;
-		public static final double ARM_ING_D = 20;
+		public static final double ARM_ING_I = 0;
+		public static final double ARM_ING_D = 30;
 		public static final double ARM_DEF_P = 8;
-		public static final double ARM_DEF_I = 0.02;
+		public static final double ARM_DEF_I = 0;
 		public static final double ARM_DEF_D = 30;
 		public static final double ARM_SHOOT_P = 1.25;
 		public static final double ARM_SHOOT_I = 0;
@@ -75,7 +75,7 @@ public class Constants {
 		//Highest position: 635 (be careful to stop early to prevent falling over)
 		
 	//Shooter
-		public static final int SHOOTING_TALON_POS_1 = 5;//3 comp
+		public static final int SHOOTING_TALON_POS_1 = 3;
 		public static final int SHOOTING_TALON_POS_2 = 9;
 		public static final double SHOOTING_PID_P = 0, SHOOTING_PID_I = 0, SHOOTING_PID_D = 0;
 		public static final double SHOOTER_INGEST_SPEED = -1;
@@ -88,7 +88,7 @@ public class Constants {
 		public static final int SHOOTER_ENC_POS_2 = 1;
 		
 	//Ingesting
-		public static final int INGESTING_TALON_POS = 8;//5 comp
+		public static final int INGESTING_TALON_POS = 5;
 		public static final int INGESTING_SWITCH_POS = 0;
 		public static final double INGESTING_IN_NORMAL_POWER = 1;
 		public static final double INGESTING_OUT_NORMAL_POWER = -0.5;
