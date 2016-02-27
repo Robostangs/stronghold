@@ -52,19 +52,20 @@ public class TeleOperated {
 //                		DriveTrain.driveStraightHyro(0.5);
 //                	}
                 	
-                	if(driver.getAButton()) {
-                		Scaling.scale(0.3);
-                	} else if(driver.getBButton()) {
-                		Scaling.scale(0.5);
-                	} else if(driver.getXButton()) {
-                		Scaling.scale(0.75);
-                	} else if(driver.getYButton()) {
-                		Scaling.scale(1);
-                	} else if(driver.getRightBumper()) {
-                		Scaling.descale(-0.5);
-                	} else {
-                		Scaling.stopScaling();
-                	}
+//                	if(driver.getAButton()) {
+//                	
+//                	Scaling.scale(0.3);
+//                	} else if(driver.getBButton()) {
+//                		Scaling.scale(0.5);
+//                	} else if(driver.getXButton()) {
+//                		Scaling.scale(0.75);
+//                	} else if(driver.getYButton()) {
+//                		Scaling.scale(1);
+//                	} else if(driver.getRightBumper()) {
+//                		Scaling.descale(-0.5);
+//                	} else {
+//                		Scaling.stopScaling();
+//                	}
       /*
        * Manip Controls
        * 
@@ -84,7 +85,7 @@ public class TeleOperated {
             	Shooter.setShooterSpeedNoPID(.75);
             	//data = data+" "+Shooter.getShooterEncoderVelocity();
             } else {
-            	Shooter.setShooterSpeedNoPID(-manip.getRightTriggerAxis());
+            	Shooter.setShooterSpeedNoPID(manip.getRightTriggerAxis());
             //System.out.println(data);
             //data = "";
             }
