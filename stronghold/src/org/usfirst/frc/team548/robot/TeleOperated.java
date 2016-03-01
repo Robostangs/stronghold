@@ -81,14 +81,8 @@ public class TeleOperated {
        * 
        * Right stick: manual arm control
        */
-            if(manip.getPOV() == 0) {
-            	Shooter.setShooterSpeedNoPID(.75);
-            	//data = data+" "+Shooter.getShooterEncoderVelocity();
-            } else {
+
             	Shooter.setShooterSpeedNoPID(manip.getRightTriggerAxis());
-            //System.out.println(data);
-            //data = "";
-            }
             
             
             if(manip.getRightBumper()) {
