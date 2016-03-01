@@ -37,12 +37,12 @@ public class Constants {
 		public static final double ARM_LOW_P = 1.75;
 		public static final double ARM_LOW_I = 0.002;
 		public static final double ARM_LOW_D = 5;
- 		public static final double ARM_ING_P = 8;
+ 		public static final double ARM_ING_P = 5;
 		public static final double ARM_ING_I = 0;
 		public static final double ARM_ING_D = 30;
-		public static final double ARM_DEF_P = 8;
+		public static final double ARM_DEF_P = 2;
 		public static final double ARM_DEF_I = 0;
-		public static final double ARM_DEF_D = 20;
+		public static final double ARM_DEF_D = 10;
 		public static final double ARM_SHOOT_P = 1.25;
 		public static final double ARM_SHOOT_I = 0;
 		public static final double ARM_SHOOT_D = 5;

@@ -80,14 +80,8 @@ public class TeleOperated {
        * 
        * Right stick: manual arm control
        */
-            if(manip.getPOV() == 0) {
-            	Shooter.setShooterSpeedNoPID(.75);
-            	//data = data+" "+Shooter.getShooterEncoderVelocity();
-            } else {
-            	Shooter.setShooterSpeedNoPID(manip.getRightTriggerAxis());
-            //System.out.println(data);
-            //data = "";
-            }
+
+            	Shooter.setShooterSpeedNoPID(manip.getRightTriggerAxis() * 0.65);
             
             
             if(manip.getRightBumper()) {
@@ -113,19 +107,18 @@ public class TeleOperated {
 	        	Arm.resetAdjustment();
 	        } else if(manip.getYButton()) {
 	        	Arm.setArmPos(Constants.ARM_POS.SHOOT);
-	        	if(manip.getDPad() != 90 && manip.getDPad() != 270) {
-	        		Arm.resetAdjustmentInit();
-	        	}
-	        	if(manip.getDPad() == 90) {
-	        		Arm.changeAdjustment(Constants.POSITIVE_ARM_ADJUSTMENT);
-	        	} else if (manip.getDPad() == 270) {
-	        		Arm.changeAdjustment(Constants.NEGATIVE_ARM_ADJUSTMENT);
-	        	}
+//	        	if(manip.getDPad() != 90 && manip.getDPad() != 270) {
+//	        		Arm.resetAdjustmentInit();
+//	        	}
+//	        	if(manip.getDPad() == 90) {
+//	        		Arm.changeAdjustment(Constants.POSITIVE_ARM_ADJUSTMENT);
+//	        	} else if (manip.getDPad() == 270) {
+//	        		Arm.changeAdjustment(Constants.NEGATIVE_ARM_ADJUSTMENT);
+//	        	}
 	        } else {
 	        	Arm.setSpeed(manip.getRightStickYAxis());
 	        	Arm.resetAdjustment();
 	        }
-            
             
     }
 }
