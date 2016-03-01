@@ -36,7 +36,7 @@ public class Arm implements PIDOutput {
 	}
 	
 	public static void setPower(double value) {
-		leftArmMotor.set(-value);
+		leftArmMotor.set(value);
 		rightArmMotor.set(-value);
 	}
 	
