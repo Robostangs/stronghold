@@ -29,7 +29,7 @@ public class Arm implements PIDOutput {
 		rightArmMotor = new CANTalon(Constants.RIGHT_ARM_TALON_POS);
 		leftArmMotor.changeControlMode(TalonControlMode.PercentVbus);
 		rightArmMotor.changeControlMode(TalonControlMode.PercentVbus);
-		encoder = new AnalogPotentiometer(1);
+		encoder = new AnalogPotentiometer(0);
 		pid = new PIDController(0,0,0, encoder, this);
 		LiveWindow.addActuator("Arm", "RotateController", pid);
 		LiveWindow.addSensor("Arm", "Pot", encoder);
@@ -139,6 +139,6 @@ public class Arm implements PIDOutput {
 	}
 
 	public void pidWrite(double output) {
-		setPower(output);
+		setPower(-output);
 	}
 }
