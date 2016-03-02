@@ -31,7 +31,7 @@ public abstract class AutoMode {
     protected abstract void run();
     
     protected void waitTime(double seconds) {
-        runCommand(new Wait(seconds));
+        runCommand(new WaitTime(seconds));
     }
     
     protected void turnToAngleInTime(double seconds, double angle, boolean reset) {
@@ -43,15 +43,15 @@ public abstract class AutoMode {
     }
     
     protected void driveStraightWithHyroWithArmPos(double seconds, double power, Constants.ARM_POS pos) {
-    	runCommand(new DriveStraightWithGyroInTimeWithArmPos(seconds, power, pos));
+    	runCommand(new DriveStraightWithHyroInTimeWithArmPos(seconds, power, pos));
     }
     
     protected void setArmToPosInTime(double seconds, Constants.ARM_POS pos) {
-    	runCommand(new RaiseArmInTime(seconds, pos));
+    	runCommand(new SetArmToPosInTime(seconds, pos));
     }
     
     protected void shootAfterRamp(double seconds, double rampSeconds, double power, Constants.ARM_POS pos) {
-    	runCommand(new ShootAfterTime(seconds, rampSeconds, power, pos));
+    	runCommand(new ShootAfterRamp(seconds, rampSeconds, power, pos));
     }
     
     protected void driveDistanceWithArmPos(double seconds, double power, int threshold, int distance, Constants.ARM_POS pos) {

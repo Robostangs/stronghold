@@ -17,36 +17,26 @@ public class DriveDistanceWithArmPos extends AutoCommandBase {
 		this.position = pos;
 		this.distance = distance;
 		this.thresh = thresh;
-		// TODO Auto-generated constructor stub
 	}
 
-	@Override
 	public void init() {
-		// TODO Auto-generated method stub
 		DriveTrain.resetHyro();
 		DriveTrain.encoderReset();
 	}
 
-	@Override
 	protected void run() {
-		// TODO Auto-generated method stub
 		DriveTrain.driveDistanceNoPID(distance, power, thresh);
     	SmartDashboard.putNumber("Left", DriveTrain.getLeftEncoder());
     	SmartDashboard.putNumber("Right", DriveTrain.getRightEncoder());
-		
 		Arm.setArmPos(position);
 		
 	}
 
-	@Override
 	public void end() {
-		// TODO Auto-generated method stub
 		DriveTrain.stop();
 	}
 
-	@Override
 	protected String getCommandName() {
-		// TODO Auto-generated method stub
 		return "Drive Distance With Arm Pos";
 	}
 

@@ -9,6 +9,7 @@ public class HighShotBatterThroughLowBar extends AutoMode{
 	}
 
 	protected void run() {
+		//encoder distance
 		driveDistanceWithArmPos(5, 0.5, 15000, 127000, Constants.ARM_POS.LOW);
 		turnToAngleInTime(1.5, 56.5, false);
 		setArmToPosInTime(1.5, Constants.ARM_POS.SHOOT);

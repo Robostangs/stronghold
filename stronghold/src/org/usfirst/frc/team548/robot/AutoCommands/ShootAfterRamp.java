@@ -5,11 +5,11 @@ import org.usfirst.frc.team548.robot.Constants;
 import org.usfirst.frc.team548.robot.Ingesting;
 import org.usfirst.frc.team548.robot.Shooter;
 
-public class ShootAfterTime extends AutoCommandBase {
+public class ShootAfterRamp extends AutoCommandBase {
 	
 	private double rampTime, power;
 	private Constants.ARM_POS position;
-	public ShootAfterTime(double timeOut, double shootAfter, double power, Constants.ARM_POS pos) {
+	public ShootAfterRamp(double timeOut, double shootAfter, double power, Constants.ARM_POS pos) {
 		super(timeOut);
 		this.power = power;
 		this.rampTime = shootAfter;
@@ -35,7 +35,7 @@ public class ShootAfterTime extends AutoCommandBase {
 	}
 
 	protected String getCommandName() {
-		return "Shoot After Time";
+		return "Shoot After Ramp";
 	}
 
 }

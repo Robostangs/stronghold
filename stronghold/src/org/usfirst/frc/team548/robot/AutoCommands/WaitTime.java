@@ -9,30 +9,26 @@ package org.usfirst.frc.team548.robot.AutoCommands;
  *
  * @author Alex
  */
-public class Wait extends AutoCommandBase {
+public class WaitTime extends AutoCommandBase {
 
-    public Wait(double timeOut) {
+    public WaitTime(double timeOut) {
         super(timeOut);
     }
 
-    @Override
+	public void init() {
+		
+	}
+	
     protected void run() {
         
     }     
 
-    @Override
     public void end() {
 
     }
 
-    @Override
     protected String getCommandName() {
-        return "Wait";
+        return "Wait Time";
     }
 
-	@Override
-	public void init() {
-		// TODO Auto-generated method stub
-		
-	}
 }
