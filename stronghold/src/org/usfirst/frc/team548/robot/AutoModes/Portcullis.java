@@ -6,14 +6,16 @@ public class Portcullis extends AutoMode {
 
 	public Portcullis() {
 		super("Portcullis");
-		// TODO Auto-generated constructor stub
 	}
 
-	@Override
 	protected void run() {
-		// TODO Auto-generated method stub
+		//time based
 		driveStraightWithHyroWithArmPos(3, 0.5, Constants.ARM_POS.LOW);
 		driveStraightWithHyroWithArmPos(4, 0.2, Constants.ARM_POS.DEF);
+		
+		//encoder distance
+//		driveDistanceWithArmPos(2, 0.5, 10000, 75000, Constants.ARM_POS.LOW);
+//		driveDistanceWithArmPos(4, 0.2, 5000, 100000, Constants.ARM_POS.DEF);
 	}
 
 }

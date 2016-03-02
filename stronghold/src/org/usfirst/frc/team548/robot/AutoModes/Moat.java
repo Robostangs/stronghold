@@ -8,7 +8,11 @@ public class Moat extends AutoMode{
 		super ("moat");
 	}
 
-	protected void run() {
+	protected void run() {		
+		//time based
 		driveStraightWithHyroWithArmPos(5, 0.7, Constants.ARM_POS.DEF);
+
+		//encoder distance
+//		driveDistanceWithArmPos(5, 0.7, 20000, 200000, Constants.ARM_POS.DEF);
 	}
 }
