@@ -18,10 +18,15 @@ public class Robot extends IterativeRobot {;
 
     public void robotInit() {
         chooser = new SendableChooser();
-        chooser.addDefault("High Goal", new HighGoal());
+        chooser.addDefault("High Shot Batter Through Low Bar", new HighShotBatterThroughLowBar());
+        chooser.addDefault("High Shot Courtyard Through Low Bar", new HighShotCourtyardThroughLowBar());
+        chooser.addDefault("Low Shot Batter Through Low Bar", new LowShotBatterThroughLowBar());
         chooser.addObject("Cross Low Bar", new CrossLowBar());
-        chooser.addObject("Cross Low Bar Then Return", new CrossLowBarThenReturn());
         chooser.addObject("Cheval", new Cheval());
+        chooser.addObject("Portcullis", new Portcullis());
+        chooser.addObject("Moat", new Moat());
+        chooser.addObject("Rock Wall", new RockWall());
+        chooser.addObject("Rough Terrain", new RoughTerrain());
         SmartDashboard.putData("Auto choices", chooser);
         
         DriveTrain.getInstance();

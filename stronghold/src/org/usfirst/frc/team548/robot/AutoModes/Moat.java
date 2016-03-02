@@ -1,0 +1,18 @@
+package org.usfirst.frc.team548.robot.AutoModes;
+
+import org.usfirst.frc.team548.robot.Constants;
+
+public class Moat extends AutoMode{
+
+	public Moat() {
+		super ("Moat");
+	}
+
+	protected void run() {		
+		//time based
+		driveStraightWithHyroWithArmPos(5, 0.7, Constants.ARM_POS.DEF);
+
+		//encoder distance
+//		driveDistanceWithArmPos(5, 0.7, 20000, 200000, Constants.ARM_POS.DEF);
+	}
+}
