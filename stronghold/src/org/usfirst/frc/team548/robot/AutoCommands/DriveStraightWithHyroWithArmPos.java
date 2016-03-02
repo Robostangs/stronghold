@@ -4,11 +4,11 @@ import org.usfirst.frc.team548.robot.Arm;
 import org.usfirst.frc.team548.robot.Constants;
 import org.usfirst.frc.team548.robot.DriveTrain;
 
-public class DriveStraightWithHyroInTimeWithArmPos extends AutoCommandBase {
+public class DriveStraightWithHyroWithArmPos extends AutoCommandBase {
 	
 	private double power;
 	private Constants.ARM_POS position;
-	public DriveStraightWithHyroInTimeWithArmPos(double timeOut, double power, Constants.ARM_POS pos) {
+	public DriveStraightWithHyroWithArmPos(double timeOut, double power, Constants.ARM_POS pos) {
 		super(timeOut);
 		this.power = power;
 		this.position = pos;

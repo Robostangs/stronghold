@@ -43,7 +43,7 @@ public abstract class AutoMode {
     }
     
     protected void driveStraightWithHyroWithArmPos(double seconds, double power, Constants.ARM_POS pos) {
-    	runCommand(new DriveStraightWithHyroInTimeWithArmPos(seconds, power, pos));
+    	runCommand(new DriveStraightWithHyroWithArmPos(seconds, power, pos));
     }
     
     protected void setArmToPosInTime(double seconds, Constants.ARM_POS pos) {
