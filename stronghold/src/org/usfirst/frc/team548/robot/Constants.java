@@ -29,8 +29,8 @@ public class Constants {
 		public static final int LEFT_ARM_TALON_POS = 4;
 		public static final int RIGHT_ARM_TALON_POS = 7;
 		public static final double ARM_POWER_COEFFICIENT = -0.75;
-		public static final double ARM_LOW_POS = 1.005; //change this one
-		public static final double ARM_ING_POS = ARM_LOW_POS - 0.050; //don't change
+		public static final double ARM_LOW_POS = 0.976; //change this one
+		public static final double ARM_ING_POS = ARM_LOW_POS - 0.014; //don't change
 		public static final double ARM_DEF_POS = ARM_LOW_POS - .147; //don't change
 		public static final double ARM_SHOOT_POS = ARM_LOW_POS - .407;//don't change
 		public static final double ARM_AUTO_SHOOT_POS = ARM_LOW_POS - .402;//don't change
@@ -97,7 +97,7 @@ public class Constants {
 		
 	//Scaling
 		public static final int SCALING_TALON_POS = 11;
-		public static final int SCALING_SWITCH_POS = 0;
+		public static final int SCALING_SERVO_POS = 0;
 		public static final double SCALING_SPEED = 0.3;
 		public static final double DESCALING_SPEED = -0.3;
 		

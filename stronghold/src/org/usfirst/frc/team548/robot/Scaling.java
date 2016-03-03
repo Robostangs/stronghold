@@ -2,16 +2,19 @@ package org.usfirst.frc.team548.robot;
 
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.Servo;
 
 public class Scaling {
 	
 	private static CANTalon scalingMotor;
 	private static Scaling instance = null;
 //	private static DigitalInput scalingSwitch;
+	private static Servo servo;
 	
 	public Scaling() {
 		scalingMotor = new CANTalon(Constants.SCALING_TALON_POS);
 //		scalingSwitch = new DigitalInput(Constants.SCALING_SWITCH_POS);
+		servo = new Servo(Constants.SCALING_SERVO_POS);
 	}
 	
 	public static Scaling getInstance() {
@@ -43,5 +46,11 @@ public class Scaling {
 		setSpeed(-speed);
 	}
 	
+	public static void in() {
+		servo.set(90);
+	}
 	
+	public static void out() {
+		servo.set(0);
+	}
 }
