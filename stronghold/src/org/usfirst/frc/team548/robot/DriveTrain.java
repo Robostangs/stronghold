@@ -31,8 +31,8 @@ public class DriveTrain implements PIDSource, PIDOutput {
 		rightMiddle = new CANTalon(Constants.DT_TALON_POS_RIGHT_MID);
 		rightBack = new CANTalon(Constants.DT_TALON_POS_RIGHT_BACK);
 		
-		rightBack.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
-		leftFront.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
+		rightFront.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
+		leftBack.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
 		
 		hyro = new AHRS(SerialPort.Port.kMXP);
 		hyro.reset();
@@ -61,19 +61,19 @@ public class DriveTrain implements PIDSource, PIDOutput {
 	} 
 	
 	public static double getLeftEncoder() {
-		return leftFront.getEncPosition();
+		return -leftBack.getEncPosition();
 	}
 	
 	public static double getLeftRate() {
-		return leftFront.getEncVelocity();
+		return leftBack.getEncVelocity();
 	}
 	
 	public static double getRightRate() {
-		return rightBack.getEncVelocity();
+		return rightFront.getEncVelocity();
 	}
 	
 	public static double getRightEncoder() {
-		return -rightBack.getEncPosition();
+		return rightFront.getEncPosition();
 	}
 	
 	public static double getEncoderAverage() {
@@ -81,8 +81,8 @@ public class DriveTrain implements PIDSource, PIDOutput {
 	}
 
 	public static void encoderReset(){
-		leftFront.setPosition(0);
-		rightBack.setPosition(0);
+		leftBack.setPosition(0);
+		rightFront.setPosition(0);
 	}	
 	
 	public static double getHyroAngle() {
@@ -168,7 +168,7 @@ public class DriveTrain implements PIDSource, PIDOutput {
 	}
 
 	public double pidGet() {
-		return getEncoderAverage();
+		return hyro.getYaw();
 	}
 	/**
 	 * Drives a distance and returns true if within a percentage of the target

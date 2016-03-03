@@ -28,6 +28,7 @@ public class DriveDistanceWithArmPos extends AutoCommandBase {
 		DriveTrain.driveDistanceNoPID(distance, power, thresh);
     	SmartDashboard.putNumber("Left", DriveTrain.getLeftEncoder());
     	SmartDashboard.putNumber("Right", DriveTrain.getRightEncoder());
+    	SmartDashboard.putNumber("Gyro", DriveTrain.getHyroAngle());
 		Arm.setArmPos(position);
 		
 	}

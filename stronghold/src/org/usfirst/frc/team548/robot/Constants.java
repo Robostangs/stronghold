@@ -7,18 +7,18 @@ public class Constants {
 		public static final int XBOX_MANIP_POS = 1;
 		
 	//Drivetrain motors
-		public static final int DT_TALON_POS_LEFT_FRONT = 8;//left encoder location
+		public static final int DT_TALON_POS_LEFT_FRONT = 8;
 		public static final int DT_TALON_POS_LEFT_MID = 7;
-		public static final int DT_TALON_POS_LEFT_BACK = 6;
-		public static final int DT_TALON_POS_RIGHT_FRONT = 0;
+		public static final int DT_TALON_POS_LEFT_BACK = 6; //encoder
+		public static final int DT_TALON_POS_RIGHT_FRONT = 0; //encoder
 		public static final int DT_TALON_POS_RIGHT_MID = 1;
-		public static final int DT_TALON_POS_RIGHT_BACK = 2;//right encoder location		
+		public static final int DT_TALON_POS_RIGHT_BACK = 2;	
 		public static final double DT_ENCODER_ERROR_THRESHOLD = 0;
 		public static final double DT_HYRO_ERROR_THRESHOLD = 1;
 		public static final double DT_DRIVE_STRAIGHT_LOWER_POWER_RIGHT = .85;
-		public static final double DT_DRIVE_STRAIGHT_HIGHER_POWER_RIGHT = 1.25;
-		public static final double DT_DRIVE_STRAIGHT_LOWER_POWER_LEFT = .80;
-		public static final double DT_DRIVE_STRAIGHT_HIGHER_POWER_LEFT = 1.10;
+		public static final double DT_DRIVE_STRAIGHT_HIGHER_POWER_RIGHT = 1.15;
+		public static final double DT_DRIVE_STRAIGHT_LOWER_POWER_LEFT = .85;
+		public static final double DT_DRIVE_STRAIGHT_HIGHER_POWER_LEFT = 1.15;
 		public static final double DRIVE_DISTANCE_LOW_POWER = 0.2;
 		
 	//Gyro
@@ -29,9 +29,9 @@ public class Constants {
 		public static final int LEFT_ARM_TALON_POS = 11; //used to be 4
 		public static final int RIGHT_ARM_TALON_POS = 10;
 		public static final double ARM_POWER_COEFFICIENT = -0.75;
-		public static final double ARM_LOW_POS = .579; //change this one
+		public static final double ARM_LOW_POS = .570; //change this one
 		public static final double ARM_ING_POS = ARM_LOW_POS - 0.022; //don't change
-		public static final double ARM_DEF_POS = ARM_LOW_POS - .140; //don't change
+		public static final double ARM_DEF_POS = ARM_LOW_POS - .170; //don't change
 		public static final double ARM_SHOOT_POS = ARM_LOW_POS - .448;//don't change
 		public static final double ARM_AUTO_SHOOT_POS = ARM_LOW_POS - .448;//don't change
 		public static final double ARM_LOW_P = 1.75;
@@ -98,6 +98,7 @@ public class Constants {
 	//Scaling
 		public static final int SCALING_TALON_POS = 4; //lol not anymore, should be 11
 		public static final int SCALING_SWITCH_POS = 0;
+		public static final int SCALING_SERVO_POS = 0;
 		public static final double SCALING_SPEED = 0.3;
 		public static final double DESCALING_SPEED = -0.3;
 		
