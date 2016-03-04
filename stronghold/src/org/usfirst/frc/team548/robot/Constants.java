@@ -26,7 +26,7 @@ public class Constants {
 		
 	//Arm
 		public static final double ARM_ENOCDER_OFFSET = -.08;
-		public static final int LEFT_ARM_TALON_POS = 11; //used to be 4
+		public static final int LEFT_ARM_TALON_POS = 4;
 		public static final int RIGHT_ARM_TALON_POS = 10;
 		public static final double ARM_POWER_COEFFICIENT = -0.75;
 		public static final double ARM_LOW_POS = .570; //change this one
@@ -40,9 +40,9 @@ public class Constants {
  		public static final double ARM_ING_P = 5;
 		public static final double ARM_ING_I = 0;
 		public static final double ARM_ING_D = 30;
-		public static final double ARM_DEF_P = 2;
+		public static final double ARM_DEF_P = 5;
 		public static final double ARM_DEF_I = 0;
-		public static final double ARM_DEF_D = 10;
+		public static final double ARM_DEF_D = 20;
 		public static final double ARM_SHOOT_P = 1.25;
 		public static final double ARM_SHOOT_I = 0;
 		public static final double ARM_SHOOT_D = 5;
@@ -96,7 +96,7 @@ public class Constants {
 		public static final double INJECTING_POWER = -1;
 		
 	//Scaling
-		public static final int SCALING_TALON_POS = 4; //lol not anymore, should be 11
+		public static final int SCALING_TALON_POS = 11;
 		public static final int SCALING_SWITCH_POS = 0;
 		public static final int SCALING_SERVO_POS = 0;
 		public static final double SCALING_SPEED = 0.3;
