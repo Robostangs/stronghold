@@ -8,6 +8,7 @@ public class TeleOperated {
 	private static XboxController driver, manip;
 	private static TeleOperated instance = null;
 //	static boolean newDrive = false;
+	static boolean latched = false;
 	
 	public static TeleOperated getInstance() {
 		if(instance == null){
@@ -45,28 +46,24 @@ public class TeleOperated {
 //            if(driver.getBackButton()) newDrive = false;
                 	
                 	if (driver.getBButton()) {
-                		DriveTrain.resetHyro();
-                		DriveTrain.encoderReset();
-                		
+                		//DriveTrain.resetHyro();
+                		//DriveTrain.encoderReset();
+                		latched = false;
                 	}
 //            
                 	if(driver.getAButton()) {
-                		DriveTrain.driveStraightHyro(0.5);
+                		//DriveTrain.driveStraightHyro(0.5);
+                		latched = true;
+                	} 
+//                	
+                	if(latched) {
+                		if(Arm.getEncoder() > (Constants.ARM_LOW_POS-.07)){
+                			Scaling.engageServo();
+                		}
+                	} else {
+                		Scaling.disengageServo();
                 	}
                 	
-//                	if(driver.getAButton()) { 	
-//                		Scaling.scale(0.3);
-//                	} else if(driver.getBButton()) {
-//                		Scaling.scale(0.5);
-//                	} else if(driver.getXButton()) {
-//                		Scaling.scale(0.75);
-//                	} else if(driver.getYButton()) {
-//                		Scaling.scale(1);
-//                	} else if(driver.getRightBumper()) {
-//                		Scaling.descale(-0.5);
-//                	} else {
-//                		Scaling.stopScaling();
-//                	}
       /*
        * Manip Controls
        * 
@@ -83,8 +80,7 @@ public class TeleOperated {
        * Right stick: manual arm control
        */
 
-            	Shooter.setShooterSpeedNoPID(manip.getRightTriggerAxis() * 0.65);
-            
+            Shooter.setShooterSpeedNoPID(manip.getRightTriggerAxis() * .675);            
             
             if(manip.getRightBumper()) {
             	Ingesting.exgest();
@@ -118,9 +114,31 @@ public class TeleOperated {
 //	        		Arm.changeAdjustment(Constants.NEGATIVE_ARM_ADJUSTMENT);
 //	        	}
 	        } else {
-	        	Arm.setSpeed(manip.getRightStickYAxis());
-	        	Arm.resetAdjustment();
+	        	if(Math.abs(manip.getLeftStickYAxis()) > .1) {
+	        		Arm.setSpeedFast(manip.getLeftStickYAxis());
+	        	} else {
+	        		
+		        		Arm.setSpeed(manip.getRightStickYAxis());
+			        	Arm.resetAdjustment();
+		        	
+	        	}
+	        	
+	        	
 	        }
             
+        	if(manip.getDPad() == 0) { 	
+        		Scaling.scale(0.3);
+        	} else if(manip.getDPad() == 90) {
+        		Scaling.scale(0.5);
+        	} else if(manip.getDPad() == 180) {
+        		Scaling.scale(0.75);
+        	} else if(manip.getDPad() == 270) {
+        		Scaling.scale(1);
+        	} else if(manip.getStartButton()) {
+        		Scaling.descale(1);
+        	} else {
+        		Scaling.stopScaling();
+        	}
+//            
     }
 }

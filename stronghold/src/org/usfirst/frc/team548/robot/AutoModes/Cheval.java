@@ -15,7 +15,7 @@ public class Cheval extends AutoMode {
 //		driveStraightWithHyroWithArmPos(1.5, 0.6, Constants.ARM_POS.LOW);
 		
 		//encoder distance
-		driveDistanceWithArmPos(2, 0.5, 15000, 92000, Constants.ARM_POS.DEF);
+		driveDistanceWithArmPos(2, 0.5, 15000, 90000, Constants.ARM_POS.DEF);
 		setArmToPosInTime(1, Constants.ARM_POS.LOW);
 		driveDistanceWithArmPos(4, 0.8, 10000, 120000, Constants.ARM_POS.LOW);
 	}

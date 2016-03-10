@@ -18,17 +18,17 @@ public class Robot extends IterativeRobot {;
 
     public void robotInit() {
         chooser = new SendableChooser();
-        chooser.addDefault("High Shot Batter Through Low Bar", new HighShotBatterThroughLowBar());
-        chooser.addDefault("High Shot Courtyard Through Low Bar", new HighShotCourtyardThroughLowBar());
-        chooser.addDefault("Low Shot Batter Through Low Bar", new LowShotBatterThroughLowBar());
-        chooser.addObject("Cross Low Bar", new CrossLowBar());
+        chooser.addDefault("Cross Low Bar", new CrossLowBar());
+        chooser.addObject("High Shot Batter Through Low Bar", new HighShotBatterThroughLowBar());
+//        chooser.addObject("High Shot Courtyard Through Low Bar", new HighShotCourtyardThroughLowBar());
+        chooser.addObject("Low Shot Batter Through Low Bar", new LowShotBatterThroughLowBar());
         chooser.addObject("Cheval", new Cheval());
-        chooser.addObject("Portcullis", new Portcullis());
+//        chooser.addObject("Portcullis", new Portcullis());
         chooser.addObject("Moat", new Moat());
         chooser.addObject("Rock Wall", new RockWall());
         chooser.addObject("Rough Terrain", new RoughTerrain());
+       
         SmartDashboard.putData("Auto choices", chooser);
-        
         DriveTrain.getInstance();
         Arm.getInstance();
         Ingesting.getInstance();
@@ -50,7 +50,9 @@ public class Robot extends IterativeRobot {;
     	DriveTrain.resetHyro();
     }
 
-
+    public void disabledPeriodic() {
+    	 SmartDashboard.putData("Auto choices", chooser);
+    }
     public void autonomousPeriodic() {
 
     }
@@ -86,6 +88,9 @@ public class Robot extends IterativeRobot {;
     	SmartDashboard.putNumber("Left", DriveTrain.getLeftEncoder());
     	SmartDashboard.putNumber("Right", DriveTrain.getRightEncoder());
     	
+    	SmartDashboard.putBoolean("ScalingSwitch", Scaling.getScalingSwitch());
+    	SmartDashboard.putBoolean("DescalingSwitch", Scaling.getDescalingSwitch());
+
     	
     }
     

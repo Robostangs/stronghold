@@ -40,9 +40,9 @@ public class Constants {
  		public static final double ARM_ING_P = 5;
 		public static final double ARM_ING_I = 0;
 		public static final double ARM_ING_D = 30;
-		public static final double ARM_DEF_P = 5;
+		public static final double ARM_DEF_P = 2;
 		public static final double ARM_DEF_I = 0;
-		public static final double ARM_DEF_D = 20;
+		public static final double ARM_DEF_D = 10;
 		public static final double ARM_SHOOT_P = 1.25;
 		public static final double ARM_SHOOT_I = 0;
 		public static final double ARM_SHOOT_D = 5;
@@ -91,13 +91,14 @@ public class Constants {
 		public static final int INGESTING_TALON_POS = 5;
 		public static final int INGESTING_SWITCH_POS = 0;
 		public static final double INGESTING_IN_NORMAL_POWER = 1;
-		public static final double INGESTING_OUT_NORMAL_POWER = -0.5;
+		public static final double INGESTING_OUT_NORMAL_POWER = -1;
 		public static final double INGESTING_HOLDING_BALL_POWER = 0.05;
 		public static final double INJECTING_POWER = -1;
 		
 	//Scaling
 		public static final int SCALING_TALON_POS = 11;
 		public static final int SCALING_SWITCH_POS = 0;
+		public static final int DESCALING_SWITCH_POS = 1;
 		public static final int SCALING_SERVO_POS = 0;
 		public static final double SCALING_SPEED = 0.3;
 		public static final double DESCALING_SPEED = -0.3;
