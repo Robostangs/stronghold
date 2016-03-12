@@ -79,7 +79,8 @@ public class Robot extends IterativeRobot {;
     	
     	SmartDashboard.putNumber("Gyro", DriveTrain.getHyroAngle());
     	
-//    	SmartDashboard.putNumber("Shooter Velocity", Shooter.getShooterEncoderVelocity()/1000);
+    	SmartDashboard.putNumber("Shooter Actual Velocity", Shooter.getShooterEncoderVelocity());
+    	SmartDashboard.putNumber("Shooter Target Velocity", TeleOperated.getShootingSpeed());
     	
     	SmartDashboard.putNumber("Adjustment", Arm.getAdjustment());
     	

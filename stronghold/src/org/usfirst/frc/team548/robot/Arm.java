@@ -130,9 +130,9 @@ public class Arm implements PIDOutput {
 	public static void setSpeed(double value) {
 		pid.disable();
 		if(value < 0) {
-				setPower(value * Constants.ARM_POWER_COEFFICIENT);
+				setPower(value);
 		} else if (value > 0) {
-				setPower(value * Constants.ARM_POWER_COEFFICIENT);
+				setPower(value);
 		} else {
 			setPower(0);
 		}

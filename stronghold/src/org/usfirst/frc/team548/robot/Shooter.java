@@ -14,7 +14,7 @@ public class Shooter implements PIDOutput{
 	private static Shooter instance = null;
 	private static CANTalon shootingMotor1, shootingMotor2;
 	private static PIDController pid;
-//	private static Encoder shootingEncoder;
+	private static Encoder shootingEncoder;
 	
 	public static Shooter getInstance(){
 		if(instance == null){
@@ -26,26 +26,30 @@ public class Shooter implements PIDOutput{
 	public Shooter() {
 		shootingMotor1 = new CANTalon(Constants.SHOOTING_TALON_POS_1);
 		shootingMotor2 = new CANTalon(Constants.SHOOTING_TALON_POS_2);
-//		shootingEncoder = new Encoder(Constants.SHOOTER_ENC_POS_1, Constants.SHOOTER_ENC_POS_2);
+		shootingEncoder = new Encoder(2, 3);
+		
 //		shootingEncoder.setPIDSourceType(PIDSourceType.kRate);
 //		shootingMotor1.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
-		//pid = new PIDController(Constants.SHOOTER_P, Constants.SHOOTER_I, Constants.SHOOTER_D, shootingEncoder, this);	
-		//LiveWindow.addActuator("Shooter", "RotateController", pid);
-//		LiveWindow.addSensor("Shooter", "Encoder", shootingEncoder);
+		pid = new PIDController(0.00002, 0.0000, 0, shootingEncoder, this);
+		//pid.setOutputRange(-0.5, 0.5);
+		shootingEncoder.setPIDSourceType(PIDSourceType.kRate);
+		
+		LiveWindow.addActuator("Shooter", "RotateController", pid);
+		LiveWindow.addSensor("Shooter", "Encoder", shootingEncoder);
 	}
 	
 	public static void setPower(double value) {
-		shootingMotor1.set(value);
-		shootingMotor2.set(-value);
+		shootingMotor1.set(-value);
+		shootingMotor2.set(value);
 	}
 	
-//	public static double getShooterEncoderVelocity() {
-//		return shootingMotor1.getEncVelocity();
-//	}
-//	
-//	public static void resetShooterEncoder() {
-//		shootingEncoder.reset();
-//	}
+	public static double getShooterEncoderVelocity() {
+		return shootingEncoder.getRate();
+	}
+	
+	public static void resetShooterEncoder() {
+		shootingEncoder.reset();
+	}
 		
 	public static void shooterIngest() {
 		setPower(Constants.SHOOTER_INGEST_SPEED);
@@ -61,14 +65,14 @@ public class Shooter implements PIDOutput{
 	
 	public static void setSpeed(double speed) {
 		
-		shootingMotor1.changeControlMode(TalonControlMode.Speed);
-		shootingMotor2.changeControlMode(TalonControlMode.Follower);
-		shootingMotor2.set(14);
-		shootingMotor2.reverseOutput(true);
-		shootingMotor1.setPID(Constants.SHOOTER_P, Constants.SHOOTER_I, Constants.SHOOTER_D);
-		shootingMotor1.set(speed);
-		//pid.enable();
-		//pid.setSetpoint(speed);
+//		shootingMotor1.changeControlMode(TalonControlMode.Speed);
+//		shootingMotor2.changeControlMode(TalonControlMode.Follower);
+//		shootingMotor2.set(14);
+//		shootingMotor2.reverseOutput(true);
+//		shootingMotor1.setPID(Constants.SHOOTER_P, Constants.SHOOTER_I, Constants.SHOOTER_D);
+//		shootingMotor1.set(speed);
+		pid.enable();
+		pid.setSetpoint(speed);
 	}
 
 	public static void setShooterSpeedNoPID(double speed) {
@@ -77,10 +81,10 @@ public class Shooter implements PIDOutput{
 	}
 	
 	public static void disablePID() {
-		//pid.disable();
+		pid.reset();
 	}
 
 	public void pidWrite(double output) {
-		setPower(output);
+		setPower(-output);
 	}
 }

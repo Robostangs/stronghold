@@ -29,7 +29,7 @@ public class Constants {
 		public static final int LEFT_ARM_TALON_POS = 4;
 		public static final int RIGHT_ARM_TALON_POS = 7;
 		public static final double ARM_POWER_COEFFICIENT = -0.75;
-		public static final double ARM_LOW_POS = 0.976; //change this one
+		public static final double ARM_LOW_POS = 0.561; //change this one
 		public static final double ARM_ING_POS = ARM_LOW_POS - 0.014; //don't change
 		public static final double ARM_DEF_POS = ARM_LOW_POS - .147; //don't change
 		public static final double ARM_SHOOT_POS = ARM_LOW_POS - .407;//don't change
