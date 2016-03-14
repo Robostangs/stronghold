@@ -87,4 +87,6 @@ public class Shooter implements PIDOutput{
 	public void pidWrite(double output) {
 		setPower(-output);
 	}
+	
+	
 }

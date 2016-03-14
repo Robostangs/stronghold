@@ -51,4 +51,10 @@ public class Ingesting {
 		setIngesting(Constants.INJECTING_POWER);
 	}
 	
+	
+	public static void injectAfterSpeed(double speed) {
+		if(Math.abs(Shooter.getShooterEncoderVelocity()) > speed) {
+			inject();
+		}
+	}
 }

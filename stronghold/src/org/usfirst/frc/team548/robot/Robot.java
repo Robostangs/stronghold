@@ -34,7 +34,7 @@ public class Robot extends IterativeRobot {;
         Ingesting.getInstance();
         Shooter.getInstance();
         TeleOperated.getInstance();
-//      Scaling.getInstance();
+        Scaling.getInstance();
         pdp = new PowerDistributionPanel();
     }
     
@@ -86,6 +86,9 @@ public class Robot extends IterativeRobot {;
     	
     	SmartDashboard.putNumber("Left", DriveTrain.getLeftEncoder());
     	SmartDashboard.putNumber("Right", DriveTrain.getRightEncoder());
+    	
+    	SmartDashboard.putBoolean("Scaling Switch", Scaling.getScalingSwitch());
+    	SmartDashboard.putBoolean("Descaling Switch", Scaling.getDescalingSwitch());
     	
     	
     }

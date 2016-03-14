@@ -7,7 +7,7 @@ public class Constants {
 		public static final int XBOX_MANIP_POS = 1;
 		
 	//Drivetrain motors
-		public static final int DT_TALON_POS_LEFT_FRONT = 6;//left encoder location
+		public static final int DT_TALON_POS_LEFT_FRONT = 1;//left encoder location
 		public static final int DT_TALON_POS_LEFT_MID = 2;
 		public static final int DT_TALON_POS_LEFT_BACK = 3;
 		public static final int DT_TALON_POS_RIGHT_FRONT = 10;
@@ -29,32 +29,32 @@ public class Constants {
 		public static final int LEFT_ARM_TALON_POS = 4;
 		public static final int RIGHT_ARM_TALON_POS = 7;
 		public static final double ARM_POWER_COEFFICIENT = -0.75;
-		public static final double ARM_LOW_POS = 0.561; //change this one
+		public static final double ARM_LOW_POS = 0.560; //change this one
 		public static final double ARM_ING_POS = ARM_LOW_POS - 0.014; //don't change
-		public static final double ARM_DEF_POS = ARM_LOW_POS - .147; //don't change
-		public static final double ARM_SHOOT_POS = ARM_LOW_POS - .407;//don't change
-		public static final double ARM_AUTO_SHOOT_POS = ARM_LOW_POS - .402;//don't change
-		public static final double ARM_LOW_P = 2;
-		public static final double ARM_LOW_I = 0.002;
-		public static final double ARM_LOW_D = 10;
- 		public static final double ARM_ING_P = 8;
-		public static final double ARM_ING_I = 0.02;
-		public static final double ARM_ING_D = 20;
-		public static final double ARM_DEF_P = 8;
-		public static final double ARM_DEF_I = 0.02;
-		public static final double ARM_DEF_D = 30;
-		public static final double ARM_SHOOT_P = 1.25;
+		public static final double ARM_DEF_POS = ARM_LOW_POS - .116; //don't change
+		public static final double ARM_SHOOT_POS = ARM_LOW_POS - .441;//don't change
+		public static final double ARM_AUTO_SHOOT_POS = ARM_LOW_POS - .401;//don't change
+		public static final double ARM_LOW_P = 1.5;
+		public static final double ARM_LOW_I = 0.008;
+		public static final double ARM_LOW_D = 12;
+ 		public static final double ARM_ING_P = 2.5;
+		public static final double ARM_ING_I = 0.002;
+		public static final double ARM_ING_D = 5;
+		public static final double ARM_DEF_P = 2.5;
+		public static final double ARM_DEF_I = 0.002;
+		public static final double ARM_DEF_D = 5;
+		public static final double ARM_SHOOT_P = 1.5;
 		public static final double ARM_SHOOT_I = 0;
-		public static final double ARM_SHOOT_D = 5;
+		public static final double ARM_SHOOT_D = 0;
 		
-		public static final double ARM_AUTO_SHOOT_P = 5;
-		public static final double ARM_AUTO_SHOOT_I = 0.02;
-		public static final double ARM_AUTO_SHOOT_D = 0.5;
+		public static final double ARM_AUTO_SHOOT_P = 3;
+		public static final double ARM_AUTO_SHOOT_I = 0.006;
+		public static final double ARM_AUTO_SHOOT_D = 1;
 		public static final double ARM_SHOOT_ADJUST_P = 7;
 		public static final double ARM_SHOOT_ADJUST_I = 0;
 		public static final double ARM_SHOOT_ADJUST_D = 1;
-		public static final double POSITIVE_ARM_ADJUSTMENT = 0.01;
-		public static final double NEGATIVE_ARM_ADJUSTMENT = -0.01;
+		public static final double POSITIVE_ARM_ADJUSTMENT = 0.005;
+		public static final double NEGATIVE_ARM_ADJUSTMENT = -0.005;
 		
 		public static enum ARM_POS {
 			LOW (ARM_LOW_POS),
@@ -86,6 +86,7 @@ public class Constants {
 		public static final double SHOOTER_D = 0;
 		public static final int SHOOTER_ENC_POS_1 = 0;
 		public static final int SHOOTER_ENC_POS_2 = 1;
+		public static final int BATTER_SHOT_SPEED = 1000;
 		
 	//Ingesting
 		public static final int INGESTING_TALON_POS = 8;
@@ -95,8 +96,10 @@ public class Constants {
 		public static final double INGESTING_HOLDING_BALL_POWER = 0.05;
 		public static final double INJECTING_POWER = -1;
 		
-	//Scaling
-		public static final int SCALING_TALON_POS = 11;
+		//Scaling
+		public static final int SCALING_TALON_POS = 6;
+		public static final int SCALING_SWITCH_POS = 0;
+		public static final int DESCALING_SWITCH_POS = 1;
 		public static final int SCALING_SERVO_POS = 0;
 		public static final double SCALING_SPEED = 0.3;
 		public static final double DESCALING_SPEED = -0.3;
