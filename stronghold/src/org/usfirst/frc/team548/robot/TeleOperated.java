@@ -38,7 +38,12 @@ public class TeleOperated {
 //            	if(newDrive) {
 //            		DriveTrain.driveForza(driver.getLeftStickXAxis(), driver.getBothTriggerAxis(), driver.getXButton());
 //                } else {
+		
+				if(driver.getRightBumper()) {
+					DriveTrain.humanDrive(driver.getLeftStickYAxis() * 0.5, driver.getRightStickYAxis() * 0.5);
+				} else {
                 	DriveTrain.humanDrive(driver.getLeftStickYAxis(), driver.getRightStickYAxis());	
+				}
 //                }
 //            }
             
@@ -57,7 +62,7 @@ public class TeleOperated {
                 	} 
 //                	
                 	if(latched) {
-                		if(Arm.getEncoder() > (Constants.ARM_LOW_POS-.07)){
+                		if(Arm.getEncoder() > (Constants.ARM_LOW_POS-.05)){
                 			Scaling.engageServo();
                 		}
                 	} else {
@@ -114,28 +119,16 @@ public class TeleOperated {
 //	        		Arm.changeAdjustment(Constants.NEGATIVE_ARM_ADJUSTMENT);
 //	        	}
 	        } else {
-	        	if(Math.abs(manip.getLeftStickYAxis()) > .1) {
-	        		Arm.setSpeedFast(manip.getLeftStickYAxis());
-	        	} else {
-	        		
-		        		Arm.setSpeed(manip.getRightStickYAxis());
-			        	Arm.resetAdjustment();
-		        	
-	        	}
-	        	
-	        	
+	        	Arm.setSpeed(manip.getRightStickYAxis());
+			    Arm.resetAdjustment();
 	        }
             
         	if(manip.getDPad() == 0) { 	
-        		Scaling.scale(0.3);
-        	} else if(manip.getDPad() == 90) {
-        		Scaling.scale(0.5);
-        	} else if(manip.getDPad() == 180) {
-        		Scaling.scale(0.75);
-        	} else if(manip.getDPad() == 270) {
         		Scaling.scale(1);
-        	} else if(manip.getStartButton()) {
-        		Scaling.descale(1);
+        	} else if(manip.getDPad() == 90) {
+        		Scaling.scale(0.3);
+        	} else if(manip.getDPad() == 180) {
+        		Scaling.descale(0.5);
         	} else {
         		Scaling.stopScaling();
         	}
