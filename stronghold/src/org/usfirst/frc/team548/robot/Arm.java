@@ -90,6 +90,10 @@ public class Arm implements PIDOutput {
 		}
 	}
 	
+	public static void setAdjustment(double adjust) {
+		shootingAdjustment = adjust;
+	}
+	
 	public static double getAdjustment() {
 		return shootingAdjustment;
 	}

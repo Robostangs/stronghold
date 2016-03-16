@@ -30,7 +30,7 @@ public class Shooter implements PIDOutput{
 		
 //		shootingEncoder.setPIDSourceType(PIDSourceType.kRate);
 //		shootingMotor1.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
-		pid = new PIDController(0.00002, 0.0000, 0, shootingEncoder, this);
+		pid = new PIDController(0.0001, 0.0000, 0, .00001, shootingEncoder, this);
 		//pid.setOutputRange(-0.5, 0.5);
 		shootingEncoder.setPIDSourceType(PIDSourceType.kRate);
 		
@@ -85,7 +85,7 @@ public class Shooter implements PIDOutput{
 	}
 
 	public void pidWrite(double output) {
-		setPower(-output);
+		setPower(output);
 	}
 	
 	

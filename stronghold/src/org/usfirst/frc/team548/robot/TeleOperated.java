@@ -8,7 +8,8 @@ public class TeleOperated {
 	private static XboxController driver, manip;
 	private static TeleOperated instance = null;
 	// static boolean newDrive = false;
-	private static int shootingSpeed = -3000;
+	private static int shootingSpeed = 3000;
+	private static boolean distanceSnap = false;
 
 	public static TeleOperated getInstance() {
 		if (instance == null) {
@@ -63,11 +64,11 @@ public class TeleOperated {
 		// }
 
 
-//		if (driver.getLeftBumper()) {
-//			Shooter.setSpeed(shootingSpeed);
-//		} else {
-//			Shooter.setShooterSpeedNoPID(manip.getRightTriggerAxis());
-//		}
+		if (driver.getLeftBumper()) {
+			Shooter.setSpeed(shootingSpeed);
+		} else {
+			Shooter.setShooterSpeedNoPID(manip.getRightTriggerAxis());
+		}
 //
 //		if (driver.getBackButton()) {
 //			shootingSpeed += 200;
@@ -131,17 +132,25 @@ public class TeleOperated {
 			Arm.resetAdjustment();
 		} else if (manip.getYButton()) {
 			Arm.setArmPos(Constants.ARM_POS.SHOOT);
-//			if (manip.getDPad() != 90 && manip.getDPad() != 270) {
-//				Arm.resetAdjustmentInit();
-//			}
-//			if (manip.getDPad() == 90) {
-//				Arm.changeAdjustment(Constants.POSITIVE_ARM_ADJUSTMENT);
-//			} else if (manip.getDPad() == 270) {
-//				Arm.changeAdjustment(Constants.NEGATIVE_ARM_ADJUSTMENT);
-//			}
+			if (manip.getDPad() != 90 && manip.getDPad() != 270) {
+				Arm.resetAdjustmentInit();
+			}
+			if (manip.getDPad() == 90) {
+				Arm.changeAdjustment(Constants.POSITIVE_ARM_ADJUSTMENT);
+			} else if (manip.getDPad() == 270) {
+				Arm.changeAdjustment(Constants.NEGATIVE_ARM_ADJUSTMENT);
+			}
+		} else if(manip.getStartButton()) {
+			if(!distanceSnap) {
+				//insert method to get desired arm position from camera
+				distanceSnap = true;
+			}
+				//set arm to desired position
+				//Arm.setArmPos(pos);
 		} else {
 			Arm.setSpeed(manip.getRightStickYAxis());
 			Arm.resetAdjustment();
+			distanceSnap = false;
 		}
 
 	}
