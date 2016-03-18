@@ -8,6 +8,7 @@ public class Ingesting {
 	private static Ingesting instance = null;
 	private static CANTalon ingestingMotor;
 	//private static DigitalInput ballSwitch;
+	private static boolean hasReachedSpeed = false;
 	
 	public static Ingesting getInstance(){
 		if(instance == null){
@@ -54,7 +55,14 @@ public class Ingesting {
 	
 	public static void injectAfterSpeed(double speed) {
 		if(Math.abs(Shooter.getShooterEncoderVelocity()) > speed) {
+			hasReachedSpeed = true;
+		}
+		while(hasReachedSpeed) {
 			inject();
 		}
+	}
+	
+	public static void resetHasReachedSpeed() {
+		hasReachedSpeed = false;
 	}
 }

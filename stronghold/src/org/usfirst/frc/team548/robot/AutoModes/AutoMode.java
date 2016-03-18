@@ -50,8 +50,8 @@ public abstract class AutoMode {
     	runCommand(new RaiseArmInTime(seconds, pos));
     }
     
-    protected void shootAfterRamp(double seconds, double rampSeconds, double power, Constants.ARM_POS pos) {
-    	runCommand(new ShootAfterTime(seconds, rampSeconds, power, pos));
+    protected void shootAfterRamp(double seconds, double rampSeconds, double power, double shootAfterSpeed, Constants.ARM_POS pos) {
+    	runCommand(new ShootAfterTime(seconds, rampSeconds, power, shootAfterSpeed, pos));
     }
     
     protected void driveDistanceWithArmPos(double seconds, double power, int threshold, int distance, Constants.ARM_POS pos) {

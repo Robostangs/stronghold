@@ -2,6 +2,7 @@ package org.usfirst.frc.team548.robot;
 
 import java.util.ArrayList;
 
+import CameraStuff.RRCPSkinnyServer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class TeleOperated {
@@ -10,6 +11,7 @@ public class TeleOperated {
 	// static boolean newDrive = false;
 	private static int shootingSpeed = 3000;
 	private static boolean distanceSnap = false;
+	private static boolean gyroReset = false;
 
 	public static TeleOperated getInstance() {
 		if (instance == null) {
@@ -33,8 +35,12 @@ public class TeleOperated {
 		 * Tank drive on sticks
 		 */
 
-		// if(driver.getAButton()) {
-		// DriveTrain.resetHyro();
+		 if(driver.getAButton()) {
+			 DriveTrain.resetHyro();
+		 }
+		 if(driver.getBButton()) {
+			 DriveTrain.turnAngle(30);
+		 }
 		// } else if(driver.getBButton()) {
 		// DriveTrain.driveStraightHyro(.5);
 		// } else {
@@ -42,12 +48,25 @@ public class TeleOperated {
 		// DriveTrain.driveForza(driver.getLeftStickXAxis(),
 		// driver.getBothTriggerAxis(), driver.getXButton());
 		// } else {
-		
-		if(driver.getRightBumper()) {
-			DriveTrain.humanDrive(driver.getLeftStickYAxis() * 0.5, driver.getRightStickYAxis() * 0.5);
+//		
+		if(driver.getLeftBumper()) {
+			if(!gyroReset) {
+				DriveTrain.resetHyro();
+				gyroReset = true;
+			}
+//			DriveTrain.turnAngle(30);
+			DriveTrain.turnAngle(RRCPSkinnyServer.getHeading());
+			System.out.println(RRCPSkinnyServer.getHeading());
+		} else if(driver.getRightBumper()) {
+			DriveTrain.humanDrive(driver.getLeftStickYAxis() * 0.75, driver.getRightStickYAxis() * 0.75);
+			gyroReset = false;
 		} else {
 			DriveTrain.humanDrive(driver.getLeftStickYAxis(), driver.getRightStickYAxis());
+			gyroReset = false;
 		}
+		
+		
+		
 		
 		// }
 		// }
@@ -64,11 +83,15 @@ public class TeleOperated {
 		// }
 
 
-		if (driver.getLeftBumper()) {
-			Shooter.setSpeed(shootingSpeed);
-		} else {
+//		if (driver.getLeftBumper()) {
+//			Shooter.setSpeed(shootingSpeed);
+//		} else {
+		if(Math.abs(manip.getLeftTriggerAxis()) < 0.1) {
 			Shooter.setShooterSpeedNoPID(manip.getRightTriggerAxis());
+		} else {
+			Shooter.setShooterSpeedNoPID(manip.getLeftTriggerAxis() * 0.65);
 		}
+//		}
 //
 //		if (driver.getBackButton()) {
 //			shootingSpeed += 200;
@@ -102,7 +125,7 @@ public class TeleOperated {
     	} else if(manip.getDPad() == 90) {
     		Scaling.scale(0.5);
     	} else if(manip.getDPad() == 180) {
-    		Scaling.descale(0.5);
+    		Scaling.descale(1);
     	} else {
     		Scaling.stopScaling();
     	}
@@ -115,10 +138,14 @@ public class TeleOperated {
 			Ingesting.ingest();
 			Shooter.shooterIngest();
 		} else if (manip.getBackButton()) {
-			//Ingesting.inject();
-			Ingesting.injectAfterSpeed(Constants.BATTER_SHOT_SPEED);
+//			Ingesting.inject();
+			Ingesting.injectAfterSpeed(Constants.MAX_SHOT_SPEED);
 		} else {
 			Ingesting.holdBall();
+			Ingesting.resetHasReachedSpeed();
+//			if(Math.abs(manip.getRightTriggerAxis()) < 0.1) {
+//				Shooter.stop();
+//			}
 		}
 
 		if (manip.getAButton()) {
@@ -146,9 +173,9 @@ public class TeleOperated {
 				distanceSnap = true;
 			}
 				//set arm to desired position
-				//Arm.setArmPos(pos);
+				//Arm.setArmPos(pos);	
 		} else {
-			Arm.setSpeed(manip.getRightStickYAxis());
+			Arm.setSpeed(-manip.getRightStickYAxis());
 			Arm.resetAdjustment();
 			distanceSnap = false;
 		}

@@ -60,6 +60,7 @@ public class Shooter implements PIDOutput{
 	}
 	
 	public static void stop() {
+		disablePID();
 		setPower(0);
 	}
 	
@@ -82,6 +83,7 @@ public class Shooter implements PIDOutput{
 	
 	public static void disablePID() {
 		pid.reset();
+		pid.disable();
 	}
 
 	public void pidWrite(double output) {

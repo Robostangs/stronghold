@@ -7,12 +7,14 @@ import org.usfirst.frc.team548.robot.Shooter;
 
 public class ShootAfterTime extends AutoCommandBase {
 	
-	private double rampTime, power;
+	private double rampTime, power, shootAfterSpeed;
 	private Constants.ARM_POS position;
-	public ShootAfterTime(double timeOut, double shootAfter, double power, Constants.ARM_POS pos) {
+	private static boolean hasReachedSpeed = false;
+	public ShootAfterTime(double timeOut, double shootAfter, double power, double shootAfterSpeed, Constants.ARM_POS pos) {
 		super(timeOut);
 		this.power = power;
 		this.rampTime = shootAfter;
+		this.shootAfterSpeed = shootAfterSpeed;
 		position = pos;
 	}
 
@@ -21,17 +23,21 @@ public class ShootAfterTime extends AutoCommandBase {
 	}
 
 	protected void run() {
+//		Shooter.setShooterSpeedNoPID(power);
+//		if(timer.get() >= rampTime) {
+//			Ingesting.inject();
+//		}
+//		Arm.resetAdjustment();
+//		Arm.setArmPos(position);
+		
 		Shooter.setShooterSpeedNoPID(power);
-		if(timer.get() >= rampTime) {
-			Ingesting.inject();
-		}
-		Arm.resetAdjustment();
-		Arm.setArmPos(position);
+		Ingesting.injectAfterSpeed(shootAfterSpeed);
 	}
 
 	public void end() {
 		Shooter.stop();
 		Ingesting.stopIngesting();
+		
 	}
 
 	protected String getCommandName() {

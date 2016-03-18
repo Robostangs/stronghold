@@ -45,6 +45,7 @@ public class DriveTrain implements PIDSource, PIDOutput {
         pid.setContinuous(true);
           
         LiveWindow.addSensor("Drive", "Gyro", hyro);
+        LiveWindow.addActuator("Drive", "PID", pid);
 	}
 	
 	public static void drive(double leftSpeed, double rightSpeed){
@@ -117,9 +118,13 @@ public class DriveTrain implements PIDSource, PIDOutput {
 	public static void humanDrive(double left, double right){
 		if(Math.abs(left) < 0.2) {
 			left = 0;
+		} else {
+			pid.disable();
 		}
 		if (Math.abs(right) < 0.2){
 			right = 0;
+		} else {
+			pid.disable();
 		}
 		drive(left, right);
 	}
@@ -195,6 +200,7 @@ public class DriveTrain implements PIDSource, PIDOutput {
 		setPIDtoGyro();
 		pid.enable();
 		pid.setSetpoint(setPoint);
+		
 	}
 
 	public static void disablePID() {
@@ -213,18 +219,14 @@ public class DriveTrain implements PIDSource, PIDOutput {
         pidInit = true;
 	}
 	
-	public static void setPIDtoDrive() {
-		gyroPID = false;
-		pid = new PIDController(Constants.DT_PID_DRIVE_KP, Constants.DT_PID_DRIVE_KI, Constants.DT_PID_DRIVE_KD, DriveTrain.getInstance(), DriveTrain.getInstance());
-		pidInit = true;
-	}
+//	public static void setPIDtoDrive() {
+//		gyroPID = false;
+//		pid = new PIDController(Constants.DT_PID_DRIVE_KP, Constants.DT_PID_DRIVE_KI, Constants.DT_PID_DRIVE_KD, DriveTrain.getInstance(), DriveTrain.getInstance());
+//		pidInit = true;
+//	}
 
 	public void pidWrite(double output) {
-		if(gyroPID) {
-			drive(output, -output);	
-		} else {
-			driveStraightHyro(output);
-		}
+		drive(output, -output);
 	}
 	
 }

@@ -10,6 +10,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team548.robot.AutoModes.*;
 
+import CameraStuff.RRCPSkinnyServer;
+
 
 public class Robot extends IterativeRobot {;
     AutoMode autoSelected;
@@ -35,6 +37,8 @@ public class Robot extends IterativeRobot {;
         Shooter.getInstance();
         TeleOperated.getInstance();
         Scaling.getInstance();
+        RRCPSkinnyServer.getInstance();
+        RRCPSkinnyServer.startServer();
         pdp = new PowerDistributionPanel();
     }
     
@@ -68,7 +72,7 @@ public class Robot extends IterativeRobot {;
 //    	SmartDashboard.putNumber("Current 7", pdp.getCurrent(7));
 //    	SmartDashboard.putNumber("Current 8", pdp.getCurrent(8));
 //    	SmartDashboard.putNumber("Current 9", pdp.getCurrent(9));
-//    	SmartDashboard.putNumber("Current 10", pdp.getCurrent(10));
+    	SmartDashboard.putNumber("Current 10", pdp.getCurrent(10));
 //    	SmartDashboard.putNumber("Current 11", pdp.getCurrent(11));
 //    	SmartDashboard.putNumber("Current 12", pdp.getCurrent(12));
 //    	SmartDashboard.putNumber("Current 13", pdp.getCurrent(13));
@@ -95,7 +99,7 @@ public class Robot extends IterativeRobot {;
     
     public void testInit() {
     	DriveTrain.resetPIDInit();
-    	DriveTrain.setPIDtoGyro();
+
     }
     public void testPeriodic() {
     	System.out.println(DriveTrain.getHyroAngle());

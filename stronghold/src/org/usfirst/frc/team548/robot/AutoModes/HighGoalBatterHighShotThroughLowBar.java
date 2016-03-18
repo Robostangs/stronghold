@@ -13,6 +13,6 @@ public class HighGoalBatterHighShotThroughLowBar extends AutoMode{
 		turnToAngleInTime(1.5, 56.5, false);
 		setArmToPosInTime(1.5, Constants.ARM_POS.SHOOT);
 		driveDistanceWithArmPos(5, 0.5, 15000, 120000, Constants.ARM_POS.SHOOT);
-		shootAfterRamp(2, 1.5, 0.65, Constants.ARM_POS.SHOOT);
+		//shootAfterRamp(2, 1.5, 0.65, Constants.ARM_POS.SHOOT);
 	}
 }

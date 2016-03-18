@@ -10,9 +10,9 @@ public class RoughTerrain extends AutoMode{
 
 	protected void run() {
 		//time based
-		driveStraightWithHyroWithArmPos(4, 0.6, Constants.ARM_POS.DEF);
-		
-		//encoder distance
-//		driveDistanceWithArmPos(4, 0.6, 15000, 127000, Constants.ARM_POS.DEF);
+				driveStraightWithHyroWithArmPos(3, 0.6, Constants.ARM_POS.DEF);
+				
+				//encoder distance
+//				driveDistanceWithArmPos(4, 0.6, 15000, 127000, Constants.ARM_POS.DEF);
 	}
 }
