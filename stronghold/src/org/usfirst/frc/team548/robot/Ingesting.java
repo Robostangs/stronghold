@@ -2,6 +2,7 @@ package org.usfirst.frc.team548.robot;
 
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.Timer;
 
 public class Ingesting {
 
@@ -9,6 +10,7 @@ public class Ingesting {
 	private static CANTalon ingestingMotor;
 	//private static DigitalInput ballSwitch;
 	private static boolean hasReachedSpeed = false;
+	private static Timer injectingTimer;
 	
 	public static Ingesting getInstance(){
 		if(instance == null){
@@ -20,6 +22,7 @@ public class Ingesting {
 	private Ingesting() {
 		ingestingMotor = new CANTalon(Constants.INGESTING_TALON_POS);
 		//ballSwitch = new DigitalInput(Constants.INGESTING_SWITCH_POS);
+		injectingTimer = new Timer();
 	}
 	
 	public static void setIngesting(double value) {
@@ -56,8 +59,9 @@ public class Ingesting {
 	public static void injectAfterSpeed(double speed) {
 		if(Math.abs(Shooter.getShooterEncoderVelocity()) > speed) {
 			hasReachedSpeed = true;
+			startTimer();
 		}
-		while(hasReachedSpeed) {
+		while(hasReachedSpeed && getTimer() < 1) {
 			inject();
 		}
 	}
@@ -65,4 +69,17 @@ public class Ingesting {
 	public static void resetHasReachedSpeed() {
 		hasReachedSpeed = false;
 	}
+	
+	public static void resetTimer() {
+		injectingTimer.stop();
+		injectingTimer.reset();
+	}
+	
+	public static void startTimer() {
+		injectingTimer.start();
+	}
+	public static double getTimer() {
+		return injectingTimer.get();
+	}
+
 }

@@ -143,9 +143,7 @@ public class TeleOperated {
 		} else {
 			Ingesting.holdBall();
 			Ingesting.resetHasReachedSpeed();
-//			if(Math.abs(manip.getRightTriggerAxis()) < 0.1) {
-//				Shooter.stop();
-//			}
+			Ingesting.resetTimer();
 		}
 
 		if (manip.getAButton()) {
