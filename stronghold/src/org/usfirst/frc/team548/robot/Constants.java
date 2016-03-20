@@ -29,7 +29,7 @@ public class Constants {
 		public static final int LEFT_ARM_TALON_POS = 4;
 		public static final int RIGHT_ARM_TALON_POS = 7;
 		public static final double ARM_POWER_COEFFICIENT = -0.75;
-		public static final double ARM_LOW_POS = 0.560; //change this one
+		public static final double ARM_LOW_POS = 0.555; //change this one
 		public static final double ARM_ING_POS = ARM_LOW_POS - 0.014; //don't change
 		public static final double ARM_DEF_POS = ARM_LOW_POS - .116; //don't change
 		public static final double ARM_SHOOT_POS = ARM_LOW_POS - .441;//don't change
@@ -50,7 +50,7 @@ public class Constants {
 		public static final double ARM_AUTO_SHOOT_P = 7;
 		public static final double ARM_AUTO_SHOOT_I = 0;
 		public static final double ARM_AUTO_SHOOT_D = 1;
-		public static final double ARM_SHOOT_ADJUST_P = 15;
+		public static final double ARM_SHOOT_ADJUST_P = 10;
 		public static final double ARM_SHOOT_ADJUST_I = 0;
 		public static final double ARM_SHOOT_ADJUST_D = 1;
 		public static final double POSITIVE_ARM_ADJUSTMENT = 0.005;
@@ -105,7 +105,8 @@ public class Constants {
 		public static final double DESCALING_SPEED = -0.3;
 		
 	//PID constants
-		public static final double DT_PID_GYRO_KP = 0.03, DT_PID_GYRO_KI = 0, DT_PID_GYRO_KD = 0;
+		public static final double DT_PID_GYRO_KP = 0.04, DT_PID_GYRO_KI = 0.000, DT_PID_GYRO_KD = 0; //p 0.03, i 0.002
+		public static final double DT_PID_SMALL_GYRO_KP = 0.1, DT_PID_SMALL_GYRO_KI = 0.005, DT_PID_SMALL_GYRO_KD = 0;
 		public static final double DT_PID_DRIVE_KP = 0, DT_PID_DRIVE_KI = 0, DT_PID_DRIVE_KD = 0;
 		
 }

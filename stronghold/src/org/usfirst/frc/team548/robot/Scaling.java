@@ -58,19 +58,19 @@ public class Scaling {
 	}
 	
 	public static void scale(double speed) {
-//		if(scalingSwitch.get()) {
+		if(scalingSwitch.get()) {
 		    setSpeed(speed);
-//		} else {
-//			stopScaling();
-//		}
+		} else {
+			stopScaling();
+		}
 	}
 	
 	public static void descale(double speed) {
-//		if(descalingSwitch.get()) {
+		if(descalingSwitch.get()) {
 			setSpeed(-speed);
-//		} else {
-//			stopScaling();
-//		}
+		} else {
+			stopScaling();
+		}
 		
 	}
 	

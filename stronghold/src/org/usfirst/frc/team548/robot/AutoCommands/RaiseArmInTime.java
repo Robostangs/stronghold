@@ -26,7 +26,7 @@ public class RaiseArmInTime extends AutoCommandBase {
 	@Override
 	public void end() {
 		// TODO Auto-generated method stub
-		
+		Arm.disablePID();
 	}
 
 	@Override

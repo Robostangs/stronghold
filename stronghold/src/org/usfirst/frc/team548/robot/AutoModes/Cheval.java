@@ -1,6 +1,10 @@
+
 package org.usfirst.frc.team548.robot.AutoModes;
 
+import org.usfirst.frc.team548.robot.Arm;
 import org.usfirst.frc.team548.robot.Constants;
+
+import CameraStuff.RRCPSkinnyServer;
 
 public class Cheval extends AutoMode {
 
@@ -15,9 +19,15 @@ public class Cheval extends AutoMode {
 //		driveStraightWithHyroWithArmPos(1.5, 0.6, Constants.ARM_POS.LOW);
 		
 		//encoder distance
-		driveDistanceWithArmPos(5, 0.5, 10000, 30000, Constants.ARM_POS.DEF);
+		driveDistanceWithArmPos(2, 0.5, 10000, 30000, Constants.ARM_POS.DEF);
 		setArmToPosInTime(1, Constants.ARM_POS.LOW);
-		driveDistanceWithArmPos(4, 0.8, 10000, 80000, Constants.ARM_POS.LOW);
+		driveDistanceWithArmPos(3, 0.6, 18000, 60000, Constants.ARM_POS.LOW);
+		turnToAngleWithVisionInTime(4);
+		
+		setArmToPosInTime(1, Constants.ARM_POS.SHOOT);
+		Arm.setArmAdjustmentFromDistance(RRCPSkinnyServer.getDistance());
+		setArmToPosInTime(1.5, Constants.ARM_POS.SHOOT);
+		shootAfterRamp(5, 3, 1, 4700, Constants.ARM_POS.SHOOT);
 	}
 
 }

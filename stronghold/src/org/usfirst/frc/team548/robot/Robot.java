@@ -84,7 +84,6 @@ public class Robot extends IterativeRobot {;
     	SmartDashboard.putNumber("Gyro", DriveTrain.getHyroAngle());
     	
     	SmartDashboard.putNumber("Shooter Actual Velocity", Shooter.getShooterEncoderVelocity());
-    	SmartDashboard.putNumber("Shooter Target Velocity", TeleOperated.getShootingSpeed());
     	
     	SmartDashboard.putNumber("Adjustment", Arm.getAdjustment());
     	
@@ -93,7 +92,7 @@ public class Robot extends IterativeRobot {;
     	
     	SmartDashboard.putBoolean("Scaling Switch", Scaling.getScalingSwitch());
     	SmartDashboard.putBoolean("Descaling Switch", Scaling.getDescalingSwitch());
-    	
+    	SmartDashboard.putNumber("Heading", RRCPSkinnyServer.getHeading()+4);
     	
     }
     
@@ -103,6 +102,7 @@ public class Robot extends IterativeRobot {;
     }
     public void testPeriodic() {
     	System.out.println(DriveTrain.getHyroAngle());
+    	SmartDashboard.putNumber("hyro", DriveTrain.getHyroAngle());
     	LiveWindow.run();
     }
     

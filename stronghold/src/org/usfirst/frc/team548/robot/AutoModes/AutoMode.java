@@ -38,6 +38,10 @@ public abstract class AutoMode {
         runCommand(new TurnToAngleInTime(seconds, angle, reset));
     }
     
+    protected void turnToAngleWithVisionInTime(double seconds) {
+        runCommand(new TurnToAngleWithVision(seconds));
+    }
+    
     protected void drivePowerInTime(double seconds, double power) {
     	runCommand(new DrivePowerInTime(seconds, power));
     }

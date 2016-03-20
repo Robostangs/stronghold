@@ -18,7 +18,7 @@ public class DrivePowerInTime extends AutoCommandBase {
 	@Override
 	protected void run() {
 		// TODO Auto-generated method stub
-		DriveTrain.drive(power, power);
+		DriveTrain.drive(power, power, "AUTO");
 		
 	}
 	@Override

@@ -164,15 +164,14 @@ public class RRCPSkinnyServer {
                             this.close();
                             break;
                         } else if (id == 1) {
-                            double distance = dis.readDouble();
+                        	rDistance = dis.readDouble();
                             rHeading= dis.readDouble();
-                            
-                            System.out.println("D: "+distance+" H: "+rHeading);
+                            //System.out.println("D: "+rDistance+" H: "+rHeading);
                             dos.write(21);
                             dos.flush();
                         } else if (id == 2) {
-                            double distance = -1;
-                            double heading = -361;
+                            rDistance = 0;
+                            rHeading = 0;
                             dos.write(21);
                             dos.flush();
                         }  else {
@@ -196,11 +195,17 @@ public class RRCPSkinnyServer {
     }
     private static void onSocketClose() { //NTBR
      rHeading = 0;  
+     rDistance = 0;
     }
     
-    private static volatile double rHeading = 0;
+    private static volatile double rHeading = 0, rDistance = 0;
     public static double getHeading() {
-    	return rHeading;
+    	return -rHeading;
+    	
+    }
+    
+    public static double getDistance() {
+    	return rDistance;
     	
     }
     

@@ -9,8 +9,8 @@ public class TeleOperated {
 	private static XboxController driver, manip;
 	private static TeleOperated instance = null;
 	// static boolean newDrive = false;
-	private static int shootingSpeed = 3000;
-	private static boolean distanceSnap = false;
+	private static double shootingSpeed = 3000, headingSnapValue = 0;
+	private static boolean distanceSnap = false, headingSnap = false;
 	private static boolean gyroReset = false;
 
 	public static TeleOperated getInstance() {
@@ -25,8 +25,7 @@ public class TeleOperated {
 		manip = new XboxController(Constants.XBOX_MANIP_POS);
 	}
 
-	static String data = "";
-
+	
 	public static void run() {
 
 		/*
@@ -35,12 +34,6 @@ public class TeleOperated {
 		 * Tank drive on sticks
 		 */
 
-		 if(driver.getAButton()) {
-			 DriveTrain.resetHyro();
-		 }
-		 if(driver.getBButton()) {
-			 DriveTrain.turnAngle(30);
-		 }
 		// } else if(driver.getBButton()) {
 		// DriveTrain.driveStraightHyro(.5);
 		// } else {
@@ -48,26 +41,38 @@ public class TeleOperated {
 		// DriveTrain.driveForza(driver.getLeftStickXAxis(),
 		// driver.getBothTriggerAxis(), driver.getXButton());
 		// } else {
-//		
-		if(driver.getLeftBumper()) {
-			if(!gyroReset) {
+		//
+		if (driver.getLeftBumper()) {
+			if (!gyroReset) {
 				DriveTrain.resetHyro();
+				DriveTrain.setPIDtoSmallGyro();
 				gyroReset = true;
 			}
-//			DriveTrain.turnAngle(30);
-			DriveTrain.turnAngle(RRCPSkinnyServer.getHeading());
-			System.out.println(RRCPSkinnyServer.getHeading());
-		} else if(driver.getRightBumper()) {
+			if(!headingSnap) {
+				headingSnapValue = RRCPSkinnyServer.getHeading()+4;
+				headingSnap = true;
+			}
+			DriveTrain.turnSmallAngle(headingSnapValue);
+			// DriveTrain.turnAngle(RRCPSkinnyServer.getHeading());
+		} else if (driver.getRightBumper()) {
 			DriveTrain.humanDrive(driver.getLeftStickYAxis() * 0.75, driver.getRightStickYAxis() * 0.75);
 			gyroReset = false;
+			headingSnap = false;
 		} else {
-			DriveTrain.humanDrive(driver.getLeftStickYAxis(), driver.getRightStickYAxis());
-			gyroReset = false;
+
+			if (driver.getAButton()) {
+				DriveTrain.resetHyro();
+			}
+			if (driver.getBButton()) {
+				DriveTrain.turnAngle(30);
+			} else {
+				DriveTrain.humanDrive(driver.getLeftStickYAxis(), driver.getRightStickYAxis());
+				// System.out.println("driving");
+				gyroReset = false;
+				headingSnap = false;
+			}
 		}
-		
-		
-		
-		
+
 		// }
 		// }
 
@@ -82,23 +87,21 @@ public class TeleOperated {
 		// DriveTrain.driveStraightHyro(0.5);
 		// }
 
-
-//		if (driver.getLeftBumper()) {
-//			Shooter.setSpeed(shootingSpeed);
-//		} else {
-		if(Math.abs(manip.getLeftTriggerAxis()) < 0.1) {
+		// if (driver.getLeftBumper()) {
+		// Shooter.setSpeed(shootingSpeed);
+		// } else {
+		if (Math.abs(manip.getLeftTriggerAxis()) < 0.1) {
 			Shooter.setShooterSpeedNoPID(manip.getRightTriggerAxis());
 		} else {
 			Shooter.setShooterSpeedNoPID(manip.getLeftTriggerAxis() * 0.65);
 		}
-//		}
-//
-//		if (driver.getBackButton()) {
-//			shootingSpeed += 200;
-//		} else if (driver.getStartButton()) {
-//			shootingSpeed -= 200;
-//		}
-
+		// }
+		//
+		// if (driver.getBackButton()) {
+		// shootingSpeed += 200;
+		// } else if (driver.getStartButton()) {
+		// shootingSpeed -= 200;
+		// }
 
 		/*
 		 * Manip Controls
@@ -111,25 +114,26 @@ public class TeleOperated {
 		 * 
 		 * Right stick: manual arm control
 		 */
-		
-		
-//    	if(manip.getDPad() == 0) { 	
-//    		Scaling.scale(0.3);
-//    	} else if(manip.getDPad() == 90) {
-//    		Scaling.scale(0.5);
-//    	} else if(manip.getDPad() == 180) {
-//    		Scaling.scale(0.75);
-//    	} else 
-    	if(manip.getDPad() == 0) {
-    		Scaling.scale(1);
-    	} else if(manip.getDPad() == 90) {
-    		Scaling.scale(0.5);
-    	} else if(manip.getDPad() == 180) {
-    		Scaling.descale(1);
-    	} else {
-    		Scaling.stopScaling();
-    	}
-		
+
+		// if(manip.getDPad() == 0) {
+		// Scaling.scale(0.3);
+		// } else if(manip.getDPad() == 90) {
+		// Scaling.scale(0.5);
+		// } else if(manip.getDPad() == 180) {
+		// Scaling.scale(0.75);
+		// } else
+
+		if (manip.getDPad() == 0) {
+			Scaling.scale(1);
+		} else if (manip.getDPad() == 90) {
+			if (!manip.getYButton()) {
+				Scaling.scale(0.3);
+			}
+		} else if (manip.getDPad() == 180) {
+			Scaling.descale(1);
+		} else {
+			Scaling.stopScaling();
+		}
 
 		if (manip.getRightBumper()) {
 			Ingesting.exgest();
@@ -138,7 +142,7 @@ public class TeleOperated {
 			Ingesting.ingest();
 			Shooter.shooterIngest();
 		} else if (manip.getBackButton()) {
-//			Ingesting.inject();
+			// Ingesting.inject();
 			Ingesting.injectAfterSpeed(Constants.MAX_SHOT_SPEED);
 		} else {
 			Ingesting.holdBall();
@@ -165,22 +169,19 @@ public class TeleOperated {
 			} else if (manip.getDPad() == 270) {
 				Arm.changeAdjustment(Constants.NEGATIVE_ARM_ADJUSTMENT);
 			}
-		} else if(manip.getStartButton()) {
-			if(!distanceSnap) {
-				//insert method to get desired arm position from camera
+		} else if (manip.getStartButton()) {
+			if (!distanceSnap) {
+				Arm.setArmAdjustmentFromDistance(RRCPSkinnyServer.getDistance()); // get distance
 				distanceSnap = true;
 			}
-				//set arm to desired position
-				//Arm.setArmPos(pos);	
+			Arm.setArmPos(Constants.ARM_POS.SHOOT);
+			// set arm to desired position
+			// Arm.setArmPos(pos);
 		} else {
 			Arm.setSpeed(-manip.getRightStickYAxis());
 			Arm.resetAdjustment();
 			distanceSnap = false;
 		}
 
-	}
-
-	public static int getShootingSpeed() {
-		return shootingSpeed;
 	}
 }
