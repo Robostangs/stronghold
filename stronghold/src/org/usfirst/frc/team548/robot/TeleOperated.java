@@ -25,7 +25,6 @@ public class TeleOperated {
 		manip = new XboxController(Constants.XBOX_MANIP_POS);
 	}
 
-	
 	public static void run() {
 
 		/*
@@ -48,14 +47,15 @@ public class TeleOperated {
 				DriveTrain.setPIDtoSmallGyro();
 				gyroReset = true;
 			}
-			if(!headingSnap) {
-				headingSnapValue = RRCPSkinnyServer.getHeading()+4;
+			if (!headingSnap) {
+				headingSnapValue = RRCPSkinnyServer.getHeading();
 				headingSnap = true;
 			}
 			DriveTrain.turnSmallAngle(headingSnapValue);
 			// DriveTrain.turnAngle(RRCPSkinnyServer.getHeading());
 		} else if (driver.getRightBumper()) {
-			DriveTrain.humanDrive(driver.getLeftStickYAxis() * 0.75, driver.getRightStickYAxis() * 0.75);
+			DriveTrain.humanDrive(driver.getLeftStickYAxis() * 0.75,
+					driver.getRightStickYAxis() * 0.75);
 			gyroReset = false;
 			headingSnap = false;
 		} else {
@@ -66,7 +66,8 @@ public class TeleOperated {
 			if (driver.getBButton()) {
 				DriveTrain.turnAngle(30);
 			} else {
-				DriveTrain.humanDrive(driver.getLeftStickYAxis(), driver.getRightStickYAxis());
+				DriveTrain.humanDrive(driver.getLeftStickYAxis(),
+						driver.getRightStickYAxis());
 				// System.out.println("driving");
 				gyroReset = false;
 				headingSnap = false;
@@ -106,8 +107,9 @@ public class TeleOperated {
 		/*
 		 * Manip Controls
 		 * 
-		 * Right trigger: shooter speed Right bumper: exgest Left bumper: ingest
-		 * Back button: inject
+		 * Right trigger: shooter speed (max of 1) Left trigger: shooter speed
+		 * (max of 0.65) Right bumper: exgest Left bumper: ingest Back button:
+		 * inject
 		 * 
 		 * A button: set arm LOW X button: set arm INGEST B button: set arm
 		 * DEFENSE Y button: set arm HIGH
@@ -115,21 +117,15 @@ public class TeleOperated {
 		 * Right stick: manual arm control
 		 */
 
-		// if(manip.getDPad() == 0) {
-		// Scaling.scale(0.3);
-		// } else if(manip.getDPad() == 90) {
-		// Scaling.scale(0.5);
-		// } else if(manip.getDPad() == 180) {
-		// Scaling.scale(0.75);
-		// } else
-
-		if (manip.getDPad() == 0) {
+		if (manip.getDPad() == 315 || manip.getDPad() == 0
+				|| manip.getDPad() == 45) {
 			Scaling.scale(1);
 		} else if (manip.getDPad() == 90) {
 			if (!manip.getYButton()) {
 				Scaling.scale(0.3);
 			}
-		} else if (manip.getDPad() == 180) {
+		} else if (manip.getDPad() == 135 || manip.getDPad() == 180
+				|| manip.getDPad() == 225) {
 			Scaling.descale(1);
 		} else {
 			Scaling.stopScaling();
@@ -142,8 +138,19 @@ public class TeleOperated {
 			Ingesting.ingest();
 			Shooter.shooterIngest();
 		} else if (manip.getBackButton()) {
-			// Ingesting.inject();
-			Ingesting.injectAfterSpeed(Constants.MAX_SHOT_SPEED);
+			if (manip.getRightTriggerAxis() > 0.5) {
+				if (Shooter.getShooterEncoderVelocity() != 0) {
+					Ingesting.injectAfterSpeed(Constants.MAX_SHOT_SPEED);
+				} else {
+					Ingesting.inject();
+				}
+			} else if (manip.getLeftTriggerAxis() > 0.5) {
+				if (Shooter.getShooterEncoderVelocity() != 0) {
+					Ingesting.injectAfterSpeed(Constants.BATTER_SHOT_SPEED);
+				} else {
+					Ingesting.inject();
+				}
+			}
 		} else {
 			Ingesting.holdBall();
 			Ingesting.resetHasReachedSpeed();
@@ -171,12 +178,10 @@ public class TeleOperated {
 			}
 		} else if (manip.getStartButton()) {
 			if (!distanceSnap) {
-				Arm.setArmAdjustmentFromDistance(RRCPSkinnyServer.getDistance()); // get distance
+				Arm.setArmAdjustmentFromDistance(RRCPSkinnyServer.getDistance());
 				distanceSnap = true;
 			}
 			Arm.setArmPos(Constants.ARM_POS.SHOOT);
-			// set arm to desired position
-			// Arm.setArmPos(pos);
 		} else {
 			Arm.setSpeed(-manip.getRightStickYAxis());
 			Arm.resetAdjustment();

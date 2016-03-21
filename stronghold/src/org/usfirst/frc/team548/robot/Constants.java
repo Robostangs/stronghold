@@ -87,6 +87,7 @@ public class Constants {
 		public static final int SHOOTER_ENC_POS_1 = 0;
 		public static final int SHOOTER_ENC_POS_2 = 1;
 		public static final int MAX_SHOT_SPEED = 4800;
+		public static final int BATTER_SHOT_SPEED = 3000;
 		
 	//Ingesting
 		public static final int INGESTING_TALON_POS = 8;
