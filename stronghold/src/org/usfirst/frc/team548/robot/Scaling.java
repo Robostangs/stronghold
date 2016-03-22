@@ -82,5 +82,8 @@ public class Scaling {
 		servo.setAngle(180);
 	}
 	
+	public static double getScallingSetForLights() {
+		return scalingMotor.get();
+	}
 	
 }

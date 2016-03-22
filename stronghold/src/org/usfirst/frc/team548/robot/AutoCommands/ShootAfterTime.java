@@ -19,7 +19,8 @@ public class ShootAfterTime extends AutoCommandBase {
 	}
 
 	public void init() {
-
+		Ingesting.resetHasReachedSpeed();
+		Ingesting.resetTimer();
 	}
 
 	protected void run() {

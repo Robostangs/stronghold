@@ -61,8 +61,12 @@ public class Ingesting {
 			hasReachedSpeed = true;
 			startTimer();
 		}
-		while(hasReachedSpeed && getTimer() < 1) {
+		
+		if(hasReachedSpeed && getTimer() < 1) {
 			inject();
+		} else {
+			Ingesting.resetTimer();
+			Ingesting.resetHasReachedSpeed();
 		}
 	}
 	

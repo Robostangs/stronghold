@@ -247,4 +247,12 @@ public class DriveTrain implements PIDSource, PIDOutput {
 //		System.out.println("PID running");
 	}
 	
+	public static double getLeftSetForLights() {
+		return -leftMiddle.get();
+	}
+	
+	public static double getRightSetForLights() {
+		return rightMiddle.get();
+	}
+	
 }

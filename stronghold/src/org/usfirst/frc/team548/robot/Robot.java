@@ -3,6 +3,8 @@ package org.usfirst.frc.team548.robot;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
+import edu.wpi.first.wpilibj.SerialPort;
+import edu.wpi.first.wpilibj.SerialPort.Port;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 //import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -30,6 +32,7 @@ public class Robot extends IterativeRobot {;
         chooser.addObject("Rough Terrain", new RoughTerrain());
         chooser.addObject("Rock Wall", new RockWall());
         SmartDashboard.putData("Auto choices", chooser);
+        
         
         DriveTrain.getInstance();
         Arm.getInstance();

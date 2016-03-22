@@ -188,5 +188,24 @@ public class TeleOperated {
 			distanceSnap = false;
 		}
 
+		if (driver.getStartButton()) {
+			if (!toggle) {
+				if (lightThing) {
+					lightThing = false;
+				} else {
+					lightThing = true;
+				}
+				toggle = true;
+			}
+		} else {
+			toggle = false;
+		}
+
+	}
+
+	public static boolean lightThing = false, toggle = false;
+
+	public static boolean getLightButtonThing() {
+		return lightThing;
 	}
 }
