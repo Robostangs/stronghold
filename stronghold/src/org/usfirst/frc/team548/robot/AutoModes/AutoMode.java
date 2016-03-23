@@ -38,6 +38,10 @@ public abstract class AutoMode {
         runCommand(new TurnToAngleInTime(seconds, angle, reset));
     }
     
+    protected void turnToAngleWithVisionInTime(double seconds) {
+        runCommand(new TurnToAngleWithVision(seconds));
+    }
+    
     protected void drivePowerInTime(double seconds, double power) {
     	runCommand(new DrivePowerInTime(seconds, power));
     }
@@ -47,11 +51,11 @@ public abstract class AutoMode {
     }
     
     protected void setArmToPosInTime(double seconds, Constants.ARM_POS pos) {
-    	runCommand(new SetArmToPosInTime(seconds, pos));
+    	runCommand(new RaiseArmInTime(seconds, pos));
     }
     
-    protected void shootAfterRamp(double seconds, double rampSeconds, double power, Constants.ARM_POS pos) {
-    	runCommand(new ShootAfterRamp(seconds, rampSeconds, power, pos));
+    protected void shootAfterRamp(double seconds, double rampSeconds, double power, double shootAfterSpeed, Constants.ARM_POS pos) {
+    	runCommand(new ShootAfterTime(seconds, rampSeconds, power, shootAfterSpeed, pos));
     }
     
     protected void driveDistanceWithArmPos(double seconds, double power, int threshold, int distance, Constants.ARM_POS pos) {

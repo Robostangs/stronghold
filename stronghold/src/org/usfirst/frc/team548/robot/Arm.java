@@ -139,25 +139,22 @@ public class Arm implements PIDOutput {
 	// }
 
 	public static void setSpeed(double value) {
-		pid.disable();
-		if (value < 0) {
-			setPower(value * Constants.ARM_POWER_COEFFICIENT);
+		disablePID();
+		if(value < 0) {
+				setPower(value);
 		} else if (value > 0) {
-			setPower(value * Constants.ARM_POWER_COEFFICIENT);
+				setPower(value);
 		} else {
 			setPower(0);
 		}
 	}
-
-	public static void setSpeedFast(double value) {
-		pid.disable();
-		if (value < 0) {
-			setPower(-value);
-		} else if (value > 0) {
-			setPower(-value);
-		} else {
-			setPower(0);
-		}
+	
+	public static void setArmAdjustmentFromDistance(double distance) {
+		shootingAdjustment = (0.0003 * distance) + 0.046; // y = 0.0003x + 0.046
+	}
+	
+	public static void disablePID() {
+		if(pid.isEnabled()) pid.disable();
 	}
 
 	public void pidWrite(double output) {

@@ -3,9 +3,9 @@ package org.usfirst.frc.team548.robot.AutoCommands;
 import org.usfirst.frc.team548.robot.Arm;
 import org.usfirst.frc.team548.robot.Constants;
 
-public class SetArmToPosInTime extends AutoCommandBase {
+public class RaiseArmInTime extends AutoCommandBase {
 	private Constants.ARM_POS position;
-	public SetArmToPosInTime(double timeOut, Constants.ARM_POS pos) {
+	public RaiseArmInTime(double timeOut, Constants.ARM_POS pos) {
 		super(timeOut);
 		position = pos;
 	}
@@ -23,7 +23,7 @@ public class SetArmToPosInTime extends AutoCommandBase {
 	}
 
 	protected String getCommandName() {
-		return "Set Arm To Pos In Time";
+		return "SetArmToPos";
 	}
 
 }

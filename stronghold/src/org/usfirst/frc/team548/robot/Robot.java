@@ -10,6 +10,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team548.robot.AutoModes.*;
 
+import CameraStuff.RRCPSkinnyServer;
+
 
 public class Robot extends IterativeRobot {;
     AutoMode autoSelected;
@@ -18,23 +20,24 @@ public class Robot extends IterativeRobot {;
 
     public void robotInit() {
         chooser = new SendableChooser();
-        chooser.addDefault("Cross Low Bar", new CrossLowBar());
-        chooser.addObject("High Shot Batter Through Low Bar", new HighShotBatterThroughLowBar());
-//        chooser.addObject("High Shot Courtyard Through Low Bar", new HighShotCourtyardThroughLowBar());
-        chooser.addObject("Low Shot Batter Through Low Bar", new LowShotBatterThroughLowBar());
+        chooser.addDefault("High Goal Courtyard Shot Through Low Bar", new HighGoalCourtyardShotThroughLowBar());
+        chooser.addObject("Cross Low Bar", new CrossLowBar());
         chooser.addObject("Cheval", new Cheval());
-//        chooser.addObject("Portcullis", new Portcullis());
+        chooser.addObject("Portcullis", new Portcullis());
         chooser.addObject("Moat", new Moat());
-        chooser.addObject("Rock Wall", new RockWall());
         chooser.addObject("Rough Terrain", new RoughTerrain());
-       
+        chooser.addObject("Rock Wall", new RockWall());
         SmartDashboard.putData("Auto choices", chooser);
+        
+        
         DriveTrain.getInstance();
         Arm.getInstance();
         Ingesting.getInstance();
         Shooter.getInstance();
         TeleOperated.getInstance();
         Scaling.getInstance();
+        RRCPSkinnyServer.getInstance();
+        RRCPSkinnyServer.startServer();
         pdp = new PowerDistributionPanel();
     }
     
@@ -77,19 +80,20 @@ public class Robot extends IterativeRobot {;
 //    	SmartDashboard.putNumber("Current 14", pdp.getCurrent(14));
 //    	SmartDashboard.putNumber("Current 15", pdp.getCurrent(15));
     	
-    	SmartDashboard.putNumber("ENCODER", Arm.getEncoder());
+SmartDashboard.putNumber("ENCODER", Arm.getEncoder());
     	
     	SmartDashboard.putNumber("Gyro", DriveTrain.getHyroAngle());
     	
-//    	SmartDashboard.putNumber("Shooter Velocity", Shooter.getShooterEncoderVelocity()/1000);
+    	SmartDashboard.putNumber("Shooter Actual Velocity", Shooter.getShooterEncoderVelocity());
     	
-//    	SmartDashboard.putNumber("Adjustment", Arm.getAdjustment());
+    	SmartDashboard.putNumber("Adjustment", Arm.getAdjustment());
     	
     	SmartDashboard.putNumber("Left", DriveTrain.getLeftEncoder());
     	SmartDashboard.putNumber("Right", DriveTrain.getRightEncoder());
     	
-    	SmartDashboard.putBoolean("ScalingSwitch", Scaling.getScalingSwitch());
-    	SmartDashboard.putBoolean("DescalingSwitch", Scaling.getDescalingSwitch());
+    	SmartDashboard.putBoolean("Scaling Switch", Scaling.getScalingSwitch());
+    	SmartDashboard.putBoolean("Descaling Switch", Scaling.getDescalingSwitch());
+    	SmartDashboard.putNumber("Heading", RRCPSkinnyServer.getHeading());
 
     	
     }

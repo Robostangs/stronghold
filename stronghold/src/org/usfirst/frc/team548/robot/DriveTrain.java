@@ -31,8 +31,8 @@ public class DriveTrain implements PIDSource, PIDOutput {
 		rightMiddle = new CANTalon(Constants.DT_TALON_POS_RIGHT_MID);
 		rightBack = new CANTalon(Constants.DT_TALON_POS_RIGHT_BACK);
 		
-		rightFront.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
-		leftBack.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
+		//rightFront.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
+		//leftBack.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
 		
 		hyro = new AHRS(SerialPort.Port.kMXP);
 		hyro.reset();
@@ -115,6 +115,7 @@ public class DriveTrain implements PIDSource, PIDOutput {
 	}
 
 	public static void humanDrive(double left, double right){
+		disablePID();
 		if(Math.abs(left) < 0.2) {
 			left = 0;
 		}
@@ -124,36 +125,6 @@ public class DriveTrain implements PIDSource, PIDOutput {
 		drive(left, right);
 	}
 	
-	public static void driveForza(double wheel, double power, boolean turnQuick) {
-        if(Math.abs(power) > .1) {
-            double leftPower = 0;
-            double rightPower = 0;
-            if (turnQuick)
-            {
-                leftPower = (wheel*(power));
-                rightPower = -wheel * ( power);
-
-            }
-            else if (wheel > 0) //right
-            {
-                leftPower = power ;
-                rightPower = power * (1-wheel);
-            }
-            else if (wheel < 0)// left
-            {
-                leftPower = power * (1 - -wheel);
-                rightPower = power;
-            }
-            else
-            {
-                leftPower = power;
-                rightPower = power;
-            }
-            drive(leftPower, rightPower);
-        } else {
-             drive(0, 0);
-        }
-	}
         
 	private static PIDSourceType pidtype = PIDSourceType.kDisplacement;
 	
@@ -195,10 +166,18 @@ public class DriveTrain implements PIDSource, PIDOutput {
 		setPIDtoGyro();
 		pid.enable();
 		pid.setSetpoint(setPoint);
+		
+	}
+	
+	public static void turnSmallAngle(double setPoint) {
+		setPIDtoSmallGyro();
+		pid.enable();
+		pid.setSetpoint(setPoint);
+		
 	}
 
 	public static void disablePID() {
-		pid.disable();
+		if(pid.isEnabled()) pid.disable();
 	}
 	
 	public static void setPIDtoGyro() {
@@ -206,25 +185,36 @@ public class DriveTrain implements PIDSource, PIDOutput {
 			gyroPID = true;
 			pid = new PIDController(Constants.DT_PID_GYRO_KP, Constants.DT_PID_GYRO_KI, Constants.DT_PID_GYRO_KD, hyro, DriveTrain.getInstance());
 			pid.setInputRange(-180.0f,  180.0f);
-			pid.setOutputRange(-0.5f, 0.5f);
+			pid.setOutputRange(-0.75f, 0.75f);
 			pid.setAbsoluteTolerance(2f);
 	        pid.setContinuous(true);
 		}
         pidInit = true;
 	}
 	
-	public static void setPIDtoDrive() {
-		gyroPID = false;
-		pid = new PIDController(Constants.DT_PID_DRIVE_KP, Constants.DT_PID_DRIVE_KI, Constants.DT_PID_DRIVE_KD, DriveTrain.getInstance(), DriveTrain.getInstance());
-		pidInit = true;
+	public static void setPIDtoSmallGyro() {
+		if(!pidInit) {
+			gyroPID = true;
+			pid = new PIDController(Constants.DT_PID_SMALL_GYRO_KP, Constants.DT_PID_SMALL_GYRO_KI, Constants.DT_PID_SMALL_GYRO_KD, hyro, DriveTrain.getInstance());
+			pid.setInputRange(-180.0f,  180.0f);
+			pid.setOutputRange(-0.75f, 0.75f);
+			pid.setAbsoluteTolerance(2f);
+	        pid.setContinuous(true);
+		}
+        pidInit = true;
 	}
 
 	public void pidWrite(double output) {
-		if(gyroPID) {
-			drive(output, -output);	
-		} else {
-			driveStraightHyro(output);
-		}
+		drive(output, -output);
+//		System.out.println("PID running");
+	}
+	
+	public static double getLeftSetForLights() {
+		return -leftMiddle.get();
+	}
+	
+	public static double getRightSetForLights() {
+		return rightMiddle.get();
 	}
 	
 }

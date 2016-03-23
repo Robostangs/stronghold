@@ -59,7 +59,7 @@ public class Scaling {
 	
 	public static void scale(double speed) {
 		if(scalingSwitch.get()) {
-		setSpeed(speed*.7);
+		    setSpeed(speed);
 		} else {
 			stopScaling();
 		}
@@ -80,6 +80,10 @@ public class Scaling {
 	
 	public static void disengageServo() {
 		servo.setAngle(180);
+	}
+	
+	public static double getScallingSetForLights() {
+		return scalingMotor.get();
 	}
 	
 	
