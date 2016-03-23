@@ -13,7 +13,7 @@ public class CrossLowBar extends AutoMode {
 		driveStraightWithHyroWithArmPos(2.5, 0.5, Constants.ARM_POS.LOW);
 
 		//encoder distance
-//		driveDistanceWithArmPos(4, 0.5, 15000, 127000, Constants.ARM_POS.LOW);
+//		driveDistanceWithArmPos(4, 0.5, 45000, 381000, Constants.ARM_POS.LOW);
 	}
 
 }

@@ -13,7 +13,7 @@ public class RockWall extends AutoMode{
 		driveStraightWithHyroWithArmPos(4, 0.6, Constants.ARM_POS.DEF);
 		
 		//encoder distance
-//		driveDistanceWithArmPos(6, 0.8, 15000, 200000, Constants.ARM_POS.DEF);
+//		driveDistanceWithArmPos(6, 0.8, 45000, 600000, Constants.ARM_POS.DEF);
 	}
 
 	

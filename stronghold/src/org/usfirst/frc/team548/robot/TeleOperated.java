@@ -70,6 +70,12 @@ public class TeleOperated {
 			headingSnap = false;
 
 		}
+		
+		if(driver.getYButton()) {
+			DriveTrain.encoderReset();
+		} else if(driver.getXButton()) {
+			DriveTrain.resetHyro();
+		}
 		// }
 		// }
 

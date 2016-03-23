@@ -20,8 +20,9 @@ public class Robot extends IterativeRobot {;
 
     public void robotInit() {
         chooser = new SendableChooser();
-        chooser.addDefault("High Goal Courtyard Shot Through Low Bar", new HighGoalCourtyardShotThroughLowBar());
-        chooser.addObject("Cross Low Bar", new CrossLowBar());
+        chooser.addDefault("Low Bar High Goal", new LowBarHighGoal());
+        chooser.addDefault("Cheval High Goal", new ChevalHighGoal());
+        chooser.addObject("Low Bar", new CrossLowBar());
         chooser.addObject("Cheval", new Cheval());
         chooser.addObject("Portcullis", new Portcullis());
         chooser.addObject("Moat", new Moat());

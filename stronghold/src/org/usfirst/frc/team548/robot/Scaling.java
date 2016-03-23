@@ -16,8 +16,8 @@ public class Scaling {
 	
 	public Scaling() {
 		scalingMotor = new CANTalon(Constants.SCALING_TALON_POS);
-		scalingSwitch = new DigitalInput(Constants.SCALING_SWITCH_POS);
-		descalingSwitch = new DigitalInput(Constants.DESCALING_SWITCH_POS);
+		scalingSwitch = new DigitalInput(5);
+		descalingSwitch = new DigitalInput(4);
 		servo = new Servo(Constants.SCALING_SERVO_POS);
 	}
 	

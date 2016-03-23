@@ -13,6 +13,6 @@ public class RoughTerrain extends AutoMode{
 		driveStraightWithHyroWithArmPos(3, 0.6, Constants.ARM_POS.DEF);
 		
 		//encoder distance
-//		driveDistanceWithArmPos(4, 0.6, 15000, 127000, Constants.ARM_POS.DEF);
+//		driveDistanceWithArmPos(4, 0.6, 45000, 381000, Constants.ARM_POS.DEF);
 	}
 }
