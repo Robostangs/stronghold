@@ -10,14 +10,15 @@ public class Scaling {
 	
 	private static CANTalon scalingMotor;
 	private static Scaling instance = null;
-	private static DigitalInput scalingSwitch;
+	private static DigitalInput scalingSwitch, scalingSwitch2;
 	private static DigitalInput descalingSwitch;
 	private static Servo servo;
 	
 	public Scaling() {
 		scalingMotor = new CANTalon(Constants.SCALING_TALON_POS);
-		scalingSwitch = new DigitalInput(5);
-		descalingSwitch = new DigitalInput(4);
+		scalingSwitch = new DigitalInput(2);
+		descalingSwitch = new DigitalInput(3);
+		scalingSwitch2 = new DigitalInput(4);
 		servo = new Servo(Constants.SCALING_SERVO_POS);
 	}
 	
@@ -29,48 +30,48 @@ public class Scaling {
 	}
 	
 	public static boolean getScalingSwitch() {
-		return scalingSwitch.get();
+		return !scalingSwitch.get();
+	}
+	
+	public static boolean getScalingSwitch2() {
+		return scalingSwitch2.get();
 	}
 	
 	public static boolean getDescalingSwitch() {
-		return descalingSwitch.get();
+		return !descalingSwitch.get();
 	}
 	
 	public static void setSpeed(double value) {
-//		if(value < 0) {
-//			if(!getDescalingSwitch()) {
+		if(value > 0) {
+			if(!getDescalingSwitch()) {
 				scalingMotor.set(value);
-//			} else {
-//				stopScaling();
-//			}
-//		} else {
-//			if(!getScalingSwitch()) {
-//				scalingMotor.set(value);
-//			} else {
-//				stopScaling();
-//			}
-//		}
+			} else {
+				stopScaling();
+			}
+		} else {
+			if(!getScalingSwitch2()) {
+				scalingMotor.set(value);
+			} else {
+				stopScaling();
+			}
+		}
 		
 	}
 	
 	public static void stopScaling() {
-		setSpeed(0);
+		scalingMotor.set(0);
 	}
 	
 	public static void scale(double speed) {
-		if(scalingSwitch.get()) {
+		
 		    setSpeed(speed);
-		} else {
-			stopScaling();
-		}
+		
 	}
 	
 	public static void descale(double speed) {
-		if(descalingSwitch.get()) {
+		
 			setSpeed(-speed);
-		} else {
-			stopScaling();
-		}
+		
 		
 	}
 	

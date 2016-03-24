@@ -150,7 +150,7 @@ public class Arm implements PIDOutput {
 	}
 	
 	public static void setArmAdjustmentFromDistance(double distance) {
-		shootingAdjustment = (0.0003 * distance) + 0.046; // y = 0.0003x + 0.046
+		shootingAdjustment = (0.0003 * distance) + 0.051; // y = 0.0003x + 0.046
 	}
 	
 	public static void disablePID() {

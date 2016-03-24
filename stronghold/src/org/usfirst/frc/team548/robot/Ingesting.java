@@ -57,16 +57,17 @@ public class Ingesting {
 	
 	
 	public static void injectAfterSpeed(double speed) {
-		if(Math.abs(Shooter.getShooterEncoderVelocity()) > speed) {
-			hasReachedSpeed = true;
-			startTimer();
-		}
+		
 		
 		if(hasReachedSpeed && getTimer() < 1) {
 			inject();
 		} else {
 			Ingesting.resetTimer();
 			Ingesting.resetHasReachedSpeed();
+			if(Math.abs(Shooter.getShooterEncoderVelocity()) > speed) {
+				hasReachedSpeed = true;
+				startTimer();
+			}
 		}
 	}
 	

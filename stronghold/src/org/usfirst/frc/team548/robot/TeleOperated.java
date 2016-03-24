@@ -61,8 +61,11 @@ public class TeleOperated {
 					driver.getRightStickYAxis() * 0.75);
 			gyroReset = false;
 			headingSnap = false;
+		} else if(driver.getRightTriggerAxis() > 0.1) {
+			DriveTrain.drive(driver.getRightTriggerAxis() * 0.25, -driver.getRightTriggerAxis() * 0.25);
+		} else if(driver.getLeftTriggerAxis() > 0.1) {
+			DriveTrain.drive(-driver.getLeftTriggerAxis() * 0.25, driver.getLeftTriggerAxis() * 0.25);
 		} else {
-
 			DriveTrain.humanDrive(driver.getLeftStickYAxis(),
 					driver.getRightStickYAxis());
 			// System.out.println("driving");
@@ -71,11 +74,11 @@ public class TeleOperated {
 
 		}
 		
-		if(driver.getYButton()) {
-			DriveTrain.encoderReset();
-		} else if(driver.getXButton()) {
-			DriveTrain.resetHyro();
-		}
+//		if(driver.getYButton()) {
+//			DriveTrain.encoderReset();
+//		} else if(driver.getXButton()) {
+//			DriveTrain.resetHyro();
+//		}
 		// }
 		// }
 
@@ -101,6 +104,7 @@ public class TeleOperated {
 			Scaling.disengageServo();
 		}
 
+		
 		/*
 		 * Manip Controls
 		 * 
@@ -198,7 +202,7 @@ public class TeleOperated {
 			Scaling.scale(1);
 		} else if (manip.getDPad() == 90) {
 			if (!manip.getYButton()) {
-				Scaling.scale(0.3);
+				Scaling.descale(0.3);
 			}
 		} else if (manip.getDPad() == 135 || manip.getDPad() == 180
 				|| manip.getDPad() == 225) {

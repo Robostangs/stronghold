@@ -1,6 +1,9 @@
 package org.usfirst.frc.team548.robot.AutoModes;
 
+import org.usfirst.frc.team548.robot.Arm;
 import org.usfirst.frc.team548.robot.Constants;
+
+import CameraStuff.RRCPSkinnyServer;
 
 public class Moat extends AutoMode{
 
@@ -10,9 +13,16 @@ public class Moat extends AutoMode{
 
 	protected void run() {		
 		//time based
-		driveStraightWithHyroWithArmPos(4, 0.8, Constants.ARM_POS.DEF);
+		//driveStraightWithHyroWithArmPos(4, 0.5, Constants.ARM_POS.DEF);
 
 		//encoder distance
-//		driveDistanceWithArmPos(5, 0.7, 60000, 600000, Constants.ARM_POS.DEF);
+		
+		driveDistanceWithArmPos(6, 0.6, 15000, 290000, Constants.ARM_POS.DEF);
+		turnToAngleWithVisionInTime(4);
+		
+		setArmToPosInTime(1, Constants.ARM_POS.SHOOT);
+		Arm.setArmAdjustmentFromDistance(RRCPSkinnyServer.getDistance());
+		setArmToPosInTime(1.5, Constants.ARM_POS.SHOOT);
+		shootAfterRamp(5, 3, 1, 4700, Constants.ARM_POS.SHOOT);
 	}
 }

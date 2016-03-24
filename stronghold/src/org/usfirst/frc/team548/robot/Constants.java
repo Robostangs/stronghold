@@ -107,7 +107,7 @@ public class Constants {
 		
 	//PID constants
 		public static final double DT_PID_GYRO_KP = 0.04, DT_PID_GYRO_KI = 0.000, DT_PID_GYRO_KD = 0; //p 0.03, i 0.002
-		public static final double DT_PID_SMALL_GYRO_KP = 0.1, DT_PID_SMALL_GYRO_KI = 0.005, DT_PID_SMALL_GYRO_KD = 0;
+		public static final double DT_PID_SMALL_GYRO_KP = 0.02, DT_PID_SMALL_GYRO_KI = 0.004, DT_PID_SMALL_GYRO_KD = 0.010;
 		public static final double DT_PID_DRIVE_KP = 0, DT_PID_DRIVE_KI = 0, DT_PID_DRIVE_KD = 0;
 
 		

@@ -12,11 +12,11 @@ public class LowBarHighGoal extends AutoMode {
 	protected void run() {
 //		encoder distance
 		driveDistanceWithArmPos(6, 0.5, 15000, 400000, Constants.ARM_POS.LOW);
-		turnToAngleInTime(1.5, 54, false);
-		turnToAngleWithVisionInTime(2.5);
+		turnToAngleInTime(1.5, 56, false);
+		turnToAngleWithVisionInTime(3);
 		setArmToPosInTime(1, Constants.ARM_POS.SHOOT);
 		setArmToPosInTime(1.5, Constants.ARM_POS.AUTO_SHOOT);
-		shootAfterRamp(3, 3, 1, 4700, Constants.ARM_POS.AUTO_SHOOT);
+		shootAfterRamp(2, 3, 1, 4700, Constants.ARM_POS.AUTO_SHOOT);
 	}
 
 }

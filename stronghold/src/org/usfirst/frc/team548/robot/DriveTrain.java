@@ -199,7 +199,7 @@ public class DriveTrain implements PIDSource, PIDOutput {
 			pid.setInputRange(-180.0f,  180.0f);
 			pid.setOutputRange(-0.75f, 0.75f);
 			pid.setAbsoluteTolerance(2f);
-	        pid.setContinuous(true);
+			pid.setContinuous(true);
 		}
         pidInit = true;
 	}

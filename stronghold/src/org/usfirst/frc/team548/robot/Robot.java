@@ -93,6 +93,7 @@ SmartDashboard.putNumber("ENCODER", Arm.getEncoder());
     	SmartDashboard.putNumber("Right", DriveTrain.getRightEncoder());
     	
     	SmartDashboard.putBoolean("Scaling Switch", Scaling.getScalingSwitch());
+    	SmartDashboard.putBoolean("Scaling Switch 2", Scaling.getScalingSwitch2());
     	SmartDashboard.putBoolean("Descaling Switch", Scaling.getDescalingSwitch());
     	SmartDashboard.putNumber("Heading", RRCPSkinnyServer.getHeading());
 
