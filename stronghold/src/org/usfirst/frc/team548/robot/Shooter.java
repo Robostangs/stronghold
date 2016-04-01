@@ -26,10 +26,10 @@ public class Shooter implements PIDOutput{
 	public Shooter() {
 		shootingMotor1 = new CANTalon(Constants.SHOOTING_TALON_POS_1);
 		shootingMotor2 = new CANTalon(Constants.SHOOTING_TALON_POS_2);
-		shootingEncoder = new Encoder(2, 3);
+//		shootingEncoder = new Encoder(2, 3);
 		
 //		shootingEncoder.setPIDSourceType(PIDSourceType.kRate);
-//		shootingMotor1.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
+		shootingMotor1.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
 		pid = new PIDController(0.0001, 0.0000, 0, .00001, shootingEncoder, this);
 		//pid.setOutputRange(-0.5, 0.5);
 		shootingEncoder.setPIDSourceType(PIDSourceType.kRate);
@@ -40,15 +40,17 @@ public class Shooter implements PIDOutput{
 	
 	public static void setPower(double value) {
 		shootingMotor1.set(-value);
-		shootingMotor2.set(value);
+		shootingMotor2.set(-value);
 	}
 	
 	public static double getShooterEncoderVelocity() {
-		return shootingEncoder.getRate();
+//		return shootingEncoder.getRate();
+		return shootingMotor1.getEncVelocity();
 	}
 	
 	public static void resetShooterEncoder() {
-		shootingEncoder.reset();
+//		shootingEncoder.reset();
+		shootingMotor1.reset();
 	}
 		
 	public static void shooterIngest() {

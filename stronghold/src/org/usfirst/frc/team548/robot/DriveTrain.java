@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 public class DriveTrain implements PIDSource, PIDOutput {
 	private static DriveTrain instance = null;
 	private static AHRS hyro;
-	private static CANTalon leftFront, leftMiddle, leftBack, rightFront, rightMiddle, rightBack;
+	private static CANTalon leftMiddle, leftBack, rightMiddle, rightBack;
 	private static PIDController pid;
 
 	public static DriveTrain getInstance(){
@@ -24,10 +24,8 @@ public class DriveTrain implements PIDSource, PIDOutput {
 	}
 
 	private DriveTrain(){
-		leftFront = new CANTalon(Constants.DT_TALON_POS_LEFT_FRONT);
 		leftMiddle = new CANTalon(Constants.DT_TALON_POS_LEFT_MID);
 		leftBack = new CANTalon(Constants.DT_TALON_POS_LEFT_BACK);
-		rightFront = new CANTalon(Constants.DT_TALON_POS_RIGHT_FRONT);
 		rightMiddle = new CANTalon(Constants.DT_TALON_POS_RIGHT_MID);
 		rightBack = new CANTalon(Constants.DT_TALON_POS_RIGHT_BACK);
 		
@@ -49,10 +47,8 @@ public class DriveTrain implements PIDSource, PIDOutput {
 	}
 	
 	public static void drive(double leftSpeed, double rightSpeed, String callingFrom){
-		leftFront.set(-leftSpeed);
 		leftMiddle.set(-leftSpeed);
 		leftBack.set(-leftSpeed);
-		rightFront.set(rightSpeed);
 		rightMiddle.set(rightSpeed);
 		rightBack.set(rightSpeed);
 //		System.out.println("L: "+leftSpeed+" R: "+rightSpeed+" S: "+callingFrom);
@@ -63,11 +59,11 @@ public class DriveTrain implements PIDSource, PIDOutput {
 	} 
 	
 	public static double getLeftEncoder() {
-		return leftFront.getEncPosition();
+		return leftMiddle.getEncPosition();
 	}
 	
 	public static double getLeftRate() {
-		return leftFront.getEncVelocity();
+		return leftMiddle.getEncVelocity();
 	}
 	
 	public static double getRightRate() {
@@ -83,7 +79,7 @@ public class DriveTrain implements PIDSource, PIDOutput {
 	}
 
 	public static void encoderReset(){
-		leftFront.setPosition(0);
+		leftMiddle.setPosition(0);
 		rightBack.setPosition(0);
 	}	
 	

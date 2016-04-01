@@ -7,12 +7,12 @@ public class Constants {
 		public static final int XBOX_MANIP_POS = 1;
 		
 	//Drivetrain motors
-		public static final int DT_TALON_POS_LEFT_FRONT = 1;//left encoder location
-		public static final int DT_TALON_POS_LEFT_MID = 2;
+		//public static final int DT_TALON_POS_LEFT_FRONT = 1;
+		public static final int DT_TALON_POS_LEFT_MID = 2;//left encoder
 		public static final int DT_TALON_POS_LEFT_BACK = 3;
-		public static final int DT_TALON_POS_RIGHT_FRONT = 10;
+		//public static final int DT_TALON_POS_RIGHT_FRONT = 10;
 		public static final int DT_TALON_POS_RIGHT_MID = 11;
-		public static final int DT_TALON_POS_RIGHT_BACK = 12;//right encoder location		
+		public static final int DT_TALON_POS_RIGHT_BACK = 12;//right encoder	
 		public static final double DT_ENCODER_ERROR_THRESHOLD = 0;
 		public static final double DT_HYRO_ERROR_THRESHOLD = 1;
 		public static final double DT_DRIVE_STRAIGHT_LOWER_POWER_RIGHT = .85;
@@ -75,7 +75,7 @@ public class Constants {
 		//Highest position: 635 (be careful to stop early to prevent falling over)
 		
 	//Shooter
-		public static final int SHOOTING_TALON_POS_1 = 5;
+		public static final int SHOOTING_TALON_POS_1 = 1;
 		public static final int SHOOTING_TALON_POS_2 = 9;
 		public static final double SHOOTING_PID_P = 0, SHOOTING_PID_I = 0, SHOOTING_PID_D = 0;
 		public static final double SHOOTER_INGEST_SPEED = -1;
@@ -90,7 +90,7 @@ public class Constants {
 		public static final int BATTER_SHOT_SPEED = 3000;
 		
 	//Ingesting
-		public static final int INGESTING_TALON_POS = 8;
+		public static final int INGESTING_TALON_POS = 5;
 		public static final int INGESTING_SWITCH_POS = 0;
 		public static final double INGESTING_IN_NORMAL_POWER = 1;
 		public static final double INGESTING_OUT_NORMAL_POWER = -0.5;
