@@ -81,17 +81,21 @@ public class Arm implements PIDOutput {
 	
 	public static void changeAdjustment(double change) {
 		if(!adjustInit) {
-			if(shootingAdjustment + change <= 0 && change < 0) {
-				adjustInit = true;
-			} else {
+//			if(shootingAdjustment + change < 0 && change < 0) {
+//				adjustInit = true;
+//			} else {
 				shootingAdjustment += change;
 				adjustInit = true;
-			}
+			//}
 		}
 	}
 	
 	public static void setAdjustment(double adjust) {
 		shootingAdjustment = adjust;
+	}
+	
+	public static void setAdjustmentToOuterWorks() {
+		shootingAdjustment = .055;
 	}
 	
 	public static double getAdjustment() {
@@ -143,11 +147,14 @@ public class Arm implements PIDOutput {
 	}
 	
 	public static void setArmAdjustmentFromDistance(double distance) {
-		shootingAdjustment = (0.0003 * distance) + 0.046; // y = 0.0003x + 0.046
+//		shootingAdjustment = (0.0003 * distance) + 0.054; // y = 0.0003x + 0.046, old
+		shootingAdjustment = (-0.0004*distance) + 0.104; //data taken 4/12/2016
 	}
 	
 	public static void disablePID() {
-		if(pid.isEnabled()) pid.disable();
+		if(pid.isEnabled()) {
+			pid.reset();
+		}
 	}
 	
 	public void pidWrite(double output) {

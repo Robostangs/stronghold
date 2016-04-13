@@ -5,6 +5,8 @@ import org.usfirst.frc.team548.robot.Constants;
 import org.usfirst.frc.team548.robot.Ingesting;
 import org.usfirst.frc.team548.robot.Shooter;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 public class ShootAfterTime extends AutoCommandBase {
 	
 	private double rampTime, power, shootAfterSpeed;
@@ -29,10 +31,11 @@ public class ShootAfterTime extends AutoCommandBase {
 //			Ingesting.inject();
 //		}
 //		Arm.resetAdjustment();
-//		Arm.setArmPos(position);
-		
+		Arm.setArmPos(position);
+		SmartDashboard.putNumber("Shooter Actual Velocity", Shooter.getShooterEncoderVelocity());
 		Shooter.setShooterSpeedNoPID(power);
 		Ingesting.injectAfterSpeed(shootAfterSpeed);
+		SmartDashboard.putNumber("ENCODER", Arm.getEncoder());
 	}
 
 	public void end() {

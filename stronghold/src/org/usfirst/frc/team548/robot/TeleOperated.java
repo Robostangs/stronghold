@@ -51,7 +51,7 @@ public class TeleOperated {
 				headingSnapValue = RRCPSkinnyServer.getHeading();
 				headingSnap = true;
 			}
-			DriveTrain.turnSmallAngle(headingSnapValue);
+			
 			// DriveTrain.turnAngle(RRCPSkinnyServer.getHeading());
 		} else if (driver.getRightBumper()) {
 			DriveTrain.humanDrive(driver.getLeftStickYAxis() * 0.75,
@@ -62,9 +62,11 @@ public class TeleOperated {
 
 			if (driver.getAButton()) {
 				DriveTrain.resetHyro();
+				//Lights.sendData2();
 			}
 			if (driver.getBButton()) {
-				DriveTrain.turnAngle(30);
+				DriveTrain.turnSmallAngle(-19);
+				//Lights.sendData();
 			} else {
 				DriveTrain.humanDrive(driver.getLeftStickYAxis(),
 						driver.getRightStickYAxis());
@@ -73,6 +75,7 @@ public class TeleOperated {
 				headingSnap = false;
 			}
 		}
+
 
 		// }
 		// }
@@ -94,7 +97,7 @@ public class TeleOperated {
 		if (Math.abs(manip.getLeftTriggerAxis()) < 0.1) {
 			Shooter.setShooterSpeedNoPID(manip.getRightTriggerAxis());
 		} else {
-			Shooter.setShooterSpeedNoPID(manip.getLeftTriggerAxis() * 0.65);
+			Shooter.setShooterSpeedNoPID(manip.getLeftTriggerAxis());
 		}
 		// }
 		//
@@ -119,14 +122,14 @@ public class TeleOperated {
 
 		if (manip.getDPad() == 315 || manip.getDPad() == 0
 				|| manip.getDPad() == 45) {
-			Scaling.scale(1);
+			Scaling.descale(1);
 		} else if (manip.getDPad() == 90) {
 			if (!manip.getYButton()) {
 				Scaling.scale(0.3);
 			}
 		} else if (manip.getDPad() == 135 || manip.getDPad() == 180
 				|| manip.getDPad() == 225) {
-			Scaling.descale(1);
+			Scaling.scale(1);
 		} else {
 			Scaling.stopScaling();
 		}
@@ -137,24 +140,30 @@ public class TeleOperated {
 		} else if (manip.getLeftBumper()) {
 			Ingesting.ingest();
 			Shooter.shooterIngest();
+			if(Shooter.getShooterEncoderVelocity() > 30000) {
+				driver.setRightRumble(1);
+			} else {
+				driver.setRightRumble(0);
+			}
 		} else if (manip.getBackButton()) {
 			if (manip.getRightTriggerAxis() > 0.5) {
-				if (Shooter.getShooterEncoderVelocity() != 0) {
+//				if (Shooter.getShooterEncoderVelocity() != 0) {
 					Ingesting.injectAfterSpeed(Constants.MAX_SHOT_SPEED);
-				} else {
-					Ingesting.inject();
-				}
+//				} else {
+//					Ingesting.inject();
+//				}
 			} else if (manip.getLeftTriggerAxis() > 0.5) {
-				if (Shooter.getShooterEncoderVelocity() != 0) {
+//				if (Shooter.getShooterEncoderVelocity() != 0) {
 					Ingesting.injectAfterSpeed(Constants.BATTER_SHOT_SPEED);
-				} else {
-					Ingesting.inject();
-				}
+//				} else {
+//					Ingesting.inject();
+//				}
 			}
 		} else {
 			Ingesting.holdBall();
 			Ingesting.resetHasReachedSpeed();
 			Ingesting.resetTimer();
+			driver.setRightRumble(0);
 		}
 
 		if (manip.getAButton()) {
@@ -179,6 +188,7 @@ public class TeleOperated {
 		} else if (manip.getStartButton()) {
 			if (!distanceSnap) {
 				Arm.setArmAdjustmentFromDistance(RRCPSkinnyServer.getDistance());
+//				Arm.setAdjustmentToOuterWorks();
 				distanceSnap = true;
 			}
 			Arm.setArmPos(Constants.ARM_POS.SHOOT);

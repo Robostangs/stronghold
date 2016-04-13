@@ -24,7 +24,7 @@ public class TurnToAngleWithVision extends AutoCommandBase{
 		
 		DriveTrain.resetPIDInit();
 		
-		angle = RRCPSkinnyServer.getHeading()+3;
+		angle = RRCPSkinnyServer.getHeading()-4;
 		System.out.println(angle);
 	}
 

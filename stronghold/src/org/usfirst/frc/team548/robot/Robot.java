@@ -40,6 +40,7 @@ public class Robot extends IterativeRobot {;
         Shooter.getInstance();
         TeleOperated.getInstance();
         Scaling.getInstance();
+        //Lights.getInstance();
         RRCPSkinnyServer.getInstance();
         RRCPSkinnyServer.startServer();
         pdp = new PowerDistributionPanel();
@@ -65,28 +66,29 @@ public class Robot extends IterativeRobot {;
 
     public void teleopPeriodic() {
     	TeleOperated.run();
-//    	SmartDashboard.putNumber("Current 0", pdp.getCurrent(0));
-//    	SmartDashboard.putNumber("Current 1", pdp.getCurrent(1));
-//    	SmartDashboard.putNumber("Current 2", pdp.getCurrent(2));
+    	SmartDashboard.putNumber("Current 0", pdp.getCurrent(0));
+    	SmartDashboard.putNumber("Current 1", pdp.getCurrent(1));
+    	SmartDashboard.putNumber("Current 2", pdp.getCurrent(2));
     	SmartDashboard.putNumber("Current 3", pdp.getCurrent(3));
-//    	SmartDashboard.putNumber("Current 4", pdp.getCurrent(4));
-//    	SmartDashboard.putNumber("Current 5", pdp.getCurrent(5));
-//    	SmartDashboard.putNumber("Current 6", pdp.getCurrent(6));
-//    	SmartDashboard.putNumber("Current 7", pdp.getCurrent(7));
-//    	SmartDashboard.putNumber("Current 8", pdp.getCurrent(8));
-//    	SmartDashboard.putNumber("Current 9", pdp.getCurrent(9));
-//    	SmartDashboard.putNumber("Current 10", pdp.getCurrent(10));
-//    	SmartDashboard.putNumber("Current 11", pdp.getCurrent(11));
+    	SmartDashboard.putNumber("Current 4", pdp.getCurrent(4));
+    	SmartDashboard.putNumber("Current 5", pdp.getCurrent(5));
+    	SmartDashboard.putNumber("Current 6", pdp.getCurrent(6));
+    	SmartDashboard.putNumber("Current 7", pdp.getCurrent(7));
+    	SmartDashboard.putNumber("Current 8", pdp.getCurrent(8));
+    	SmartDashboard.putNumber("Current 9", pdp.getCurrent(9));
+    	SmartDashboard.putNumber("Current 10", pdp.getCurrent(10));
+    	SmartDashboard.putNumber("Current 11", pdp.getCurrent(11));
     	SmartDashboard.putNumber("Current 12", pdp.getCurrent(12));
-//    	SmartDashboard.putNumber("Current 13", pdp.getCurrent(13));
-//    	SmartDashboard.putNumber("Current 14", pdp.getCurrent(14));
-//    	SmartDashboard.putNumber("Current 15", pdp.getCurrent(15));
+    	SmartDashboard.putNumber("Current 13", pdp.getCurrent(13));
+    	SmartDashboard.putNumber("Current 14", pdp.getCurrent(14));
+    	SmartDashboard.putNumber("Current 15", pdp.getCurrent(15));
     	
     	SmartDashboard.putNumber("ENCODER", Arm.getEncoder());
     	
     	SmartDashboard.putNumber("Gyro", DriveTrain.getHyroAngle());
     	
     	SmartDashboard.putNumber("Shooter Actual Velocity", Shooter.getShooterEncoderVelocity());
+    	//SmartDashboard.putNumber("Shooter Wheel RPM", Shooter.getShooterVersaRPM());
     	
     	SmartDashboard.putNumber("Adjustment", Arm.getAdjustment());
     	
@@ -95,7 +97,7 @@ public class Robot extends IterativeRobot {;
     	
     	SmartDashboard.putBoolean("Scaling Switch", Scaling.getScalingSwitch());
     	SmartDashboard.putBoolean("Descaling Switch", Scaling.getDescalingSwitch());
-    	SmartDashboard.putNumber("Heading", RRCPSkinnyServer.getHeading()+4);
+    	SmartDashboard.putNumber("Heading", RRCPSkinnyServer.getHeading());
     	
     }
     

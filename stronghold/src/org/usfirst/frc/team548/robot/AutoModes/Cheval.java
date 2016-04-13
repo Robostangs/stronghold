@@ -21,13 +21,14 @@ public class Cheval extends AutoMode {
 		//encoder distance
 		driveDistanceWithArmPos(2, 0.5, 10000, 30000, Constants.ARM_POS.DEF);
 		setArmToPosInTime(1, Constants.ARM_POS.LOW);
-		driveDistanceWithArmPos(3, 0.6, 18000, 60000, Constants.ARM_POS.LOW);
-		turnToAngleWithVisionInTime(4);
+		driveDistanceWithArmPos(3, 0.6, 18000, 60000, Constants.ARM_POS.DEF);
+		
 		
 		setArmToPosInTime(1, Constants.ARM_POS.SHOOT);
+		turnToAngleWithVisionInTime(4);
 		Arm.setArmAdjustmentFromDistance(RRCPSkinnyServer.getDistance());
 		setArmToPosInTime(1.5, Constants.ARM_POS.SHOOT);
-		shootAfterRamp(5, 3, 1, 4700, Constants.ARM_POS.SHOOT);
+		shootAfterRamp(4, 3, 1, 33000, Constants.ARM_POS.SHOOT);
 	}
 
 }

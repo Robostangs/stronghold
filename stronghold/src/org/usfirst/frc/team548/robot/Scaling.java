@@ -58,7 +58,7 @@ public class Scaling {
 	}
 	
 	public static void scale(double speed) {
-		if(scalingSwitch.get()) {
+		if(!scalingSwitch.get()) {
 		    setSpeed(speed);
 		} else {
 			stopScaling();

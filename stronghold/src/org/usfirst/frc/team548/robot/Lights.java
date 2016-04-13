@@ -7,22 +7,37 @@ import edu.wpi.first.wpilibj.SerialPort.Port;
 
 public class Lights {
 	private static SerialPort p;
+	private static Lights instance;
 	private static DriverStation d;
 	
+	public static Lights getInstance() {
+		if(instance==null) {
+			instance = new Lights();
+		}
+		return instance;
+	}
 	private Lights() {
-		p = new SerialPort(9600, Port.kOnboard);
+		p = new SerialPort(9600,Port.kUSB);
 		d = DriverStation.getInstance();
 	}
 	
 	public static void sendData() {
-		getAllianceNumber();
-		getLeftDT();
-		getRightDT();
-		getShooterStuff();
-		getSalerStuff();
-		getCrap();
-		getState();
-		getFMS();
+//		getAllianceNumber();
+//		getLeftDT();
+//		getRightDT();
+//		getShooterStuff();
+//		getSalerStuff();
+//		getCrap();
+//		getState();
+//		getFMS();
+		p.writeString("3,2"+"\n");
+		p.flush();
+		//System.out.println(p.readString());
+	}
+	
+	public static void sendData2() {
+		p.writeString("3,0");
+		p.flush();
 	}
 	
 	private static byte getAllianceNumber() {

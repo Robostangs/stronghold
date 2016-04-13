@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.Timer;
 public class Ingesting {
 
 	private static Ingesting instance = null;
-	private static CANTalon ingestingMotor;
+	private static CANTalon injectingMotor;
 	//private static DigitalInput ballSwitch;
 	private static boolean hasReachedSpeed = false;
 	private static Timer injectingTimer;
@@ -20,26 +20,26 @@ public class Ingesting {
 	}
 	
 	private Ingesting() {
-		ingestingMotor = new CANTalon(Constants.INGESTING_TALON_POS);
+		injectingMotor = new CANTalon(Constants.INJECTING_TALON_POS);
 		//ballSwitch = new DigitalInput(Constants.INGESTING_SWITCH_POS);
 		injectingTimer = new Timer();
 	}
 	
-	public static void setIngesting(double value) {
-		ingestingMotor.set(value);
+	public static void setInjecting(double value) {
+		injectingMotor.set(value);
 	}
 	
 	public static void stopIngesting() {
-		setIngesting(0);
+		setInjecting(0);
 	}
 	
 	public static void ingest() {
-		setIngesting(Constants.INGESTING_IN_NORMAL_POWER);
+		setInjecting(Constants.INJECTING_IN_NORMAL_POWER);
 		
 	}
 
 	public static void exgest() {
-		setIngesting(Constants.INGESTING_OUT_NORMAL_POWER);
+		setInjecting(Constants.EXGESTING_NORMAL_POWER);
 		
 	}
 	
@@ -48,11 +48,11 @@ public class Ingesting {
 //	}
 	
 	public static void holdBall() {
-		setIngesting(Constants.INGESTING_HOLDING_BALL_POWER);
+		setInjecting(Constants.INJECTING_HOLDING_BALL_POWER);
 	}
 	
 	public static void inject() {
-		setIngesting(Constants.INJECTING_POWER);
+		setInjecting(Constants.INJECTING_POWER);
 	}
 	
 	

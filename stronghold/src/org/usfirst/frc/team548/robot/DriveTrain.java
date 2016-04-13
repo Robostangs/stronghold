@@ -205,7 +205,7 @@ public class DriveTrain implements PIDSource, PIDOutput {
 	}
 
 	public static void disablePID() {
-		if(pid.isEnabled()) pid.disable();
+		if(pid.isEnabled()) pid.reset();
 	}
 	
 	public static void setPIDtoGyro() {
