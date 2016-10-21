@@ -34,7 +34,12 @@ public class ShootAfterTime extends AutoCommandBase {
 		Arm.setArmPos(position);
 		SmartDashboard.putNumber("Shooter Actual Velocity", Shooter.getShooterEncoderVelocity());
 		Shooter.setShooterSpeedNoPID(power);
-		Ingesting.injectAfterSpeed(shootAfterSpeed);
+		
+		if((this.timeOut - timer.get()) < .5) {
+			Ingesting.inject();
+		} else {
+			Ingesting.injectAfterSpeed(shootAfterSpeed);	
+		}
 		SmartDashboard.putNumber("ENCODER", Arm.getEncoder());
 	}
 

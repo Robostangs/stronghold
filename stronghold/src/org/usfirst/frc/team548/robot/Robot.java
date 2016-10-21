@@ -22,15 +22,14 @@ public class Robot extends IterativeRobot {;
 
     public void robotInit() {
         chooser = new SendableChooser();
-        chooser.addDefault("High Goal Courtyard Shot Through Low Bar", new HighGoalCourtyardShotThroughLowBar());
-        chooser.addDefault("High Goal Batter Low Shot Through Low Bar", new HighGoalBatterLowShotThroughLowBar());
-        chooser.addDefault("High Goal Batter High Shot Through Low Bar", new HighGoalBatterHighShotThroughLowBar());
-        chooser.addObject("Cross Low Bar", new CrossLowBar());
-        chooser.addObject("Cheval", new Cheval());
-        chooser.addObject("Portcullis", new Portcullis());
-        chooser.addObject("Moat", new Moat());
-        chooser.addObject("Rough Terrain", new RoughTerrain());
-        chooser.addObject("Rock Wall", new RockWall());
+        chooser.addObject("Low Ba;r High Goal", new HighGoalCourtyardShotThroughLowBar());
+        chooser.addObject("Low Bar Cross", new CrossLowBar());
+        chooser.addObject("Cheval Cross", new ChevalCross());
+        chooser.addObject("Cheval High Goal", new Cheval());
+        chooser.addObject("Portcullis Cross", new Portcullis());
+        chooser.addDefault("Moat Cross", new Moat());
+//        chooser.addObject("Rough Terrain Cross", new RoughTerrain());
+        chooser.addObject("Rock Wall Cross", new RockWall());
         SmartDashboard.putData("Auto choices", chooser);
         
         
@@ -51,13 +50,17 @@ public class Robot extends IterativeRobot {;
 	 * If using the SendableChooser make sure to add them to the chooser code above as well.
 	 */
     public void autonomousInit() {
-    	autoSelected = (AutoMode) chooser.getSelected();
+    	autoSelected = (AutoMode) new Moat();
     	System.out.println("Starting Auton");
 		autoSelected.start();
 		
     	DriveTrain.resetHyro();
     }
-
+    
+    public void disabledPeriodic() {
+    	SmartDashboard.putData("Auto choices", chooser);
+    	SmartDashboard.putString("Seleted Auto", ((AutoMode)chooser.getSelected()).getName());
+   }
 
     public void autonomousPeriodic() {
 

@@ -1,3 +1,4 @@
+
 package org.usfirst.frc.team548.robot;
 
 import edu.wpi.first.wpilibj.CANTalon;
@@ -24,7 +25,7 @@ public class Shooter {
 	public Shooter() {
 		shootingMotor1 = new CANTalon(Constants.SHOOTING_TALON_POS_1);
 		shootingMotor2 = new CANTalon(Constants.SHOOTING_TALON_POS_2);
-		shootingMotor2.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+		shootingMotor1.setFeedbackDevice(FeedbackDevice.QuadEncoder);
 		//LiveWindow.addActuator("Shooter", "RotateController", pid);
 		//LiveWindow.addSensor("Shooter", "Encoder", shootingEncoder);
 	}
@@ -36,7 +37,7 @@ public class Shooter {
 	
 	public static double getShooterEncoderVelocity() {
 //		return shootingEncoder.getRate();
-		return shootingMotor2.getEncVelocity();
+		return shootingMotor1.getEncVelocity();
 	}
 		
 	public static void shooterIngest() {

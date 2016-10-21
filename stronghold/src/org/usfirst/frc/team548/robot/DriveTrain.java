@@ -1,6 +1,7 @@
 package org.usfirst.frc.team548.robot;
 
 import com.kauailabs.navx.frc.AHRS;
+
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
@@ -75,7 +76,7 @@ public class DriveTrain implements PIDSource, PIDOutput {
 	}
 	
 	public static double getEncoderAverage() {
-		return (getRightEncoder() + getLeftEncoder()) / 2;
+		return Math.abs((getRightEncoder() + getLeftEncoder())) / 2;
 	}
 
 	public static void encoderReset(){
@@ -123,36 +124,28 @@ public class DriveTrain implements PIDSource, PIDOutput {
 		drive(left, right, "Human Drive");
 	}
 	
-//	public static void driveForza(double wheel, double power, boolean turnQuick) {
-//        if(Math.abs(power) > .1) {
-//            double leftPower = 0;
-//            double rightPower = 0;
-//            if (turnQuick)
-//            {
-//                leftPower = (wheel*(power));
-//                rightPower = -wheel * ( power);
-//
-//            }
-//            else if (wheel > 0) //right
-//            {
-//                leftPower = power ;
-//                rightPower = power * (1-wheel);
-//            }
-//            else if (wheel < 0)// left
-//            {
-//                leftPower = power * (1 - -wheel);
-//                rightPower = power;
-//            }
-//            else
-//            {
-//                leftPower = power;
-//                rightPower = power;
-//            }
-//            drive(leftPower, rightPower);
-//        } else {
-//             drive(0, 0);
-//        }
-//	}
+	public static void driveForza(double wheel, double power, boolean turnQuick)
+    {
+        if (Math.abs(power) > .1)
+        {
+            double leftPower = 0;
+            double rightPower = 0;
+            if (turnQuick)
+            {
+                leftPower = (wheel * (power));
+                rightPower = -wheel * (power);
+            } else {
+            	//1.9
+                leftPower = (wheel >= 0) ? power : power * (Math.cos(1.8*wheel));
+                rightPower = (wheel <= 0) ? power : power * (Math.cos(1.8 * wheel));
+            }
+            drive(leftPower, rightPower, "");
+        }
+        else
+        {
+            drive(0, 0, "");
+        }
+    }
         
 	private static PIDSourceType pidtype = PIDSourceType.kDisplacement;
 	
@@ -242,6 +235,9 @@ public class DriveTrain implements PIDSource, PIDOutput {
 		drive(output, -output, "PID");
 //		System.out.println("PID running");
 	}
+	
+	
+	
 	
 	public static double getLeftSetForLights() {
 		return -leftMiddle.get();

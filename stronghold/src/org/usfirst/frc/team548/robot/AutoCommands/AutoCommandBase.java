@@ -17,7 +17,7 @@ import edu.wpi.first.wpilibj.Timer;
  */
 public abstract class AutoCommandBase {
     private boolean done = false;
-    private double timeOut;
+    protected double timeOut;
     protected Timer timer;
     private static DriverStation ds = DriverStation.getInstance();
 

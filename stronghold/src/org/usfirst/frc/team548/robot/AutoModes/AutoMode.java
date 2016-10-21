@@ -65,4 +65,8 @@ public abstract class AutoMode {
     private static void runCommand(AutoCommandBase command) {
         command.execute();
     }
+    
+    public String getName() {
+    	return this.autoName;
+    }
 }

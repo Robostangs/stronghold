@@ -121,4 +121,8 @@ public class XboxController extends Joystick{
 		return (getRightTriggerAxis()-getLeftTriggerAxis());
 	}
 	
+	public double getTriggers() {
+		return (getRawAxis(3)-getRawAxis(2));
+	}
+	
 }
