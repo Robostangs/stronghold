@@ -15,7 +15,6 @@ public class Arm implements PIDOutput {
 	private static AnalogPotentiometer encoder;
 	private static double shootingAdjustment = 0;
 	private static boolean adjustInit = false;
-//	private static boolean armIsHigh = false;
 	
 	public static Arm getInstance() {
 		if(instance == null){
@@ -111,29 +110,7 @@ public class Arm implements PIDOutput {
 		adjustInit = false;
 	}
 	
-//	public static double snap = 0;
-//	
-//	public static boolean initSnap = false;
-//	
-//	public static double takeSnap() {
-//		if(!initSnap) {
-//			snap = getEncoder();
-//			initSnap = true;
-//		}
-//		return snap;
-//	}
-//	
-//	public static void resetSnap() {
-//		initSnap = false;
-//	}
-//	
-//	public static boolean isArmHigh() {
-//		if(takeSnap() < 0.650) {
-//			 return true;
-//		} else {
-//			return false;
-//		}
-//	}
+
 	
 	public static void setSpeed(double value) {
 		disablePID();

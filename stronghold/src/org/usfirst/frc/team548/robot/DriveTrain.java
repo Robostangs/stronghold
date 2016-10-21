@@ -30,8 +30,6 @@ public class DriveTrain implements PIDSource, PIDOutput {
 		rightMiddle = new CANTalon(Constants.DT_TALON_POS_RIGHT_MID);
 		rightBack = new CANTalon(Constants.DT_TALON_POS_RIGHT_BACK);
 		
-//		rightBack.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
-//		leftFront.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
 		
 		hyro = new AHRS(SerialPort.Port.kMXP);
 		hyro.reset();
@@ -162,22 +160,7 @@ public class DriveTrain implements PIDSource, PIDOutput {
 	public double pidGet() {
 		return getEncoderAverage();
 	}
-	/**
-	 * Drives a distance and returns true if within a percentage of the target
-	 * RESET ENCODERS BEFOR USING
-	 * @param setPoint
-	 * @param pk
-	 * @param ik
-	 * @param dk
-	 * @return is the setpoint in tolerance
-	 */
-//	public static boolean driveDistance(double setPoint, double pk, double ik, double dk) {
-//		pid.setPID(pk, ik, dk);
-//		pid.setSetpoint(setPoint);
-//		pid.enable();
-//		pid.setPercentTolerance(9999999); //IDK YET
-//		return pid.onTarget();
-//	}
+
 	
 	public static void resetPIDInit() {
 		pidInit = false;
@@ -225,11 +208,7 @@ public class DriveTrain implements PIDSource, PIDOutput {
         pidInit = true;
 	}
 	
-//	public static void setPIDtoDrive() {
-//		gyroPID = false;
-//		pid = new PIDController(Constants.DT_PID_DRIVE_KP, Constants.DT_PID_DRIVE_KI, Constants.DT_PID_DRIVE_KD, DriveTrain.getInstance(), DriveTrain.getInstance());
-//		pidInit = true;
-//	}
+
 
 	public void pidWrite(double output) {
 		drive(output, -output, "PID");

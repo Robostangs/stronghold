@@ -71,8 +71,6 @@ public class Constants {
 		}
 	
 		
-		//Lowest position: 917
-		//Highest position: 635 (be careful to stop early to prevent falling over)
 		
 	//Shooter
 		public static final int SHOOTING_TALON_POS_1 = 3;

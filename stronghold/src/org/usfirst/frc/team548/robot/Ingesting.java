@@ -8,7 +8,6 @@ public class Ingesting {
 
 	private static Ingesting instance = null;
 	private static CANTalon injectingMotor;
-	//private static DigitalInput ballSwitch;
 	private static boolean hasReachedSpeed = false;
 	private static Timer injectingTimer;
 	
@@ -43,9 +42,6 @@ public class Ingesting {
 		
 	}
 	
-//	public static boolean hasBall() {
-//		return ballSwitch.get();
-//	}
 	
 	public static void holdBall() {
 		setInjecting(Constants.INJECTING_HOLDING_BALL_POWER);

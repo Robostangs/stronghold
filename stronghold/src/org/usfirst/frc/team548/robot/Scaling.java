@@ -1,6 +1,5 @@
 package org.usfirst.frc.team548.robot;
 
-import javax.swing.plaf.SliderUI;
 
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.DigitalInput;

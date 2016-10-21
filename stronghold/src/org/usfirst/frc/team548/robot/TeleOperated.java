@@ -31,27 +31,13 @@ public class TeleOperated {
 		if (driver.getBackButton())
 			oneDriver = false;
 		if (!oneDriver) {
-			if (driver.getAButton()) {
-				Scaling.engageServo();
-			} else if (driver.getBButton()) {
-				Scaling.disengageServo();
-			}
+//			if (driver.getAButton()) {
+//				//Scaling.engageServo();
+//			} else if (driver.getBButton()) {
+//				//Scaling.disengageServo();
+//			}
 
-			/*
-			 * Driver Controls
-			 * 
-			 * Tank drive on sticks
-			 */
-
-			// } else if(driver.getBButton()) {
-			// DriveTrain.driveStraightHyro(.5);
-			// } else {
-			// if(newDrive) {
-			// DriveTrain.driveForza(driver.getLeftStickXAxis(),
-			// driver.getBothTriggerAxis(), driver.getXButton());
-			// } else {
-			//
-			// System.out.println("driving");
+			
 
 			if (Math.abs(driver.getTriggers()) < .1) {
 				DriveTrain.humanDrive(driver.getLeftStickYAxis(),
@@ -63,61 +49,26 @@ public class TeleOperated {
 						driver.getTriggers(), driver.getXButton());
 			}
 
-			// }
-			// }
-
-			// if(driver.getStartButton()) newDrive = true;
-			// if(driver.getBackButton()) newDrive = false;
-
-			// if (driver.getBButton()) {
-			// DriveTrain.encoderReset();
-			// }
-			//
-			// if(driver.getAButton()) {
-			// DriveTrain.driveStraightHyro(0.5);
-			// }
-
-			// if (driver.getLeftBumper()) {
-			// Shooter.setSpeed(shootingSpeed);
-			// } else {
 
 			if (Math.abs(manip.getLeftTriggerAxis()) < 0.1) {
 				Shooter.setShooterSpeedNoPID(manip.getRightTriggerAxis());
 			}
-			// }
-			//
-			// if (driver.getBackButton()) {
-			// shootingSpeed += 200;
-			// } else if (driver.getStartButton()) {
-			// shootingSpeed -= 200;
-			// }
+			
+			 
 
-			/*
-			 * Manip Controls
-			 * 
-			 * Right trigger: shooter speed (max of 1) Left trigger: shooter
-			 * speed (max of 0.65) Right bumper: exgest Left bumper: ingest Back
-			 * button: inject
-			 * 
-			 * A button: set arm LOW X button: set arm INGEST B button: set arm
-			 * DEFENSE Y button: set arm HIGH
-			 * 
-			 * Right stick: manual arm control
-			 */
-
-			if (manip.getDPad() == 315 || manip.getDPad() == 0
-					|| manip.getDPad() == 45) {
-				Scaling.descale(1);
-			} else if (manip.getDPad() == 90) {
-				if (!manip.getYButton()) {
-					Scaling.scale(0.3);
-				}
-			} else if (manip.getDPad() == 135 || manip.getDPad() == 180
-					|| manip.getDPad() == 225) {
-				Scaling.scale(1);
-			} else {
-				Scaling.stopScaling();
-			}
+//			if (manip.getDPad() == 315 || manip.getDPad() == 0
+//					|| manip.getDPad() == 45) {
+//				Scaling.descale(1);
+//			} else if (manip.getDPad() == 90) {
+//				if (!manip.getYButton()) {
+//					Scaling.scale(0.3);
+//				}
+//			} else if (manip.getDPad() == 135 || manip.getDPad() == 180
+//					|| manip.getDPad() == 225) {
+//				Scaling.scale(1);
+//			} else {
+//				Scaling.stopScaling();
+//			}
 
 			if (manip.getRightBumper()) {
 				Ingesting.exgest();
@@ -231,9 +182,7 @@ public class TeleOperated {
 
 	}
 
-	public static boolean lightThing = false, toggle = false;
+	public static boolean toggle = false;
 
-	public static boolean getLightButtonThing() {
-		return lightThing;
-	}
+
 }
